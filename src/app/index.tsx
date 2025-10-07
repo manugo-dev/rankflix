@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import rankflixLogo from "@/assets/rankflix.svg";
 
 function App() {

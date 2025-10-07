@@ -4,6 +4,6 @@ export default {
     "prettier --write",
     "vitest related --run --passWithNoTests",
   ],
-  // "*.{scss,css}": ["stylelint --fix", "prettier --write"],
+  "*.{scss,css}": ["stylelint --fix", "prettier --write"],
   "*.{json,md,yml,yaml}": ["prettier --write"],
 };
