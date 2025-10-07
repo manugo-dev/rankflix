@@ -16,7 +16,7 @@ export default defineConfig([
   importX.flatConfigs.typescript,
   eslintPluginUnicorn.configs.recommended,
   {
-    files: ["**/*.{.js,.jsx,ts,tsx}"],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
       tseslintConfigs.recommended,
@@ -25,11 +25,20 @@ export default defineConfig([
     ],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+      },
     },
     rules: {
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+
+      // typescript-eslint rules
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+
       // eslint-plugin-unicorn rules
       "unicorn/filename-case": ["error", { case: "kebabCase" }],
+      "unicorn/no-useless-undefined": ["error", { checkArguments: false }],
+
       // eslint-plugin-import-x rules
       "import-x/no-dynamic-require": "warn",
       "import-x/no-nodejs-modules": "warn",
