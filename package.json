@@ -6,7 +6,7 @@
   "scripts": {
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "build:ssr-server": "esbuild server/index.js --outfile=dist/index.js --bundle --minify --platform=node --target=node22 --format=esm --external:vite --external:express",
+    "build:ssr-server": "cross-env NODE_ENV=production node server/build.js",
     "build": "rimraf dist && npm run build:client && npm run build:ssr && npm run build:ssr-server",
     "dev:client": "vite",
     "dev": "cross-env NODE_ENV=local node server/index.js",
@@ -50,6 +50,7 @@
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "cross-env": "10.1.0",
+    "esbuild": "^0.25.10",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
