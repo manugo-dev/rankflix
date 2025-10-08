@@ -6,6 +6,8 @@ import { App } from "./app";
 
 export interface RenderResult {
   html: string;
+  head?: string;
+  dehydrated?: unknown;
 }
 
 export const render = (url: string): RenderResult => {

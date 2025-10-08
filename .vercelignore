@@ -1,0 +1,19 @@
+node_modules
+.husky
+
+coverage
+**/*.test.*
+**/*.spec.*
+**/tests
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*

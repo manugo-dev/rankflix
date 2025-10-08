@@ -16,6 +16,16 @@ export default defineConfig([
   importX.flatConfigs.typescript,
   eslintPluginUnicorn.configs.recommended,
   {
+    files: ["**/*.{js,cjs,mjs}"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
