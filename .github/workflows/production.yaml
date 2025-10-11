@@ -24,7 +24,7 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Link project
-        run: vercel link --yes --project ${{ env.VERCEL_PROJECT_NAME }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel link --yes --project ${{ vars.VERCEL_PROJECT_NAME }} --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
         run: vercel build --yes --prod --token=${{ secrets.VERCEL_TOKEN }}
