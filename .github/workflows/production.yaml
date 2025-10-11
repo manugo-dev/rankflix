@@ -13,6 +13,7 @@ jobs:
   deploy:
     name: Deploy to Vercel Production
     runs-on: ubuntu-latest
+    environment: production
     needs: CI
 
     steps:
