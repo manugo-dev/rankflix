@@ -1,4 +1,4 @@
-import { MovieGenreMap, TMDB_MOVIE_SOURCE_ID } from "@/entities/movies";
+import { MovieGenreMap, MovieSourceId } from "@/entities/movies";
 import { discoverMoviesQueries } from "@/features/movie/discovery-movies";
 import type { PrefetchContext } from "@/shared/lib/prefetch";
 import { registerRoute } from "@/shared/lib/prefetch";
@@ -8,15 +8,15 @@ registerRoute({
   path: ROUTES.HOME,
   prefetch: async ({ queryClient }: PrefetchContext) => {
     await Promise.all([
-      queryClient.prefetchQuery(discoverMoviesQueries.trending(TMDB_MOVIE_SOURCE_ID)),
+      queryClient.prefetchQuery(discoverMoviesQueries.trending(MovieSourceId.TMDB)),
       queryClient.prefetchQuery(
-        discoverMoviesQueries.byGenres(TMDB_MOVIE_SOURCE_ID, [MovieGenreMap.DRAMA]),
+        discoverMoviesQueries.byGenres(MovieSourceId.TMDB, [MovieGenreMap.DRAMA]),
       ),
       queryClient.prefetchQuery(
-        discoverMoviesQueries.byGenres(TMDB_MOVIE_SOURCE_ID, [MovieGenreMap.COMEDY]),
+        discoverMoviesQueries.byGenres(MovieSourceId.TMDB, [MovieGenreMap.COMEDY]),
       ),
       queryClient.prefetchQuery(
-        discoverMoviesQueries.byGenres(TMDB_MOVIE_SOURCE_ID, [MovieGenreMap.ACTION]),
+        discoverMoviesQueries.byGenres(MovieSourceId.TMDB, [MovieGenreMap.ACTION]),
       ),
     ]);
   },

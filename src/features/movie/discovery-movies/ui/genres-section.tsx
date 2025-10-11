@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 
-import { type MovieGenreId, type MovieSourceId } from "@/entities/movies";
+import { type MovieGenreId, type MovieSourceIdType } from "@/entities/movies";
 import { getRouteLink } from "@/shared/routes";
 
 import { discoverMoviesQueries } from "../api/queries";
 
 interface GenreSectionProps {
-  source: MovieSourceId;
+  source: MovieSourceIdType;
   genres: MovieGenreId[];
   title: string;
 }

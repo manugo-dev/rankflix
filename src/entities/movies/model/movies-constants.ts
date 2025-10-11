@@ -1,15 +1,17 @@
 import type { MovieTrendingTime } from "./movies-types";
 
-import { TMDB_MOVIE_SOURCE_ID } from "../api/providers/tmdb-movie-provider";
-
 export const DEFAULT_TRENDING_TIME: MovieTrendingTime = "day";
 
-export const MovieSourceMap = {
-  [TMDB_MOVIE_SOURCE_ID]: "The Movie Database",
+export const MovieSourceId = {
+  TMDB: "TMDB",
 } as const;
 
-export type MovieSourceName = (typeof MovieSourceMap)[keyof typeof MovieSourceMap];
-export type MovieSourceId = keyof typeof MovieSourceMap;
+export const MovieSourceName = {
+  [MovieSourceId.TMDB]: "The Movie Database",
+} as const;
+
+export type MovieSourceNameType = (typeof MovieSourceName)[keyof typeof MovieSourceName];
+export type MovieSourceIdType = keyof typeof MovieSourceId;
 
 export const MovieGenreMap = {
   ACTION: "genres.ACTION",

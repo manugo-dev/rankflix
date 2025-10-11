@@ -1,4 +1,4 @@
-import { MovieGenreMap, TMDB_MOVIE_SOURCE_ID } from "@/entities/movies";
+import { MovieGenreMap, MovieSourceId } from "@/entities/movies";
 import { GenresSection, TrendingSection } from "@/features/movie/discovery-movies";
 
 export function HomePage() {
@@ -6,19 +6,19 @@ export function HomePage() {
     <section>
       <h1>Home Page</h1>
       <p>Welcome to Rankflix!</p>
-      <TrendingSection source={TMDB_MOVIE_SOURCE_ID} />
+      <TrendingSection source={MovieSourceId.TMDB} />
       <GenresSection
-        source={TMDB_MOVIE_SOURCE_ID}
+        source={MovieSourceId.TMDB}
         genres={[MovieGenreMap.DRAMA]}
         title="Drama Movies"
       />
       <GenresSection
-        source={TMDB_MOVIE_SOURCE_ID}
+        source={MovieSourceId.TMDB}
         genres={[MovieGenreMap.COMEDY]}
         title="Comedy Movies"
       />
       <GenresSection
-        source={TMDB_MOVIE_SOURCE_ID}
+        source={MovieSourceId.TMDB}
         genres={[MovieGenreMap.ACTION]}
         title="Action Movies"
       />

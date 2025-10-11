@@ -1,7 +1,7 @@
 import type { LanguageParam, Paginated, PaginatedParams } from "@/shared/api";
 import type { ParamsObject } from "@/shared/lib/utility-types";
 
-import type { MovieGenreId, MovieSourceId } from "./movies-constants";
+import type { MovieGenreId, MovieSourceIdType } from "./movies-constants";
 
 export interface Movie {
   id: string;
@@ -13,7 +13,7 @@ export interface Movie {
   voteAverage?: number;
   voteCount?: number;
   genres?: MovieGenreId[];
-  source: MovieSourceId;
+  source: MovieSourceIdType;
 }
 
 export type Movies = Movie[];
@@ -21,9 +21,8 @@ export type Movies = Movie[];
 export interface MovieDetail {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: string | null;
   budget: number;
-  genres: MovieGenre[];
+  genres: MovieGenreId[];
   homepage: string;
   id: number;
   imdb_id: string;
@@ -32,8 +31,6 @@ export interface MovieDetail {
   overview: string;
   popularity: number;
   poster_path: string;
-  production_companies: MovieProductionCompany[];
-  production_countries: MovieProductionCountry[];
   release_date: string;
   revenue: number;
   runtime: number;
@@ -44,22 +41,11 @@ export interface MovieDetail {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  source: MovieSourceIdType;
 }
 
 export interface MovieGenre {
   id: number;
-  name: string;
-}
-
-export interface MovieProductionCompany {
-  id: number;
-  logo_path?: string;
-  name: string;
-  origin_country: string;
-}
-
-export interface MovieProductionCountry {
-  iso_3166_1: string;
   name: string;
 }
 
@@ -86,5 +72,5 @@ export interface DiscoverMoviesParams extends ParamsObject, Partial<PaginatedPar
 export interface MoviesAPIActions {
   trending: (_params: TrendingMoviesParams) => Promise<PaginatedMovies>;
   discover: (_params: DiscoverMoviesParams) => Promise<PaginatedMovies>;
-  details: (_id: string) => Promise<Movie>;
+  details: (_id: string) => Promise<MovieDetail>;
 }

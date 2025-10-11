@@ -2,6 +2,7 @@ import { tmdbApi } from "@/shared/api";
 
 import {
   mapDiscoverParamsToTMDBParams,
+  mapTMDBMovieDetailToMovieDetail,
   mapTMDBMovieToMovie,
 } from "../../lib/mappers/tmdb-movies-mapper";
 import { DEFAULT_TRENDING_TIME } from "../../model/movies-constants";
@@ -10,8 +11,6 @@ import type {
   PaginatedMovies,
   TrendingMoviesParams,
 } from "../../model/movies-types";
-
-export const TMDB_MOVIE_SOURCE_ID = "TMDB";
 
 export const getTMDBTrendingMovies = async (
   params?: TrendingMoviesParams,
@@ -39,7 +38,7 @@ export const getTMDBMovies = async (params?: DiscoverMoviesParams): Promise<Pagi
   };
 };
 
-export const getTMDBMovieDetails = async (id: string) => {
-  const response = await tmdbApi.movieDetails(id);
-  return mapTMDBMovieToMovie(response.data);
+export const getTMDBMovieDetail = async (id: string) => {
+  const response = await tmdbApi.movieDetail(id);
+  return mapTMDBMovieDetailToMovieDetail(response.data);
 };

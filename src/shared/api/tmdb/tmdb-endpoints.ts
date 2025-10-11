@@ -22,5 +22,5 @@ export const tmdbApi = {
       params: params,
     }),
 
-  movieDetails: (id: string) => tmdbClient.get(TMDB_ENDPOINTS.MOVIE_DETAILS(id)),
+  movieDetail: (id: string) => tmdbClient.get(TMDB_ENDPOINTS.MOVIE_DETAILS(id)),
 };

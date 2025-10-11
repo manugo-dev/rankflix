@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
-import { TMDB_MOVIE_SOURCE_ID } from "@/entities/movies";
-import { movieDetailsQueries } from "@/features/movie/movie-details";
+import { MovieSourceId } from "@/entities/movies";
+import { MovieDetailSection, movieDetailQueries } from "@/features/movie/movie-detail";
+import { getRouteLink } from "@/shared/routes";
 
 export function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
-  const movieQuery = useQuery(movieDetailsQueries.getMovie(TMDB_MOVIE_SOURCE_ID, movieId ?? ""));
+  const movieQuery = useQuery(movieDetailQueries.getMovie(MovieSourceId.TMDB, movieId ?? ""));
 
   const isLoading = movieQuery.isLoading;
   const hasError = movieQuery.isError;
@@ -30,9 +31,9 @@ export function MovieDetailPage() {
   }
 
   return (
-    <section>
-      <h1>Movie Detail Page</h1>
-      <h2>{movieQuery.data?.title}</h2>
-    </section>
+    <>
+      <MovieDetailSection movie={movieQuery.data!} />
+      <Link to={getRouteLink.HOME()}>Back to Home</Link>
+    </>
   );
 }

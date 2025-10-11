@@ -1,18 +1,18 @@
 import {
-  getTMDBMovieDetails,
+  getTMDBMovieDetail,
   getTMDBMovies,
   getTMDBTrendingMovies,
 } from "./providers/tmdb-movie-provider";
 
-import type { MovieSourceId } from "../model/movies-constants";
+import { MovieSourceId, type MovieSourceIdType } from "../model/movies-constants";
 import type { MoviesAPIActions } from "../model/movies-types";
 
 export const MOVIE_QUERY_KEY = "movies";
 
 export const movieApi = {
-  TMDB: {
+  [MovieSourceId.TMDB]: {
     trending: getTMDBTrendingMovies,
     discover: getTMDBMovies,
-    details: getTMDBMovieDetails,
+    details: getTMDBMovieDetail,
   },
-} satisfies Record<MovieSourceId, MoviesAPIActions>;
+} satisfies Record<MovieSourceIdType, MoviesAPIActions>;

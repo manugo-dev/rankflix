@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { type MovieSourceId, type MovieTrendingTime } from "@/entities/movies";
+import { type MovieSourceIdType, type MovieTrendingTime } from "@/entities/movies";
 
 import { discoverMoviesQueries } from "../api/queries";
 
 interface TrendingSectionProps {
-  source: MovieSourceId;
+  source: MovieSourceIdType;
   timeWindow?: MovieTrendingTime;
 }
 
