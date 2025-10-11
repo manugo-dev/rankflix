@@ -3,6 +3,8 @@ import type { DehydratedState } from "@tanstack/react-query";
 import { AppRouter } from "./app-router";
 import { QueryProvider, StoreProvider } from "./providers";
 
+import "./styles/main.scss";
+
 interface AppProps {
   dehydratedState?: DehydratedState;
 }
