@@ -1,1 +1,2 @@
-import "./home/ssr";
+import "./home/home.ssr";
+import "./movie-detail/movie-detail.ssr";
