@@ -30,3 +30,4 @@ coverage
 .env.*
 
 fsd-high-level-dependencies.html
+.vercel
