@@ -1,8 +1,15 @@
+import { dehydrate } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 
-import { App } from "./app";
+import { createQueryClient } from "@/shared/config/query-client";
+import { prefetchRouteData } from "@/shared/lib/prefetch";
+
+import { App } from "./app/app";
+
+// Register SSR routes and their prefetch functions
+import "./pages/ssr";
 
 export interface RenderResult {
   html: string;
@@ -10,17 +17,22 @@ export interface RenderResult {
   dehydrated?: unknown;
 }
 
-export const render = (url: string): RenderResult => {
+export const render = async (currentUrl: string): Promise<RenderResult> => {
+  const queryClient = createQueryClient();
+  await prefetchRouteData(queryClient, currentUrl);
+  const dehydratedState = dehydrate(queryClient);
+
   const html = renderToString(
     <StrictMode>
-      <StaticRouter location={url}>
-        <App />
+      <StaticRouter location={currentUrl}>
+        <App dehydratedState={dehydratedState} />
       </StaticRouter>
     </StrictMode>,
   );
 
   return {
     html,
+    dehydrated: dehydratedState,
   };
 };
 

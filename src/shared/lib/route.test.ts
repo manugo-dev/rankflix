@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { cleanUrl, extractParameters as extractParameters, matchRoute } from "./route";
+import { cleanUrl, extractParams as extractParams, matchRoute } from "./route";
 
 describe("Route Utils", () => {
   describe("cleanUrl", () => {
@@ -21,25 +21,25 @@ describe("Route Utils", () => {
     });
   });
 
-  describe("extractParameters", () => {
+  describe("extractParams", () => {
     it("extracts single param", () => {
-      const parameters = extractParameters("/user/123", "/user/:id");
-      expect(parameters).toEqual({ id: "123" });
+      const params = extractParams("/user/123", "/user/:id");
+      expect(params).toEqual({ id: "123" });
     });
 
     it("extracts multiple params", () => {
-      const parameters = extractParameters("/user/john/post/456", "/user/:username/post/:id");
-      expect(parameters).toEqual({ username: "john", id: "456" });
+      const params = extractParams("/user/john/post/456", "/user/:username/post/:id");
+      expect(params).toEqual({ username: "john", id: "456" });
     });
 
     it("returns empty object for no match", () => {
-      const parameters = extractParameters("/other", "/user/:id");
-      expect(parameters).toEqual({});
+      const params = extractParams("/other", "/user/:id");
+      expect(params).toEqual({});
     });
 
     it("returns empty object for no params", () => {
-      const parameters = extractParameters("/home", "/home");
-      expect(parameters).toEqual({});
+      const params = extractParams("/home", "/home");
+      expect(params).toEqual({});
     });
   });
 

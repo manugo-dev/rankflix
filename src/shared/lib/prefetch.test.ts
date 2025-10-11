@@ -1,12 +1,13 @@
 import { QueryClient } from "@tanstack/react-query";
 import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from "vitest";
 
-import { prefetchRouteData } from "./prefetch";
-import { matchRoute, extractParameters } from "@/shared/lib/utils/route";
+import { extractParams, matchRoute } from "@/shared/lib/route";
 
-vi.mock("@/shared/lib/utils/route", () => ({
+import { prefetchRouteData } from "./prefetch";
+
+vi.mock("@/shared/lib/route", () => ({
   matchRoute: vi.fn(),
-  extractParameters: vi.fn(),
+  extractParams: vi.fn(),
 }));
 
 describe("prefetchRouteData", () => {
@@ -25,7 +26,7 @@ describe("prefetchRouteData", () => {
   it("calls route prefetch with correct context when route matches", async () => {
     const mockPrefetch = vi.fn(async (_context: unknown) => {});
     (matchRoute as Mock).mockReturnValue({ path: "/users/:id", prefetch: mockPrefetch });
-    (extractParameters as Mock).mockReturnValue({ id: "123" });
+    (extractParams as Mock).mockReturnValue({ id: "123" });
 
     await prefetchRouteData(queryClient, url);
 
@@ -58,7 +59,7 @@ describe("prefetchRouteData", () => {
     const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     (matchRoute as Mock).mockReturnValue({ path: "/users/:id", prefetch: throwingPrefetch });
-    (extractParameters as Mock).mockReturnValue({ id: "123" });
+    (extractParams as Mock).mockReturnValue({ id: "123" });
 
     await expect(prefetchRouteData(queryClient, url)).resolves.toBeUndefined();
 

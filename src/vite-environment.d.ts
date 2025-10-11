@@ -1,7 +1,11 @@
+/* eslint-disable no-var */
 /// <reference types="vite/client" />
 
-declare global {
-  interface Window {
-    __INITIAL_STATE__?: Record<string, unknown>;
+import type { DehydratedState, QueryClient } from "@tanstack/react-query";
+
+export declare global {
+  declare namespace globalThis {
+    var __INITIAL_STATE__: DehydratedState | undefined;
+    var __TANSTACK_QUERY_CLIENT__: QueryClient;
   }
 }

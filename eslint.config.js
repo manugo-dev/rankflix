@@ -48,6 +48,14 @@ export default defineConfig([
       // eslint-plugin-unicorn rules
       "unicorn/filename-case": ["error", { case: "kebabCase" }],
       "unicorn/no-useless-undefined": ["error", { checkArguments: false }],
+      "unicorn/no-null": "off",
+      "unicorn/prevent-abbreviations": [
+        "error",
+        {
+          replacements: { props: false, param: false, params: false },
+          allowList: { props: true, param: false, params: false, lib: true },
+        },
+      ],
 
       // eslint-plugin-import-x rules
       "import-x/no-dynamic-require": "warn",
@@ -56,9 +64,9 @@ export default defineConfig([
       "import-x/order": [
         "error",
         {
-          groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
-          pathGroups: [{ pattern: "@/**", group: "sibling" }],
           "newlines-between": "always",
+          groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
+          pathGroups: [{ pattern: "@/**", group: "internal" }],
           alphabetize: {
             order: "asc",
             caseInsensitive: true,

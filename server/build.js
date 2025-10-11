@@ -8,5 +8,5 @@ build({
   target: "node22",
   format: "esm",
   bundle: true,
-  external: ["express", "vite", "compression"],
+  external: ["express", "vite", "compression", "sirv"],
 });
