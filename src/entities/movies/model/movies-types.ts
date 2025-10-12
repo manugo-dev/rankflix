@@ -1,4 +1,4 @@
-import type { LanguageParam, Paginated, PaginatedParams } from "@/shared/api";
+import type { LanguageParam, Paginated, PaginatedParams } from "@/shared/api/types";
 import type { ParamsObject } from "@/shared/lib/utility-types";
 
 import type { MovieGenreId, MovieSourceIdType } from "./movies-constants";
