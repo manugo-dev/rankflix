@@ -1,6 +1,7 @@
 import type { MovieTrendingTime } from "./movies-types";
 
 export const DEFAULT_TRENDING_TIME: MovieTrendingTime = "day";
+export const DEFAULT_BANNER_PATH = "https://via.placeholder.com/1280x800?text=No+Image";
 
 export const MovieSourceId = {
   TMDB: "TMDB",

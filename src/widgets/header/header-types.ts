@@ -1,4 +1,4 @@
-export type HeaderVariant = "default" | "transparent";
+export type HeaderVariant = "default" | "floating";
 
 export interface HeaderProps {
   variant?: HeaderVariant;

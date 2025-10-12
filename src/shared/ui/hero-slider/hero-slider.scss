@@ -1,0 +1,48 @@
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 50vh;
+  background: rgb(0 0 0 / 20%);
+}
+
+.hero-slider__viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slider__item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+}
+
+.hero-slider__controls {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  transform: translateY(-50%);
+}
+
+.hero-slider__control {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 40%);
+  color: white;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: background 0.3s;
+}
+
+.hero-slider__control:hover {
+  background: rgb(0 0 0 / 60%);
+}

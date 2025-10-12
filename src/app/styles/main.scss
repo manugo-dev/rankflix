@@ -1,5 +1,6 @@
-@import "normalize";
-@import "variables";
+@use "normalize";
+@use "fonts";
+@use "variables";
 
 html,
 body {
@@ -12,5 +13,5 @@ body {
 body {
   background-color: #141414;
   color: #eee;
-  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-family: var(--font-primary);
 }

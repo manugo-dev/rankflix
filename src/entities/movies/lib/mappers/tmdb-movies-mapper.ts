@@ -5,11 +5,22 @@ import {
   type TMDBMovie,
   type TMDBMovieDetail,
 } from "@/shared/api";
+import { ENVIRONMENT } from "@/shared/config";
 import { sortedValuesToString } from "@/shared/lib/array";
 import { createBidirectionalMap } from "@/shared/lib/mapping";
 
 import { MovieGenreMap, MovieSourceId, type MovieGenreId } from "../../model/movies-constants";
 import type { DiscoverMoviesParams, Movie, MovieDetail } from "../../model/movies-types";
+
+export const tmdbImageSizes = {
+  banner: "w1920_and_h800_multi_faces",
+  backdrop: "w780",
+  poster: "w342",
+};
+
+export const getTMDBMovieImage = (path?: string, size?: keyof typeof tmdbImageSizes) => {
+  return `${ENVIRONMENT.TMDB_IMAGE_BASE_URL}/${size ? tmdbImageSizes[size] : tmdbImageSizes.poster}/${path}`;
+};
 
 export const tmdbGenreMap = createBidirectionalMap<MovieGenreId, TMDBGenreId>({
   [MovieGenreMap.ACTION]: TMDBGenreMap.action,

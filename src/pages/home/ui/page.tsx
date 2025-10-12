@@ -8,10 +8,8 @@ import "./home.scss";
 export function HomePage() {
   return (
     <>
-      <Header />
+      <Header variant="floating" />
       <section className="home-page">
-        <h1>Home Page</h1>
-        <p>Welcome to Rankflix!</p>
         <TrendingSection source={MovieSourceId.TMDB} />
         <GenresSection
           source={MovieSourceId.TMDB}

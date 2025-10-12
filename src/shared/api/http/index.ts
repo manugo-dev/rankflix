@@ -1,2 +1,9 @@
 export { createHttpClient } from "./http-client";
-export * from "./http-model";
+export type {
+  CreateHttpClientParams,
+  HttpClientError,
+  HttpClientInstance,
+  HttpClientResponse,
+  HttpPaginatedRequestParams,
+  HttpPaginatedResponse,
+} from "./http-model";
