@@ -16,7 +16,7 @@ export function MoviesCarousel({ movies }: MoviesCarouselProps) {
   const navigate = useNavigate();
 
   return (
-    <Carousel gap={20}>
+    <Carousel gap={20} className="movies-carousel">
       {movies.map((movie) => (props) => (
         <li
           key={movie.id}
