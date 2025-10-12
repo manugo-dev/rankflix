@@ -30,8 +30,8 @@ export const MovieGenreMap = {
   MYSTERY: "genres.MYSTERY",
   ROMANCE: "genres.ROMANCE",
   SCIENCE_FICTION: "genres.SCIENCE_FICTION",
-  TV_MOVIE: "genres.TV_MOVIE",
   THRILLER: "genres.THRILLER",
+  TV_MOVIE: "genres.TV_MOVIE",
   WAR: "genres.WAR",
   WESTERN: "genres.WESTERN",
 } as const;

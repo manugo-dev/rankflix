@@ -14,5 +14,5 @@ export function createBidirectionalMap<TKey extends string, TValue extends strin
   const hasKey = (key: TKey): boolean => key in forward;
   const hasValue = (value: TValue): boolean => value in reverse;
 
-  return { forward, reverse, toValue, toKey, hasKey, hasValue };
+  return { forward, hasKey, hasValue, reverse, toKey, toValue };
 }

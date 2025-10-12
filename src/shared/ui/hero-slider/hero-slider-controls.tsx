@@ -1,6 +1,6 @@
 interface HeroSliderControlsProps {
-  onPrev: () => void;
   onNext: () => void;
+  onPrev: () => void;
 }
 
 export function HeroSliderControls({ onNext, onPrev }: HeroSliderControlsProps) {

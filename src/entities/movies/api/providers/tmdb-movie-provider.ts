@@ -1,4 +1,4 @@
-import { tmdbApi } from "@/shared/api";
+import { tmdbApi } from "@/shared/api/tmdb";
 
 import {
   mapDiscoverParamsToTMDBParams,
@@ -22,8 +22,8 @@ export const getTMDBTrendingMovies = async (
   return {
     page: response.data.page,
     results: response.data.results.map((movie) => mapTMDBMovieToMovie(movie)),
-    total_results: response.data.total_results,
     total_pages: response.data.total_pages,
+    total_results: response.data.total_results,
   };
 };
 
@@ -33,8 +33,8 @@ export const getTMDBMovies = async (params?: DiscoverMoviesParams): Promise<Pagi
   return {
     page: response.data.page,
     results: response.data.results.map((movie) => mapTMDBMovieToMovie(movie)),
-    total_results: response.data.total_results,
     total_pages: response.data.total_pages,
+    total_results: response.data.total_results,
   };
 };
 

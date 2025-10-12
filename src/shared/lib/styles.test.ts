@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { cn } from "./styles";
 
@@ -12,7 +12,7 @@ describe("cn utility", () => {
   });
 
   it("supports objects for conditional classes", () => {
-    expect(cn({ foo: true, bar: false }, "baz")).toBe("foo baz");
+    expect(cn({ bar: false, foo: true }, "baz")).toBe("foo baz");
   });
 
   it("supports arrays and nested structures", () => {

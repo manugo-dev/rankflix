@@ -5,21 +5,21 @@ export type CreateHttpClientParams = CreateAxiosDefaults | undefined;
 
 export interface HttpClientResponse<T = unknown> {
   data: T;
+  headers: Record<string, string>;
   status: number;
   statusText: string;
-  headers: Record<string, string>;
 }
 
 export interface HttpClientError {
-  message: string;
   code?: string;
-  status?: number;
+  message: string;
   response?: HttpClientResponse;
+  status?: number;
 }
 
 export interface HttpPaginatedRequestParams {
-  page: number;
   limit?: number;
+  page: number;
 }
 
 export interface HttpPaginatedResponse<T> {

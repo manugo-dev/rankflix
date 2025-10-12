@@ -1,13 +1,13 @@
 import { QueryClient } from "@tanstack/react-query";
-import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type Mock, vi } from "vitest";
 
 import { extractParams, matchRoute } from "@/shared/lib/route";
 
 import { prefetchRouteData } from "./prefetch";
 
 vi.mock("@/shared/lib/route", () => ({
-  matchRoute: vi.fn(),
   extractParams: vi.fn(),
+  matchRoute: vi.fn(),
 }));
 
 describe("prefetchRouteData", () => {
@@ -33,9 +33,9 @@ describe("prefetchRouteData", () => {
     expect(mockPrefetch).toHaveBeenCalledTimes(1);
     const calledWith = mockPrefetch.mock.calls[0][0];
     expect(calledWith).toMatchObject({
-      url,
       params: { id: "123" },
       queryClient,
+      url,
     });
   });
 

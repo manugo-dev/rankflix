@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { cleanUrl, extractParams as extractParams, matchRoute } from "./route";
 
@@ -29,7 +29,7 @@ describe("Route Utils", () => {
 
     it("extracts multiple params", () => {
       const params = extractParams("/user/john/post/456", "/user/:username/post/:id");
-      expect(params).toEqual({ username: "john", id: "456" });
+      expect(params).toEqual({ id: "456", username: "john" });
     });
 
     it("returns empty object for no match", () => {
@@ -45,9 +45,9 @@ describe("Route Utils", () => {
 
   describe("matchRoute", () => {
     const routes = [
-      { path: "/user/:id", name: "detail" },
-      { path: "/users", name: "list" },
-      { path: "/", name: "home" },
+      { name: "detail", path: "/user/:id" },
+      { name: "list", path: "/users" },
+      { name: "home", path: "/" },
     ];
 
     it("matches exact route", () => {

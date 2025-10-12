@@ -10,8 +10,8 @@ export const movieDetailQueryKeys = {
 export const movieDetailQueries = {
   getMovie: (source: keyof typeof movieApi, id: string) => {
     return queryOptions({
-      queryKey: movieDetailQueryKeys.getMovie(id),
       queryFn: () => movieApi[source].details(id),
+      queryKey: movieDetailQueryKeys.getMovie(id),
     });
   },
 };

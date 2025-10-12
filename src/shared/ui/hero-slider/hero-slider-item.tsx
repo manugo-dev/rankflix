@@ -1,9 +1,9 @@
 import type { PropsWithChildren } from "react";
 
 interface HeroSliderItemProps extends PropsWithChildren {
+  description?: string;
   image: string;
   title?: string;
-  description?: string;
 }
 
 export function HeroSliderItem({ children, description, image, title }: HeroSliderItemProps) {

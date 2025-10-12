@@ -1,6 +1,5 @@
-import type { TMDBGenreMap } from "./tmdb-constants";
-
 import type { HttpPaginatedResponse } from "../http";
+import type { TMDBGenreMap } from "./tmdb-constants";
 
 export type TMDBGenreId = (typeof TMDBGenreMap)[keyof typeof TMDBGenreMap];
 
@@ -23,20 +22,20 @@ export interface TMDBSpokenLanguage {
 }
 
 export interface TMDBMovie {
+  adult: boolean;
+  backdrop_path: string | null;
+  genre_ids: string[];
   id: string;
-  title: string;
+  original_language: string;
   original_title: string;
   overview: string;
+  popularity: number;
   poster_path: string | null;
-  backdrop_path: string | null;
   release_date: string;
+  title: string;
+  video: boolean;
   vote_average: number;
   vote_count: number;
-  popularity: number;
-  genre_ids: string[];
-  adult: boolean;
-  original_language: string;
-  video: boolean;
 }
 
 export interface TMDBMovieDetail {
@@ -69,22 +68,22 @@ export interface TMDBMovieDetail {
 }
 
 export type TMDBSortByOption =
+  | "original_title.asc"
+  | "original_title.desc"
   | "popularity.asc"
   | "popularity.desc"
+  | "primary_release_date.asc"
+  | "primary_release_date.desc"
   | "release_date.asc"
   | "release_date.desc"
   | "revenue.asc"
   | "revenue.desc"
-  | "primary_release_date.asc"
-  | "primary_release_date.desc"
-  | "original_title.asc"
-  | "original_title.desc"
   | "vote_average.asc"
   | "vote_average.desc"
   | "vote_count.asc"
   | "vote_count.desc";
 
-export type TMDBWatchMonetizationType = "flatrate" | "free" | "ads" | "rent" | "buy";
+export type TMDBWatchMonetizationType = "ads" | "buy" | "flatrate" | "free" | "rent";
 
 export type TMDBDiscoverMoviesResponse = HttpPaginatedResponse<TMDBMovie>;
 export interface TMDBDiscoverMoviesParams {
@@ -96,9 +95,9 @@ export interface TMDBDiscoverMoviesParams {
   include_video?: boolean;
   language?: string;
   page?: number;
-  primary_release_year?: number;
   "primary_release_date.gte"?: string;
   "primary_release_date.lte"?: string;
+  primary_release_year?: number;
   region?: string;
   "release_date.gte"?: string;
   "release_date.lte"?: string;

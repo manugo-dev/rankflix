@@ -1,5 +1,5 @@
-export { tmdbApi } from "./tmdb-endpoints";
 export { TMDBGenreMap } from "./tmdb-constants";
+export { tmdbApi } from "./tmdb-endpoints";
 export type {
   TMDBDiscoverMoviesParams,
   TMDBDiscoverMoviesResponse,

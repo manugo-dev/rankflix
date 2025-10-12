@@ -1,5 +1,5 @@
 export const ROUTES = {
   HOME: "/",
-  WISHLIST: "/wishlist",
   MOVIE_DETAIL: "/movie/:movieId",
+  WISHLIST: "/wishlist",
 } as const;

@@ -7,12 +7,12 @@
  * @typedef {{ render: (url: string) => Promise<RenderResult> }} RenderModule
  */
 
+import compression from "compression";
+import express from "express";
 import fs from "node:fs/promises";
 import path from "node:path";
-import express from "express";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import sirv from "sirv";
-import compression from "compression";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -95,10 +95,10 @@ async function createVite(app) {
 
   const { createServer: createViteServer } = await import("vite");
   const vite = await createViteServer({
-    server: { middlewareMode: true },
     appType: "custom",
     base: BASE_URL,
     root: ROOT_DIR,
+    server: { middlewareMode: true },
   });
   app.use(vite.middlewares);
   return vite;

@@ -14,8 +14,8 @@ export const TMDBGenreMap = {
   mystery: "9648",
   romance: "10749",
   science_fiction: "878",
-  tv_movie: "10770",
   thriller: "53",
+  tv_movie: "10770",
   war: "10752",
   western: "37",
 } as const;

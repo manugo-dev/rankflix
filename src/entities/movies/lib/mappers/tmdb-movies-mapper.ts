@@ -1,20 +1,20 @@
 import {
-  TMDBGenreMap,
   type TMDBDiscoverMoviesParams,
   type TMDBGenreId,
+  TMDBGenreMap,
   type TMDBMovie,
   type TMDBMovieDetail,
-} from "@/shared/api";
+} from "@/shared/api/tmdb";
 import { ENVIRONMENT } from "@/shared/config";
 import { sortedValuesToString } from "@/shared/lib/array";
 import { createBidirectionalMap } from "@/shared/lib/mapping";
 
-import { MovieGenreMap, MovieSourceId, type MovieGenreId } from "../../model/movies-constants";
+import { type MovieGenreId, MovieGenreMap, MovieSourceId } from "../../model/movies-constants";
 import type { DiscoverMoviesParams, Movie, MovieDetail } from "../../model/movies-types";
 
 export const tmdbImageSizes = {
-  banner: "w1920_and_h800_multi_faces",
   backdrop: "w780",
+  banner: "w1920_and_h800_multi_faces",
   poster: "w342",
 };
 
@@ -52,22 +52,20 @@ From TMDB provider model to Movie model
 
 export const mapTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
   return {
-    id: tmdbMovie.id,
-    title: tmdbMovie.title,
-    overview: tmdbMovie.overview,
-    releaseDate: tmdbMovie.release_date,
-    posterUrl: tmdbMovie.poster_path ?? undefined,
     backdropUrl: tmdbMovie.backdrop_path ?? undefined,
+    id: tmdbMovie.id,
+    overview: tmdbMovie.overview,
+    posterUrl: tmdbMovie.poster_path ?? undefined,
+    releaseDate: tmdbMovie.release_date,
+    source: MovieSourceId.TMDB,
+    title: tmdbMovie.title,
     voteAverage: tmdbMovie.vote_average,
     voteCount: tmdbMovie.vote_count,
-    source: MovieSourceId.TMDB,
   };
 };
 
 export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): MovieDetail => {
   return {
-    id: tmdbMovie.id,
-    title: tmdbMovie.title,
     adult: tmdbMovie.adult,
     backdrop_path: tmdbMovie.backdrop_path,
     budget: tmdbMovie.budget,
@@ -75,6 +73,7 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
       .map((genreId) => mapTMDBGenreIdToMovieGenreId(genreId))
       .filter((genreId) => !!genreId),
     homepage: tmdbMovie.homepage,
+    id: tmdbMovie.id,
     imdb_id: tmdbMovie.imdb_id,
     original_language: tmdbMovie.original_language,
     original_title: tmdbMovie.original_title,
@@ -84,6 +83,7 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
     release_date: tmdbMovie.release_date,
     revenue: tmdbMovie.revenue,
     runtime: tmdbMovie.runtime,
+    source: MovieSourceId.TMDB,
     spoken_languages: tmdbMovie.spoken_languages.map((language) => ({
       english_name: language.english_name,
       iso_639_1: language.iso_639_1,
@@ -91,10 +91,10 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
     })),
     status: tmdbMovie.status,
     tagline: tmdbMovie.tagline,
+    title: tmdbMovie.title,
     video: tmdbMovie.video,
     vote_average: tmdbMovie.vote_average,
     vote_count: tmdbMovie.vote_count,
-    source: MovieSourceId.TMDB,
   };
 };
 

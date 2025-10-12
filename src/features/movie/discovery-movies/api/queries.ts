@@ -1,9 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
 
 import {
-  movieApi,
-  MOVIE_QUERY_KEY,
   type DiscoverMoviesParams,
+  MOVIE_QUERY_KEY,
+  movieApi,
   type MovieGenreId,
   type MovieTrendingTime,
   type TrendingMoviesParams,
@@ -31,8 +31,8 @@ export const discoverMoviesQueryKeys = {
 export const discoverMoviesQueries = {
   all: (source: keyof typeof movieApi, params?: DiscoverMoviesParams) => {
     return queryOptions({
-      queryKey: discoverMoviesQueryKeys.all(source, params),
       queryFn: () => movieApi[source].discover(params),
+      queryKey: discoverMoviesQueryKeys.all(source, params),
       staleTime: STALE_TIMES.DEFAULT,
     });
   },
@@ -42,8 +42,8 @@ export const discoverMoviesQueries = {
     params?: Omit<DiscoverMoviesParams, "withGenres">,
   ) => {
     return queryOptions({
-      queryKey: discoverMoviesQueryKeys.byGenres(source, sortedValuesToString(withGenres), params),
       queryFn: () => movieApi[source].discover({ ...params, withGenres }),
+      queryKey: discoverMoviesQueryKeys.byGenres(source, sortedValuesToString(withGenres), params),
       staleTime: STALE_TIMES.DEFAULT,
     });
   },
@@ -53,8 +53,8 @@ export const discoverMoviesQueries = {
     params?: TrendingMoviesParams,
   ) => {
     return queryOptions({
-      queryKey: discoverMoviesQueryKeys.trending(source, time, params),
       queryFn: () => movieApi[source].trending({ ...params, timeWindow: time }),
+      queryKey: discoverMoviesQueryKeys.trending(source, time, params),
       staleTime: STALE_TIMES.DAY,
     });
   },

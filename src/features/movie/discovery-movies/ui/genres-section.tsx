@@ -5,8 +5,8 @@ import { type MovieGenreId, MoviesCarousel, type MovieSourceIdType } from "@/ent
 import { discoverMoviesQueries } from "../api/queries";
 
 interface GenreSectionProps {
-  source: MovieSourceIdType;
   genres: MovieGenreId[];
+  source: MovieSourceIdType;
   title: string;
 }
 

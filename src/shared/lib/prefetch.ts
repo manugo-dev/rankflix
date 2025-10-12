@@ -4,8 +4,8 @@ import { extractParams, matchRoute } from "@/shared/lib/route";
 import type { RouteParams } from "@/shared/routes";
 
 export interface PrefetchContext {
-  queryClient: QueryClient;
   params: RouteParams;
+  queryClient: QueryClient;
   url: string;
 }
 
@@ -36,7 +36,7 @@ export async function prefetchRouteData(queryClient: QueryClient, url: string): 
 
   try {
     const params = extractParams(url, config.path);
-    const context: PrefetchContext = { queryClient, params: params, url };
+    const context: PrefetchContext = { params: params, queryClient, url };
     await config.prefetch(context);
   } catch (error) {
     console.error(`Prefetch error for ${url}:`, error);

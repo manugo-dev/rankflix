@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { type PropsWithChildren, useEffect, useState } from "react";
-
-import "./hero-slider.scss";
+import { type PropsWithChildren, useCallback, useEffect, useState } from "react";
 
 import { HeroSliderControls } from "./hero-slider-controls";
+
+import "./hero-slider.scss";
 
 interface HeroSliderProps extends PropsWithChildren {
   autoPlay?: boolean;
@@ -14,14 +14,19 @@ export function HeroSlider({ autoPlay = true, children, interval = 6000 }: HeroS
   const slides = Array.isArray(children) ? children : [children];
   const [index, setIndex] = useState(0);
 
-  const next = () => setIndex((previous) => (previous + 1) % slides.length);
-  const previous = () => setIndex((previous_) => (previous_ - 1 + slides.length) % slides.length);
+  const next = useCallback(() => {
+    setIndex((previous) => (previous + 1) % slides.length);
+  }, [slides.length]);
+
+  const previous = useCallback(() => {
+    setIndex((previous_) => (previous_ - 1 + slides.length) % slides.length);
+  }, [slides.length]);
 
   useEffect(() => {
     if (!autoPlay) return;
     const timer = setTimeout(next, interval);
     return () => clearTimeout(timer);
-  }, [index, autoPlay, interval]);
+  }, [index, autoPlay, interval, next]);
 
   return (
     <div className="hero-slider">
@@ -30,9 +35,9 @@ export function HeroSlider({ autoPlay = true, children, interval = 6000 }: HeroS
           <motion.div
             key={index}
             className="hero-slider__item"
-            initial={{ opacity: 0, scale: 1.02 }}
+            initial={{ opacity: 0.2, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
+            exit={{ opacity: 0.2, scale: 0.98 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             {slides[index]}

@@ -7,14 +7,13 @@ import { createQueryClient } from "@/shared/config/query-client";
 import { prefetchRouteData } from "@/shared/lib/prefetch";
 
 import { App } from "./app/app";
-
 // Register SSR routes and their prefetch functions
 import "./pages/ssr";
 
 export interface RenderResult {
-  html: string;
-  head?: string;
   dehydrated?: unknown;
+  head?: string;
+  html: string;
 }
 
 export const render = async (currentUrl: string): Promise<RenderResult> => {
@@ -31,8 +30,8 @@ export const render = async (currentUrl: string): Promise<RenderResult> => {
   );
 
   return {
-    html,
     dehydrated: dehydratedState,
+    html,
   };
 };
 

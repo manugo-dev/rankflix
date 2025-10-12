@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "react-router";
 
 import { MovieSourceId } from "@/entities/movies";
-import { MovieDetailSection, movieDetailQueries } from "@/features/movie/movie-detail";
+import { movieDetailQueries, MovieDetailSection } from "@/features/movie/movie-detail";
 import { getRouteLink } from "@/shared/routes";
 
 export function MovieDetailPage() {

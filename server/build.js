@@ -1,12 +1,12 @@
 import { build } from "esbuild";
 
 build({
-  logLevel: "info",
+  bundle: true,
   entryPoints: ["server/index.js"],
+  external: ["express", "vite", "compression", "sirv"],
+  format: "esm",
+  logLevel: "info",
   outfile: "dist/index.js",
   platform: "node",
   target: "node22",
-  format: "esm",
-  bundle: true,
-  external: ["express", "vite", "compression", "sirv"],
 });
