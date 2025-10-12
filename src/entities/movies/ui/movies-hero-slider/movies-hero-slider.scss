@@ -27,7 +27,7 @@
   bottom: 10%;
   left: 5%;
   max-width: 600px;
-  color: white;
+  color: rgb(255 255 255);
 }
 
 .movies-hero-slider__title {
@@ -44,7 +44,7 @@
 .movies-hero-slider__button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  border: none;
+  border: 0;
   border-radius: 6px;
   background-color: #e50914;
   color: #fff;

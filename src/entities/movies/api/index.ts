@@ -1,3 +1,4 @@
+import { getTMDBMovieImage } from "../lib/mappers/tmdb-movies-mapper";
 import { MovieSourceId, type MovieSourceIdType } from "../model/movies-constants";
 import type { MoviesAPIActions } from "../model/movies-types";
 import {
@@ -12,6 +13,7 @@ export const movieApi = {
   [MovieSourceId.TMDB]: {
     details: getTMDBMovieDetail,
     discover: getTMDBMovies,
+    getMovieImage: getTMDBMovieImage,
     trending: getTMDBTrendingMovies,
   },
 } satisfies Record<MovieSourceIdType, MoviesAPIActions>;

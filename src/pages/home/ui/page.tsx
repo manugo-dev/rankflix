@@ -3,13 +3,11 @@ import { GenresSection, TrendingSection } from "@/features/movie/discovery-movie
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 
-import "./home.scss";
-
 export function HomePage() {
   return (
     <>
       <Header variant="floating" />
-      <section className="home-page">
+      <section>
         <TrendingSection source={MovieSourceId.TMDB} />
         <GenresSection
           source={MovieSourceId.TMDB}

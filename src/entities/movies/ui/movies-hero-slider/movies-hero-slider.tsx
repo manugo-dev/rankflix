@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { getRouteLink } from "@/shared/routes";
 import { HeroSlider, HeroSliderItem } from "@/shared/ui/hero-slider/hero-slider";
 
-import { getTMDBMovieImage } from "../../lib/mappers/tmdb-movies-mapper";
+import { movieApi } from "../../api";
 import { DEFAULT_BANNER_PATH } from "../../model/movies-constants";
 import type { Movie } from "../../model/movies-types";
 
@@ -20,7 +20,10 @@ export function MoviesHeroSlider({ movies }: MoviesHeroSliderProps) {
         <HeroSliderItem key={movie.id}>
           <div className="movies-hero-slider__slide">
             <img
-              src={getTMDBMovieImage(movie.backdropUrl, "banner") ?? DEFAULT_BANNER_PATH}
+              src={
+                movieApi[movie.source].getMovieImage(movie.backdropUrl, "banner") ??
+                DEFAULT_BANNER_PATH
+              }
               alt={movie.title}
               className="movies-hero-slider__image"
             />

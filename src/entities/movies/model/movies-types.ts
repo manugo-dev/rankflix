@@ -69,8 +69,11 @@ export interface DiscoverMoviesParams extends ParamsObject, Partial<PaginatedPar
   withGenres?: MovieGenreId[];
 }
 
+export type MovieImageSize = "backdrop" | "banner" | "poster";
+
 export interface MoviesAPIActions {
   details: (_id: string) => Promise<MovieDetail>;
   discover: (_params: DiscoverMoviesParams) => Promise<PaginatedMovies>;
+  getMovieImage: (_path: string, _size?: MovieImageSize) => string;
   trending: (_params: TrendingMoviesParams) => Promise<PaginatedMovies>;
 }

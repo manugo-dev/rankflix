@@ -1,4 +1,4 @@
-import { getTMDBMovieImage } from "../../lib/mappers/tmdb-movies-mapper";
+import { movieApi } from "../../api";
 import type { Movie } from "../../model/movies-types";
 
 import "./movie-card.scss";
@@ -8,12 +8,12 @@ interface MovieCardProps {
   onClick?: (_id: string) => void;
 }
 
-export function MovieCard({ movie, onClick }: MovieCardProps) {
+export function MovieCard({ movie }: MovieCardProps) {
   return (
-    <div className="movie-card" onClick={() => onClick?.(movie.id)}>
+    <div className="movie-card">
       <img
         className="movie-card__poster"
-        src={getTMDBMovieImage(movie.posterUrl)}
+        src={movieApi[movie.source].getMovieImage(movie.posterUrl)}
         alt={movie.title}
       />
       <h3 className="movie-card__title">{movie.title}</h3>

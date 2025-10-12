@@ -2,6 +2,10 @@
 @use "fonts";
 @use "variables";
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   width: 100%;

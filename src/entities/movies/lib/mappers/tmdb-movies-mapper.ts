@@ -10,9 +10,14 @@ import { sortedValuesToString } from "@/shared/lib/array";
 import { createBidirectionalMap } from "@/shared/lib/mapping";
 
 import { type MovieGenreId, MovieGenreMap, MovieSourceId } from "../../model/movies-constants";
-import type { DiscoverMoviesParams, Movie, MovieDetail } from "../../model/movies-types";
+import type {
+  DiscoverMoviesParams,
+  Movie,
+  MovieDetail,
+  MovieImageSize,
+} from "../../model/movies-types";
 
-export const tmdbImageSizes = {
+export const tmdbImageSizes: Record<MovieImageSize, string> = {
   backdrop: "w780",
   banner: "w1920_and_h800_multi_faces",
   poster: "w342",
