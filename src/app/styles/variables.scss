@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "./responsive" as *;
+
 :root {
   /* Typography */
   --font-primary: "Poppins", system-ui, -apple-system, sans-serif;
@@ -23,12 +26,6 @@
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
 
-  /* Breakpoints (px and rem for clarity) */
-  --bp-xs: 360px;
-  --bp-sm: 640px;
-  --bp-md: 900px;
-  --bp-lg: 1280px;
-
   /* Colors */
   --color-primary: rgb(10 64 96 / 100%);
   --color-primary-hover: rgb(10 64 96 / 50%);
@@ -51,8 +48,11 @@
   --transition-slow: 350ms ease;
 
   /* Component sizes */
-  --header-height: 5rem;
-  --logo-width: 7.5rem;
   --carousel-control-size: 2.6rem;
   --icon-size: 2.5rem;
+
+  /* Breakpoints */
+  @each $name, $value in $breakpoints {
+    --bp-#{$name}: #{$value};
+  }
 }

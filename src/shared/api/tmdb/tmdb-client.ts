@@ -1,4 +1,4 @@
-import { ENVIRONMENT } from "@/shared/config/environment";
+import { ENVIRONMENT } from "@/shared/config";
 
 import { createHttpClient } from "../http";
 

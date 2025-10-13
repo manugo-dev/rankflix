@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import { MovieSourceId } from "@/entities/movies";
 import { movieDetailQueries, MovieDetailSection } from "@/features/movie/movie-detail";
-import { getRouteLink } from "@/shared/routes";
 
 export function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
@@ -33,7 +32,6 @@ export function MovieDetailPage() {
   return (
     <>
       <MovieDetailSection movie={movieQuery.data!} />
-      <Link to={getRouteLink.HOME()}>Back to Home</Link>
     </>
   );
 }

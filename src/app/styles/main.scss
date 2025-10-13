@@ -1,6 +1,7 @@
 @use "normalize";
-@use "fonts";
 @use "variables";
+@import "@fontsource/poppins/latin.css";
+@import "@fontsource/space-mono/latin.css";
 
 * {
   box-sizing: border-box;

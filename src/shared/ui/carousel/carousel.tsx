@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useMemo } from "react";
 
-import { DEFAULT_CAROUSEL_ITEMS_PER_PAGE } from "@/shared/config/responsive";
+import { DEFAULT_CAROUSEL_ITEMS_PER_PAGE } from "@/shared/config";
 import { cn } from "@/shared/lib/styles";
 
 import type { CarouselProps } from "./carousel-types";

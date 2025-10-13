@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { type MovieGenreId, MoviesCarousel, type MovieSourceIdType } from "@/entities/movies";
-import { TitlesSkeleton } from "@/widgets/skeleton/titles-skeleton";
+import { TitlesSkeleton } from "@/shared/ui/skeleton";
 
 import { discoverMoviesQueries } from "../api/queries";
 

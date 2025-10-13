@@ -29,20 +29,48 @@
   z-index: 5;
   display: block;
   width: var(--page-width);
-  padding: 2rem 5rem 10rem;
+  padding: 2rem 4rem 6rem;
   margin: 0 auto;
+
+  @include from-breakpoint(xs) {
+    padding: 2rem 4rem 7rem;
+  }
+
+  @include from-breakpoint(md) {
+    padding: 2rem 5rem 10rem;
+  }
+
+  @include from-breakpoint(lg) {
+    padding: 2rem 5rem 12rem;
+  }
 }
 
 .movies-hero-slider__title {
-  margin-bottom: 1rem;
-  font-size: 2.5rem;
-  line-height: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  line-height: 2rem;
+
+  @include from-breakpoint(sm) {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
 }
 
 .movies-hero-slider__description {
+  display: -webkit-box;
+  overflow: hidden;
   margin-bottom: 1.5rem;
   color: #ddd;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  @include line-clamp(2);
+
+  @include from-breakpoint(xs) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .movies-hero-slider__button {

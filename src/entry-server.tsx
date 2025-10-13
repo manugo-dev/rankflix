@@ -3,7 +3,7 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 
-import { createQueryClient } from "@/shared/config/query-client";
+import { createQueryClient } from "@/shared/config";
 import { prefetchRouteData } from "@/shared/lib/prefetch";
 
 import { App } from "./app/app";

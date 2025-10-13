@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import type { BreakpointValueObject } from "@/shared/config/responsive";
+import type { BreakpointValueObject } from "@/shared/config";
 
 export interface CarouselItemRenderProps extends React.HTMLAttributes<HTMLLIElement> {
   className?: string;

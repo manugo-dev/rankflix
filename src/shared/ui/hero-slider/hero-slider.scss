@@ -3,6 +3,7 @@
   overflow: hidden;
   width: 100%;
   height: 60vh;
+  min-height: 30rem;
   background: rgb(0 0 0 / 20%);
 }
 
@@ -49,11 +50,19 @@
 }
 
 .hero-slider__control--prev {
-  left: 0.5rem;
+  left: 0.3rem;
+
+  @include from-breakpoint(sm) {
+    left: 0.5rem;
+  }
 }
 
 .hero-slider__control--next {
-  right: 0.5rem;
+  right: 0.3rem;
+
+  @include from-breakpoint(sm) {
+    right: 0.5rem;
+  }
 }
 
 .hero-slider__control:hover {

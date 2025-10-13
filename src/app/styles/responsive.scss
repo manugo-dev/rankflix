@@ -1,0 +1,22 @@
+/* stylelint-disable @stylistic/function-parentheses-space-inside */
+@use "sass:map";
+
+$breakpoints: (
+  xs: 400px,
+  sm: 640px,
+  md: 900px,
+  lg: 1280px,
+  xl: 1440px,
+);
+
+@mixin from-breakpoint($breakpoint) {
+  $size: if(
+    map.has-key($breakpoints, $breakpoint),
+    map.get($breakpoints, $breakpoint),
+    $breakpoint
+  );
+
+  @media (width >= $size) {
+    @content;
+  }
+}
