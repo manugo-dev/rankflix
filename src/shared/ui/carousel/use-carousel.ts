@@ -1,157 +1,239 @@
-import { useAnimationControls, useMotionValue } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type PanInfo, useAnimate, useMotionValue } from "motion/react";
+import {
+  type FocusEvent,
+  type MouseEventHandler,
+  type PointerEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import { BREAKPOINTS } from "@/shared/config/responsive";
+import { useBreakpointValue } from "@/shared/hooks/use-breakpoint-value";
 
 import type { UseCarouselOptions } from "./carousel-types";
 
-export function useCarousel({ gap, itemsPerPage, totalItems }: UseCarouselOptions) {
-  const [width, setWidth] = useState(0);
-  const [focusedIndex, setFocusedIndex] = useState(0);
+const THROTTLE_KEYBOARD = 50;
 
+export function useCarousel({
+  gap = 16,
+  itemsPerPage,
+  onSelectItem,
+  totalItems,
+}: UseCarouselOptions) {
+  const itemsPerView = useBreakpointValue<number>(itemsPerPage, 1);
   const x = useMotionValue(0);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [scope, animate] = useAnimate();
 
-  const references = useRef({
-    container: null as HTMLDivElement | null,
-    items: [] as (HTMLLIElement | null)[],
-    track: null as HTMLUListElement | null,
-  });
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [maxScrollX, setMaxScrollX] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0);
 
-  const controls = useAnimationControls();
+  const containerReference = useRef<HTMLDivElement | null>(null);
+  const itemsReference = useRef<(HTMLLIElement | null)[]>([]);
+  const draggingOffsetReference = useRef(0);
 
-  const getItemsPerPage = (windowWidth: number): number => {
-    if (typeof itemsPerPage === "number") return itemsPerPage;
-    let selectedItems = itemsPerPage.xs || 1;
-    for (const [breakpoint, minWidth] of Object.entries(BREAKPOINTS).toSorted(
-      (a, b) => a[1] - b[1],
-    ) as [keyof typeof BREAKPOINTS, number][]) {
-      if (windowWidth >= minWidth && itemsPerPage[breakpoint]) {
-        selectedItems = itemsPerPage[breakpoint]!;
-      }
-    }
-    return selectedItems;
-  };
+  // --- Helpers base ---
+  const pageCount = useMemo(
+    () => Math.max(1, Math.ceil(totalItems / Math.max(1, itemsPerView))),
+    [totalItems, itemsPerView],
+  );
 
-  useEffect(() => {
-    const track = references.current.track;
-    const container = references.current.container;
-    if (!track || !container) return;
+  const currentPage = useMemo(() => {
+    if (activeIndex < 0) return 0;
+    return Math.floor(activeIndex / Math.max(1, itemsPerView));
+  }, [activeIndex, itemsPerView]);
 
-    const calculateDimensions = () => {
-      const itemsPerView = getItemsPerPage(window.innerWidth);
-      const maxScrollX = Math.max(0, track.scrollWidth - container.offsetWidth + gap);
+  const firstIndexOfPage = useCallback(
+    (page: number) => Math.min(totalItems - 1, page * Math.max(1, itemsPerView)),
+    [itemsPerView, totalItems],
+  );
 
-      setWidth(maxScrollX);
-      track.style.setProperty("--items-per-page", itemsPerView.toString());
-      track.style.setProperty("--gap", `${gap}px`);
+  const canScrollLeft = currentPage > 0;
+  const canScrollRight = currentPage < pageCount - 1;
 
-      const clampedX = Math.max(Math.min(x.get(), 0), -maxScrollX);
-      controls.stop();
-      controls.set({ x: clampedX });
-    };
+  // --- Scroll Animations ---
+  const scrollToItem = useCallback(
+    (index: number, { align = "center" }: { align?: "center" | "left" } = {}) => {
+      const container = containerReference.current;
+      const item = itemsReference.current[index];
+      if (!container || !item) return;
 
-    calculateDimensions();
+      const containerWidth = container.offsetWidth;
 
-    window.addEventListener("resize", calculateDimensions);
-    return () => window.removeEventListener("resize", calculateDimensions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalItems, gap]);
+      const targetOffset =
+        align === "center"
+          ? item.offsetLeft - (containerWidth - item.offsetWidth) / 2
+          : item.offsetLeft;
 
-  const handlePrevious = useCallback(() => {
-    const previousIndex = Math.max(focusedIndex - 1, 0);
-    references.current.items[previousIndex]?.focus();
-  }, [focusedIndex]);
+      item.scrollIntoView({ behavior: "smooth", block: "center" });
+      const clamped = Math.max(0, Math.min(targetOffset, maxScrollX));
+      animate(x, -clamped, { damping: 30, stiffness: 300, type: "spring" });
+    },
+    [animate, maxScrollX, x],
+  );
 
-  const handleNext = useCallback(() => {
-    const nextIndex = Math.min(focusedIndex + 1, totalItems - 1);
-    references.current.items[nextIndex]?.focus();
-  }, [focusedIndex, totalItems]);
+  // --- PAGE Navigation (for buttons) ---
+  const goToPage = useCallback(
+    (page: number) => {
+      const container = containerReference.current;
+      if (!container) return;
+      const safePage = Math.min(Math.max(0, page), pageCount - 1);
+      const firstIndex = firstIndexOfPage(safePage);
+      setActiveIndex(firstIndex);
+      scrollToItem(firstIndex, { align: "left" });
+      container.focus();
+    },
+    [firstIndexOfPage, pageCount, scrollToItem],
+  );
 
-  useEffect(() => {
-    const container = references.current.container;
-    if (!container) return;
+  const handleNext = useCallback(() => goToPage(currentPage + 1), [goToPage, currentPage]);
+  const handlePrevious = useCallback(() => goToPage(currentPage - 1), [goToPage, currentPage]);
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        handlePrevious();
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        handleNext();
-      }
-    };
+  // --- ITEM Navigation (for keyboard) ---
+  const navigateItem = useCallback(
+    (direction: 1 | -1) => {
+      setActiveIndex((previous) => {
+        const next = Math.min(Math.max(previous + direction, 0), totalItems - 1);
+        scrollToItem(next, { align: "center" });
+        return next;
+      });
+    },
+    [scrollToItem, totalItems],
+  );
 
-    container.addEventListener("keydown", handleKeyDown);
-    return () => container.removeEventListener("keydown", handleKeyDown);
-  }, [focusedIndex, totalItems, handleNext, handlePrevious]);
-
-  function scrollToItem(index: number) {
-    const item = references.current.items[index];
-    const track = references.current.track;
-    const container = references.current.container;
-    if (!item || !track || !container) return;
-
-    const itemLeft = item.offsetLeft;
-    const itemWidth = item.offsetWidth;
-    const visibleWidth = container.offsetWidth;
-
-    let targetX = -itemLeft + (visibleWidth - itemWidth) / 2;
-    targetX = Math.max(Math.min(targetX, 0), -width);
-    controls.stop();
-    controls.start({ x: targetX });
-  }
-
-  function handleItemFocus(index: number) {
-    setFocusedIndex(index);
-    scrollToItem(index);
-  }
-
-  function handleSnap() {
-    const container = references.current.container;
-    const items = references.current.items;
+  // --- Snap on drag end ---
+  const handleSnap = useCallback(() => {
+    draggingOffsetReference.current = 0;
+    const container = containerReference.current;
+    const items = itemsReference.current;
     if (!container || items.length === 0) return;
 
     const containerWidth = container.offsetWidth;
     const currentX = x.get();
 
     let closestIndex = 0;
-    let smallestDistance = Infinity;
+    let closestDistance = Infinity;
 
-    for (const [index, item] of items.entries()) {
-      if (!item) continue;
-
-      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+    for (const [index, element] of items.entries()) {
+      if (!element) continue;
+      const itemCenter = element.offsetLeft + element.offsetWidth / 2;
       const viewportCenter = -currentX + containerWidth / 2;
       const distance = Math.abs(itemCenter - viewportCenter);
-
-      if (distance < smallestDistance) {
-        smallestDistance = distance;
+      if (distance < closestDistance) {
+        closestDistance = distance;
         closestIndex = index;
       }
     }
 
-    scrollToItem(closestIndex);
-  }
+    setActiveIndex(closestIndex);
+    scrollToItem(closestIndex, { align: "center" });
+  }, [scrollToItem, x]);
 
-  const handleAnimationCompleted = () => {
-    const currentX = x.get();
-    setCanScrollLeft(currentX < -1);
-    setCanScrollRight(currentX > -width + 1);
+  // --- Pointer + Focus ---
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+    const item = target.closest("[data-index]") as HTMLElement | null;
+    if (!item) return;
+    const index = Number(item.dataset.index);
+    if (!Number.isNaN(index)) setActiveIndex(index);
   };
 
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    const container = containerReference.current;
+    const nextFocused = event.relatedTarget as HTMLElement | null;
+    if (!container || (nextFocused && container.contains(nextFocused))) return;
+    setActiveIndex(-1);
+    animate(x, 0, { damping: 30, stiffness: 300, type: "spring" });
+  };
+
+  const handleOnDrag = (_event: PointerEvent | MouseEvent | TouchEvent, info: PanInfo) => {
+    draggingOffsetReference.current = info.offset.x;
+  };
+
+  const handleOnMouseUp: MouseEventHandler<HTMLUListElement> = (event) => {
+    if (Math.abs(draggingOffsetReference?.current ?? 0) < 10) {
+      const target = event.target as HTMLElement;
+      const item = target.closest("[data-index]") as HTMLElement | null;
+      if (!item) return;
+      const index = Number(item.dataset.index);
+      if (Number.isNaN(index)) return;
+      onSelectItem?.(index);
+    }
+  };
+
+  // --- Dynamic sizes ---
+  useEffect(() => {
+    const container = containerReference.current;
+    if (!container) return;
+
+    const calc = () => {
+      const containerWidth = container.offsetWidth;
+      const newItemWidth = (containerWidth - gap * (itemsPerView - 1)) / itemsPerView;
+      const totalWidth = totalItems * (newItemWidth + gap) - gap;
+      const newMaxScroll = Math.max(0, totalWidth - containerWidth);
+
+      setItemWidth(newItemWidth);
+      setMaxScrollX(newMaxScroll);
+    };
+
+    calc();
+    const ro = new ResizeObserver(calc);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, [gap, itemsPerView, totalItems]);
+
+  // --- Keyboard Navigation (element by element, centered) ---
+  useEffect(() => {
+    const container = containerReference.current;
+    if (!container) return;
+
+    let lastTime = 0;
+    const onKeyDown = (event: KeyboardEvent) => {
+      const now = Date.now();
+      if (now - lastTime < THROTTLE_KEYBOARD) return;
+
+      switch (event.key) {
+        case "ArrowRight": {
+          event.preventDefault();
+          lastTime = now;
+          navigateItem(1);
+          break;
+        }
+        case "ArrowLeft": {
+          event.preventDefault();
+          lastTime = now;
+          navigateItem(-1);
+          break;
+        }
+        case "Enter": {
+          onSelectItem?.(activeIndex);
+          break;
+        }
+      }
+    };
+
+    container.addEventListener("keydown", onKeyDown);
+    return () => container.removeEventListener("keydown", onKeyDown);
+  }, [navigateItem, activeIndex, onSelectItem]);
+
   return {
+    activeIndex,
     canScrollLeft,
     canScrollRight,
-    controls,
-    handleAnimationCompleted,
-    handleItemFocus,
+    containerReference,
+    handleBlur,
     handleNext,
+    handleOnDrag,
+    handleOnMouseUp,
+    handlePointerUp,
     handlePrevious,
     handleSnap,
-    references,
-    width,
+    itemsReference,
+    itemWidth,
+    maxScrollX,
+    scope,
     x,
   };
 }

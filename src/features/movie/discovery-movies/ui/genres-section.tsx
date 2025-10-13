@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { type MovieGenreId, MoviesCarousel, type MovieSourceIdType } from "@/entities/movies";
+import { TitlesSkeleton } from "@/widgets/skeleton/titles-skeleton";
 
 import { discoverMoviesQueries } from "../api/queries";
+
+import "./genres-section.scss";
 
 interface GenreSectionProps {
   genres: MovieGenreId[];
@@ -17,14 +20,34 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     isLoading,
   } = useQuery(discoverMoviesQueries.byGenres(source, genres));
 
-  if (isLoading) return <p>Loading {title}...</p>;
-  if (error) return <p>Error loading {title}</p>;
-  if (!movies?.results) return <p>No movies found</p>;
+  if (isLoading)
+    return (
+      <section aria-label={title} className="genres-section">
+        <h2 className="genres-section__title">{title}</h2>
+        <TitlesSkeleton />
+      </section>
+    );
+
+  if (error)
+    return (
+      <section aria-label={title} className="genres-section">
+        <h2 className="genres-section__title">{title}</h2>
+        <p className="genres-section__error-text">Something happened downloading the catalog</p>
+      </section>
+    );
+
+  if (!movies?.results)
+    return (
+      <section aria-label={title} className="genres-section">
+        <h2 className="genres-section__title">{title}</h2>
+        <p className="genres-section__not-found-text">No movies found</p>
+      </section>
+    );
 
   return (
-    <div>
-      <h2>{title}</h2>
+    <section aria-label={title} className="genres-section">
+      <h2 className="genres-section__title">{title}</h2>
       <MoviesCarousel movies={movies.results} />
-    </div>
+    </section>
   );
 }

@@ -1,3 +1,5 @@
+import "./footer.scss";
+
 export function Footer() {
-  return <footer>footer</footer>;
+  return <footer className="footer">crafted with ❤️ by @manugo.dev</footer>;
 }

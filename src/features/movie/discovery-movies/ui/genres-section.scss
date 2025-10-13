@@ -1,0 +1,19 @@
+.genres-section {
+  margin-bottom: 3rem;
+
+  .genres-section__title {
+    margin: 0 0 1rem;
+    color: var(--color-text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2rem;
+  }
+
+  .genres-section__error-text {
+    color: var(--color-text-error);
+  }
+
+  .genres-section__not-found-text {
+    color: var(--color-text-gray);
+  }
+}

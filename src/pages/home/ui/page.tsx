@@ -7,24 +7,26 @@ export function HomePage() {
   return (
     <>
       <Header variant="floating" />
-      <section>
+      <main className="page">
         <TrendingSection source={MovieSourceId.TMDB} />
-        <GenresSection
-          source={MovieSourceId.TMDB}
-          genres={[MovieGenreMap.DRAMA]}
-          title="Drama Movies"
-        />
-        <GenresSection
-          source={MovieSourceId.TMDB}
-          genres={[MovieGenreMap.COMEDY]}
-          title="Comedy Movies"
-        />
-        <GenresSection
-          source={MovieSourceId.TMDB}
-          genres={[MovieGenreMap.ACTION]}
-          title="Action Movies"
-        />
-      </section>
+        <div className="boxed-container">
+          <GenresSection
+            source={MovieSourceId.TMDB}
+            genres={[MovieGenreMap.DRAMA]}
+            title="Drama Movies"
+          />
+          <GenresSection
+            source={MovieSourceId.TMDB}
+            genres={[MovieGenreMap.COMEDY]}
+            title="Comedy Movies"
+          />
+          <GenresSection
+            source={MovieSourceId.TMDB}
+            genres={[MovieGenreMap.ACTION]}
+            title="Action Movies"
+          />
+        </div>
+      </main>
       <Footer />
     </>
   );

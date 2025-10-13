@@ -2,11 +2,11 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 50vh;
+  height: 60vh;
   background: rgb(0 0 0 / 20%);
 }
 
-.hero-slider__viewport {
+.hero-slider__track {
   position: relative;
   width: 100%;
   height: 100%;
@@ -26,14 +26,19 @@
   right: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
-  padding: 0 1rem;
+  width: var(--page-width);
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-md);
+  margin: 0 auto;
   transform: translateY(-50%);
 }
 
 .hero-slider__control {
-  width: 40px;
-  height: 40px;
+  position: absolute;
+  width: var(--carousel-control-size);
+  height: var(--carousel-control-size);
   border: 0;
   border-radius: 50%;
   background: rgb(0 0 0 / 40%);
@@ -41,6 +46,14 @@
   cursor: pointer;
   font-size: 2rem;
   transition: background 0.3s;
+}
+
+.hero-slider__control--prev {
+  left: 0.5rem;
+}
+
+.hero-slider__control--next {
+  right: 0.5rem;
 }
 
 .hero-slider__control:hover {

@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { type PropsWithChildren, useCallback, useEffect, useState } from "react";
 
-import { HeroSliderControls } from "./hero-slider-controls";
-
 import "./hero-slider.scss";
 
 interface HeroSliderProps extends PropsWithChildren {
@@ -30,25 +28,28 @@ export function HeroSlider({ autoPlay = true, children, interval = 6000 }: HeroS
 
   return (
     <div className="hero-slider">
-      <div className="hero-slider__viewport">
+      <div className="hero-slider__track">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
             className="hero-slider__item"
-            initial={{ opacity: 0.2, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0.2, scale: 0.98 }}
+            initial={{ opacity: 0.2 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0.2 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             {slides[index]}
           </motion.div>
         </AnimatePresence>
       </div>
-      <HeroSliderControls onPrev={previous} onNext={next} />
+      <div className="hero-slider__controls">
+        <button className="hero-slider__control hero-slider__control--prev" onClick={previous}>
+          ‹
+        </button>
+        <button className="hero-slider__control hero-slider__control--next" onClick={next}>
+          ›
+        </button>
+      </div>
     </div>
   );
-}
-
-export function HeroSliderItem({ children }: PropsWithChildren) {
-  return <div className="hero-slider__item-content">{children}</div>;
 }

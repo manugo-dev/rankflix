@@ -15,7 +15,15 @@ body {
 }
 
 body {
-  background-color: #141414;
+  background-color: var(--color-page-background);
   color: #eee;
   font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+.boxed-container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
 }

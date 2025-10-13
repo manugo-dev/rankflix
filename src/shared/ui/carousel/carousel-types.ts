@@ -1,10 +1,14 @@
 import type { ReactNode } from "react";
 
-export interface CarouselItemRenderProps {
+import type { BreakpointValueObject } from "@/shared/config/responsive";
+
+export interface CarouselItemRenderProps extends React.HTMLAttributes<HTMLLIElement> {
   className?: string;
+  "data-index": number;
   index: number;
-  onFocus: () => void;
+  isActive?: boolean;
   ref?: (_element: HTMLLIElement | null) => void;
+  style?: React.CSSProperties;
 }
 
 export type CarouselItemRenderer = (_props: CarouselItemRenderProps) => ReactNode;
@@ -13,11 +17,13 @@ export interface CarouselProps {
   children: CarouselItemRenderer[];
   className?: string;
   gap?: number;
-  itemsPerPage?: number | { lg?: number; md?: number; sm?: number; xl?: number; xs?: number };
+  itemsPerPage?: BreakpointValueObject<number>;
+  onSelectItem?: (_index: number) => void;
 }
 
 export interface UseCarouselOptions {
   gap: Required<CarouselProps>["gap"];
   itemsPerPage: Required<CarouselProps>["itemsPerPage"];
+  onSelectItem?: CarouselProps["onSelectItem"];
   totalItems: number;
 }

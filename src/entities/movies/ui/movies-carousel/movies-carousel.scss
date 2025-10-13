@@ -1,7 +1,20 @@
-.movies-carousel {
-  background: rgb(94 101 98);
+.movies-carousel__item {
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 1rem;
+  background: none;
 }
 
-.movies-carousel__item:focus {
-  background: rgb(122 206 20);
+.movies-carousel__item:hover .movie-card {
+  box-shadow: 0 0 1rem var(--color-primary-hover);
+}
+
+.movies-carousel__item--is-active,
+.movies-carousel__item--is-active:hover {
+  background: var(--color-primary-hover);
+
+  .movie-card__poster {
+    box-shadow: 0 0 0.5rem rgb(0 0 0 / 70%);
+    transform: scale(1.05);
+  }
 }

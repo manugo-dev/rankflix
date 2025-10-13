@@ -4,12 +4,17 @@ export const BREAKPOINTS = {
   sm: 768,
   xl: 1440,
   xs: 640,
-};
+} as const;
 
-export const DEFAULT_CAROUSEL_ITEMS_PER_PAGE = {
-  lg: 8,
-  md: 6,
+export type Breakpoint = keyof typeof BREAKPOINTS;
+export type BreakpointValueObject<T> = Partial<Record<Breakpoint, T>>;
+
+export const BREAKPOINTS_ORDER = Object.entries(BREAKPOINTS)
+  .toSorted(([_keyA, a], [_keyB, b]) => a - b)
+  .map(([key]) => key) as Breakpoint[];
+
+export const DEFAULT_CAROUSEL_ITEMS_PER_PAGE: BreakpointValueObject<number> = {
+  md: 4,
   sm: 3,
-  xl: 8,
-  xs: 2,
+  xs: 1,
 };

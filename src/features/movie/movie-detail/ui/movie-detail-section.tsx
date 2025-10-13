@@ -1,5 +1,4 @@
-import type { MovieDetail } from "@/entities/movies";
-import { getTMDBMovieImage } from "@/entities/movies/lib/mappers/tmdb-movies-mapper";
+import { movieApi, type MovieDetail } from "@/entities/movies";
 
 interface MovieDetailSectionProps {
   movie: MovieDetail;
@@ -8,7 +7,7 @@ interface MovieDetailSectionProps {
 export function MovieDetailSection({ movie }: MovieDetailSectionProps) {
   return (
     <section>
-      <img src={getTMDBMovieImage(movie.poster_path)} alt={movie.title} />
+      <img src={movieApi[movie.source].getMovieImage(movie.poster_path)} alt={movie.title} />
       <h1>{movie.title}</h1>
       <p>{movie.overview}</p>
       <p>Genres: {movie.genres.join(", ")}</p>

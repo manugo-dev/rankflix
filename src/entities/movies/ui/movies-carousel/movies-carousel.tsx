@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router";
 
+import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
-import { Carousel } from "@/shared/ui/carousel/carousel";
+import { Carousel } from "@/shared/ui/carousel";
 
 import type { Movie } from "../../model/movies-types";
 import { MovieCard } from "../movie-card/movie-card";
@@ -16,17 +17,22 @@ export function MoviesCarousel({ movies }: MoviesCarouselProps) {
   const navigate = useNavigate();
 
   return (
-    <Carousel gap={20} className="movies-carousel">
-      {movies.map((movie) => (props) => (
+    <Carousel
+      gap={10}
+      className="movies-carousel"
+      onSelectItem={(index) => navigate(getRouteLink.MOVIE_DETAIL(movies[index].id))}
+      itemsPerPage={{ md: 5, sm: 4, xs: 2 }}
+    >
+      {movies.map((movie) => ({ className, isActive, ...props }) => (
         <li
+          {...props}
           key={movie.id}
-          ref={props.ref}
-          onFocus={props.onFocus}
-          tabIndex={0}
-          className="movies-carousel__item"
-          onClick={() => navigate(getRouteLink.MOVIE_DETAIL(movie.id))}
+          className={cn(className, "movies-carousel__item", {
+            "movies-carousel__item--is-active": isActive,
+          })}
+          aria-label={movie.title}
         >
-          <MovieCard movie={movie} />
+          <MovieCard movie={movie} active={isActive} />
         </li>
       ))}
     </Carousel>
