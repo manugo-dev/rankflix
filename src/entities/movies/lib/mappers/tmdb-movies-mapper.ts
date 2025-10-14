@@ -7,6 +7,7 @@ import {
 } from "@/shared/api/tmdb";
 import { ENVIRONMENT } from "@/shared/config";
 import { sortedValuesToString } from "@/shared/lib/array";
+import { parseDate } from "@/shared/lib/date";
 import { createBidirectionalMap } from "@/shared/lib/mapping";
 
 import { type MovieGenreId, MovieGenreMap, MovieSourceId } from "../../model/movies-constants";
@@ -60,8 +61,8 @@ export const mapTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
     backdropUrl: tmdbMovie.backdrop_path ?? undefined,
     id: tmdbMovie.id,
     overview: tmdbMovie.overview,
-    posterUrl: tmdbMovie.poster_path ?? undefined,
-    releaseDate: tmdbMovie.release_date,
+    posterPath: tmdbMovie.poster_path ?? undefined,
+    releaseDate: parseDate(tmdbMovie.release_date),
     source: MovieSourceId.TMDB,
     title: tmdbMovie.title,
     voteAverage: tmdbMovie.vote_average,
@@ -78,28 +79,24 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
       .map((genreId) => mapTMDBGenreIdToMovieGenreId(genreId))
       .filter((genreId) => !!genreId),
     homepage: tmdbMovie.homepage,
-    id: tmdbMovie.id,
-    imdb_id: tmdbMovie.imdb_id,
-    original_language: tmdbMovie.original_language,
-    original_title: tmdbMovie.original_title,
+    id: tmdbMovie.id.toString(),
+    imdbId: tmdbMovie.imdb_id,
+    originalLanguage: tmdbMovie.original_language,
+    originalTitle: tmdbMovie.original_title,
     overview: tmdbMovie.overview,
     popularity: tmdbMovie.popularity,
-    poster_path: tmdbMovie.poster_path,
-    release_date: tmdbMovie.release_date,
+    posterPath: tmdbMovie.poster_path,
+    releaseDate: parseDate(tmdbMovie.release_date),
     revenue: tmdbMovie.revenue,
     runtime: tmdbMovie.runtime,
     source: MovieSourceId.TMDB,
-    spoken_languages: tmdbMovie.spoken_languages.map((language) => ({
-      english_name: language.english_name,
-      iso_639_1: language.iso_639_1,
-      name: language.name,
-    })),
+    spokenLanguages: tmdbMovie.spoken_languages.map((language) => language.name),
     status: tmdbMovie.status,
     tagline: tmdbMovie.tagline,
     title: tmdbMovie.title,
     video: tmdbMovie.video,
-    vote_average: tmdbMovie.vote_average,
-    vote_count: tmdbMovie.vote_count,
+    voteAverage: tmdbMovie.vote_average,
+    voteCount: tmdbMovie.vote_count,
   };
 };
 

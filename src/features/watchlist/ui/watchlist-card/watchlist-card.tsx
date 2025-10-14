@@ -1,20 +1,18 @@
 import { motion } from "motion/react";
 
-import { getYear } from "@/shared/lib/date";
 import { cn } from "@/shared/lib/styles";
 
-import { movieApi } from "../../api";
-import type { Movie } from "../../model/movies-types";
+import type { WatchlistItem } from "../../model/watchlist-types";
 
-import "./movie-card.scss";
+import "./watchlist-card.scss";
 
-interface MovieCardProps {
+interface WatchlistCardProps {
   active?: boolean;
-  movie: Movie;
+  item: WatchlistItem;
 }
 
-export function MovieCard({ active = false, movie }: MovieCardProps) {
-  const movieYear = movie.releaseDate ? getYear(movie.releaseDate) : "—";
+export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
+  const movieYear = item.releaseDate ? new Date(item.releaseDate).getFullYear() : "—";
 
   return (
     <motion.article
@@ -30,8 +28,8 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
     >
       <motion.div className="movie-card__image-container">
         <motion.img
-          src={movieApi[movie.source].getMovieImage(movie.posterPath)}
-          alt={movie.title}
+          src={item.posterUrl}
+          alt={item.title}
           className="movie-card__image"
           variants={{
             hover: { height: "75%" },
@@ -39,18 +37,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
           }}
           transition={{ duration: 0.35, ease: "easeOut" }}
           draggable={false}
-          style={{ viewTransitionName: `movie-${movie.id}` }}
         />
-      </motion.div>
-      <motion.div
-        className="movie-card__ranking"
-        variants={{
-          hover: { opacity: 1, y: 0 },
-          rest: { opacity: 0, y: 16 },
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        ⭐ {movie.voteAverage?.toFixed(1) ?? "—"}
       </motion.div>
       <motion.div
         className="movie-card__info"
@@ -60,7 +47,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
         }}
         transition={{ delay: 0.05, duration: 0.3 }}
       >
-        <h3 className="movie-card__title">{movie.title}</h3>
+        <h3 className="movie-card__title">{item.title}</h3>
         <p className="movie-card__year">{movieYear}</p>
       </motion.div>
     </motion.article>

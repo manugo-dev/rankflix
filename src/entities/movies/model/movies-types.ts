@@ -8,8 +8,8 @@ export interface Movie {
   genres?: MovieGenreId[];
   id: string;
   overview?: string;
-  posterUrl?: string;
-  releaseDate?: string;
+  posterPath?: string;
+  releaseDate?: Date;
   source: MovieSourceIdType;
   title: string;
   voteAverage?: number;
@@ -24,34 +24,28 @@ export interface MovieDetail {
   budget: number;
   genres: MovieGenreId[];
   homepage: string;
-  id: number;
-  imdb_id: string;
-  original_language: string;
-  original_title: string;
+  id: string;
+  imdbId: string;
+  originalLanguage: string;
+  originalTitle: string;
   overview: string;
   popularity: number;
-  poster_path: string;
-  release_date: string;
+  posterPath: string;
+  releaseDate: Date;
   revenue: number;
   runtime: number;
   source: MovieSourceIdType;
-  spoken_languages: MovieSpokenLanguage[];
+  spokenLanguages: string[];
   status: string;
   tagline: string;
   title: string;
   video: boolean;
-  vote_average: number;
-  vote_count: number;
+  voteAverage: number;
+  voteCount: number;
 }
 
 export interface MovieGenre {
   id: number;
-  name: string;
-}
-
-export interface MovieSpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
   name: string;
 }
 

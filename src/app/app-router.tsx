@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router";
 import { MainLayout } from "@/app/layouts/main-layout";
 import { HomePage } from "@/pages/home";
 import { MovieDetailPage } from "@/pages/movie-detail";
-import { WishlistPage } from "@/pages/wishlist";
+import { NotFoundPage } from "@/pages/not-found";
+import { WatchlistPage } from "@/pages/watchlist";
 import { ROUTES } from "@/shared/routes";
 
 export function AppRouter() {
@@ -11,9 +12,9 @@ export function AppRouter() {
     <Routes>
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route element={<MainLayout />}>
-        <Route path={ROUTES.WISHLIST} element={<WishlistPage />} />
+        <Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
         <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetailPage />} />
-        <Route path="*" element={<div>404 – Page not found</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

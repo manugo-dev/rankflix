@@ -15,7 +15,7 @@ interface MoviesHeroSliderProps {
 
 export function MoviesHeroSlider({ movies }: MoviesHeroSliderProps) {
   return (
-    <HeroSlider autoPlay={false}>
+    <HeroSlider>
       {movies.map((movie) => (
         <div className="movies-hero-slider__slide" key={movie.id}>
           <img

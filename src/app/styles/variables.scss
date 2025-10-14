@@ -8,6 +8,13 @@
   --base-font-size: 16px;
   --font-size-base: 1rem;
   --line-height-base: 1.25rem;
+  --color-top-background: rgb(4 20 30);
+  --color-bottom-background: rgb(8 48 72);
+  --background: var(--color-bottom-background)
+    linear-gradient(to bottom, var(--color-top-background) 50%, var(--color-bottom-background) 100%)
+    no-repeat;
+  --header-background: rgb(0 0 0 / 40%);
+  --footer-background: rgb(0 0 0 / 20%);
 
   /* Layout width */
   --page-width: 1280px;
@@ -29,12 +36,10 @@
   /* Colors */
   --color-primary: rgb(10 64 96 / 100%);
   --color-primary-hover: rgb(10 64 96 / 50%);
-  --color-page-background: rgb(22 22 22 / 100%);
-  --color-header-background: rgb(22 22 22 / 90%);
-  --color-footer-background: rgb(15 15 15 / 100%);
+  --color-error: rgb(120 28 29);
   --color-text-white: rgb(255 255 255 / 100%);
   --color-text-error: rgb(212 65 68);
-  --color-text-gray: rgb(150 150 150);
+  --color-text-gray: rgb(00 150 150);
 
   /* Shadows */
   --color-shadow-primary: rgb(5 76 117 / 50%);
