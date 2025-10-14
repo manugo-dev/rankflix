@@ -1,4 +1,4 @@
-import { BREAKPOINTS_ORDER, type BreakpointValueObject } from "../config/responsive";
+import { BREAKPOINTS_ORDERED, type BreakpointValueObject } from "../config/responsive";
 import { useBreakpoint } from "./use-breakpoints";
 
 export function useBreakpointValue<T>(_values: BreakpointValueObject<T>): T | undefined;
@@ -8,9 +8,9 @@ export function useBreakpointValue<T>(values: BreakpointValueObject<T>, defaultV
 
   if (values[current] !== undefined) return values[current];
 
-  const currentIndex = BREAKPOINTS_ORDER.indexOf(current);
+  const currentIndex = BREAKPOINTS_ORDERED.indexOf(current);
   for (let index = currentIndex - 1; index >= 0; index--) {
-    const key = BREAKPOINTS_ORDER[index];
+    const key = BREAKPOINTS_ORDERED[index];
     if (values[key] !== undefined) return values[key];
   }
 

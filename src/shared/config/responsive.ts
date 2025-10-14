@@ -9,7 +9,7 @@ export const BREAKPOINTS = {
 export type Breakpoint = keyof typeof BREAKPOINTS;
 export type BreakpointValueObject<T> = Partial<Record<Breakpoint, T>>;
 
-export const BREAKPOINTS_ORDER = Object.entries(BREAKPOINTS)
+export const BREAKPOINTS_ORDERED = Object.entries(BREAKPOINTS)
   .toSorted(([_keyA, a], [_keyB, b]) => a - b)
   .map(([key]) => key) as Breakpoint[];
 
