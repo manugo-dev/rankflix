@@ -30,7 +30,7 @@ export function AddToWatchlistButton({ item }: AddToWatchlistButtonProps) {
     <Button
       className="add-to-watchlist"
       onClick={handleAction}
-      variant={exists ? "error" : "primary"}
+      variant={exists ? "danger" : "primary"}
     >
       {exists ? "Remove from Watchlist" : "Add to Watchlist"}
     </Button>

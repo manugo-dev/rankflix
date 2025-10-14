@@ -1,7 +1,8 @@
 .footer {
   display: flex;
+  height: 4rem;
   align-items: center;
   justify-content: center;
   padding: var(--space-md);
-  background: var(--color-footer-background);
+  background: var(--footer-background);
 }

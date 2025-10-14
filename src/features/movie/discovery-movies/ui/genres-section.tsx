@@ -32,7 +32,9 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     return (
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>
-        <p className="genres-section__error-text">Something happened downloading the catalog</p>
+        <p className="genres-section__description genres-section__description--danger">
+          Something happened downloading the catalog
+        </p>
       </section>
     );
 
@@ -40,7 +42,7 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     return (
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>
-        <p className="genres-section__not-found-text">No movies found</p>
+        <p className="genres-section__description">No movies found</p>
       </section>
     );
 

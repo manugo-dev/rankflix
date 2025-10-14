@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
+import { WatchlistLink } from "@/features/watchlist/ui/watchlist-link/watchlist-link";
 import logoSrc from "@/shared/assets/rankflix.svg";
 import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
@@ -16,32 +17,35 @@ export function Header({ variant = "default" }: HeaderProps) {
 
   useEffect(() => {
     if (variant !== "floating") return;
-    const onScroll = () =>
-      setScrolled(window.scrollY > (headerReference.current?.offsetHeight ?? 150) * 2);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const handleScroll = () => {
+      const threshold = (headerReference.current?.offsetHeight ?? 100) * 1.5;
+      setScrolled(window.scrollY > threshold);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [variant]);
 
   return (
     <header
+      ref={headerReference}
       className={cn(
         "header",
         HEADER_VARIANTS_CLASSNAMES[variant] ?? HEADER_VARIANTS_CLASSNAMES.default,
         { "header--scrolled": scrolled },
       )}
-      ref={headerReference}
     >
       <div className="header__inner">
-        <Link to={getRouteLink.HOME()}>
-          <img src={logoSrc} alt="Rankflix" width={150} className="header__logo" />
+        <Link to={getRouteLink.HOME()} className="header__logo-link">
+          <img src={logoSrc} alt="Rankflix" className="header__logo" />
         </Link>
+
         <nav className="header__nav">
           <Link to={getRouteLink.HOME()} className="header__nav-link">
             Home
           </Link>
-          <Link to={getRouteLink.WISHLIST()} className="header__nav-link">
-            Wishlist
-          </Link>
+          <WatchlistLink />
         </nav>
       </div>
     </header>

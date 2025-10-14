@@ -1,5 +1,6 @@
 export const ROUTES = {
+  ERROR: "/error",
   HOME: "/",
   MOVIE_DETAIL: "/movie/:movieId",
-  WISHLIST: "/wishlist",
+  WATCHLIST: "/watchlist",
 } as const;

@@ -14,11 +14,11 @@
     line-height: 2rem;
   }
 
-  .genres-section__error-text {
-    color: var(--color-text-error);
+  .genres-section__description {
+    color: var(--color-text-gray);
   }
 
-  .genres-section__not-found-text {
-    color: var(--color-text-gray);
+  .genres-section__description--danger {
+    color: var(--color-text-danger);
   }
 }

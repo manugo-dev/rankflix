@@ -7,9 +7,9 @@ export function HomePage() {
   return (
     <>
       <Header variant="floating" />
-      <main className="page">
+      <main className="home-page">
         <TrendingSection source={MovieSourceId.TMDB} />
-        <div className="boxed-container">
+        <div className="page boxed-container">
           <GenresSection
             source={MovieSourceId.TMDB}
             genres={[MovieGenreMap.DRAMA]}
