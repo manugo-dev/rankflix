@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 import { movieApi, MovieSourceId } from "@/entities/movies";
 import { movieDetailQueries } from "@/features/movie/movie-detail";
@@ -12,7 +12,6 @@ import "./movie-detail.scss";
 
 export function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
-  const navigate = useNavigate();
   const movieQuery = useQuery(movieDetailQueries.getMovie(MovieSourceId.TMDB, movieId ?? ""));
   const movie = movieQuery?.data;
 
@@ -21,7 +20,7 @@ export function MovieDetailPage() {
 
   if (isLoading) {
     return (
-      <section>
+      <section className="page boxed-container movie-detail">
         <h1>Movie Detail Page</h1>
         <p>Loading movie details...</p>
       </section>
@@ -29,7 +28,7 @@ export function MovieDetailPage() {
   }
 
   if (hasError || !movie) {
-    return navigate(getRouteLink.ERROR());
+    return <Navigate to={getRouteLink.ERROR()} />;
   }
 
   return (
