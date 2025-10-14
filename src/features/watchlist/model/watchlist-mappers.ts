@@ -1,4 +1,4 @@
-import type { Movie } from "@/entities/movies";
+import { type Movie, movieApi } from "@/entities/movies";
 import { getRouteLink } from "@/shared/routes";
 
 import type { WatchlistItem, WatchlistItemType } from "./watchlist-types";
@@ -10,7 +10,7 @@ export const getUniqueId = (itemId: string, itemType: WatchlistItemType) => {
 export const createWatchlistItemFromMovie = (movie: Movie): WatchlistItem => {
   return {
     id: movie.id.toString(),
-    posterUrl: movie.posterPath,
+    posterUrl: movieApi[movie.source].getMovieImage(movie.posterPath, "poster"),
     releaseDate: movie.releaseDate,
     title: movie.title,
     type: "movie",

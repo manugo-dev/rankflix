@@ -1,7 +1,8 @@
 .movie-detail {
   display: flex;
+  width: 100%;
   min-height: 100vh;
-  flex-direction: column;
+  flex-flow: column wrap;
   background: linear-gradient(to bottom, #050509, #0a0a14);
   color: var(--color-text-white);
 }
@@ -10,6 +11,7 @@
   position: relative;
   display: flex;
   min-height: 40vh;
+  flex-wrap: wrap;
   align-items: flex-end;
   background-position: center;
   background-size: cover;
@@ -26,6 +28,7 @@
   z-index: 1;
   display: flex;
   max-width: var(--page-width, 1200px);
+  flex-wrap: wrap;
   align-items: flex-end;
   padding: 4rem 2rem;
   margin: 0 auto;

@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
+import { useNavigate } from "react-router";
 
 import { cn } from "@/shared/lib/styles";
 
+import { getRouteForWatchlistItem } from "../../model/watchlist-mappers";
 import type { WatchlistItem } from "../../model/watchlist-types";
 
 import "./watchlist-card.scss";
@@ -13,6 +15,11 @@ interface WatchlistCardProps {
 
 export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
   const movieYear = item.releaseDate ? new Date(item.releaseDate).getFullYear() : "—";
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(getRouteForWatchlistItem(item));
+  };
 
   return (
     <motion.article
@@ -24,6 +31,7 @@ export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
         hover: { scale: 1.02, y: -6 },
         rest: { scale: 1, y: 0 },
       }}
+      onClick={handleCardClick}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <motion.div className="movie-card__image-container">

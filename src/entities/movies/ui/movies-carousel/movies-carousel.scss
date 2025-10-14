@@ -6,12 +6,13 @@
 }
 
 .movies-carousel__item:hover .movie-card {
-  box-shadow: 0 0 1rem var(--color-primary-hover);
+  border: 0.1rem solid rgb(255 255 255 / 20%);
+  box-shadow: 0 0 1.5rem rgb(0 0 0 / 80%);
 }
 
 .movies-carousel__item--is-active,
 .movies-carousel__item--is-active:hover {
-  background: var(--color-primary-hover);
+  background: rgb(255 255 255 / 50%);
 
   .movie-card__poster {
     box-shadow: 0 0 0.5rem rgb(0 0 0 / 70%);

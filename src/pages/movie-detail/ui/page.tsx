@@ -7,6 +7,7 @@ import { movieDetailQueries } from "@/features/movie/movie-detail";
 import { AddToWatchlistButton, createWatchlistItemFromMovie } from "@/features/watchlist";
 import { getYear } from "@/shared/lib/date";
 import { getRouteLink } from "@/shared/routes";
+import { Spinner } from "@/shared/ui/spinner";
 
 import "./movie-detail.scss";
 
@@ -20,9 +21,8 @@ export function MovieDetailPage() {
 
   if (isLoading) {
     return (
-      <section className="page boxed-container movie-detail">
-        <h1>Movie Detail Page</h1>
-        <p>Loading movie details...</p>
+      <section className="page boxed-container">
+        <Spinner />
       </section>
     );
   }
