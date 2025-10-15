@@ -1,6 +1,7 @@
 import { TMDBGenreMap, type TMDBMovie, type TMDBMovieDetail } from "@/shared/api/tmdb";
 
-import type { Movies } from "../model/movies-types";
+import { MovieGenreMap, MovieSourceId } from "../model/movies-constants";
+import type { MovieDetail, Movies } from "../model/movies-types";
 
 export const MOCKED_TMDB_MOVIES: TMDBMovie[] = [
   {
@@ -94,4 +95,32 @@ export const MOCKED_TMDB_MOVIE_DETAIL: TMDBMovieDetail = {
   video: false,
   vote_average: 8.2,
   vote_count: 200,
+};
+
+export const MOCKED_MAPPED_MOVIE_DETAIL: MovieDetail = {
+  adult: true,
+  backdropPath: "backdrop.png",
+  budget: 500_000,
+  genres: [MovieGenreMap.ACTION, MovieGenreMap.DRAMA],
+  homepage: "https://movie.test",
+  id: "42",
+  imdbId: "tt1234567",
+  originalLanguage: "en",
+  originalTitle: "Origin Title",
+  overview: "Detail overview",
+  popularity: 88,
+  posterPath: "poster.png",
+  productionCompanies: [{ id: 1, logoPath: undefined, name: "Studio", originCountry: "" }],
+  productionCountries: [{ isoCode: "US", name: "United States" }],
+  releaseDate: new Date("2024-02-01T00:00:00.000Z"),
+  revenue: 1_000_000,
+  runtime: 123,
+  source: MovieSourceId.TMDB,
+  spokenLanguages: ["English", "Español"],
+  status: "Released",
+  tagline: "The tagline",
+  title: "Movie Detail",
+  video: false,
+  voteAverage: 8.2,
+  voteCount: 200,
 };

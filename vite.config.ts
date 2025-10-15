@@ -29,6 +29,8 @@ export default defineConfig({
         "**/*.stories.{ts,tsx}",
         "**/*-types.ts",
         "**/types.ts",
+        "**/pages/**/ssr.ts",
+        "**/index.ts",
         "**/*.config.js",
         ...coverageConfigDefaults.exclude,
       ],
