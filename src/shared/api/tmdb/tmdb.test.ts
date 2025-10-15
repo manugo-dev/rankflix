@@ -1,8 +1,21 @@
 import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { tmdbApi } from "@/shared/api/tmdb";
+
+vi.mock("@/shared/config", async (importActual) => {
+  const actual = await importActual<typeof import("@/shared/config")>();
+  return {
+    ...actual,
+    ENVIRONMENT: {
+      ...actual.ENVIRONMENT,
+      TMDB_API_KEY: "test_key",
+      TMDB_BASE_URL: "https://api.tmdb.test/3",
+      TMDB_IMAGE_BASE_URL: "https://images.tmdb.test",
+    },
+  };
+});
 
 const DISCOVER_RESULT_MOCK = [
   { id: 1, title: "Movie 1" },
@@ -53,9 +66,15 @@ const MOCKED_HANDLERS = [
 describe("tmdb API (MSW)", () => {
   const server = setupServer(...MOCKED_HANDLERS);
 
-  beforeAll(() => server.listen());
-  afterAll(() => server.close());
-  afterEach(() => server.resetHandlers());
+  beforeAll(() => {
+    server.listen();
+  });
+  afterAll(() => {
+    server.close();
+  });
+  afterEach(() => {
+    server.resetHandlers();
+  });
 
   it("discoverMovies calls the discover endpoint", async () => {
     const response = await tmdbApi.discoverMovies();
