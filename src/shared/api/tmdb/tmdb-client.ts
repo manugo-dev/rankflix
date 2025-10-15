@@ -3,7 +3,7 @@ import { ENVIRONMENT } from "@/shared/config";
 import { createHttpClient } from "../http";
 
 export const tmdbClient = createHttpClient({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL: ENVIRONMENT.TMDB_BASE_URL,
   headers: {
     "Content-Type": "application/json;charset=utf-8",
   },

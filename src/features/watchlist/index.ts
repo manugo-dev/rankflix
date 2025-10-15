@@ -8,3 +8,4 @@ export {
 } from "./model/watchlist-types";
 export { AddToWatchlistButton } from "./ui/add-to-watchlist-button/add-to-watchlist-button";
 export { WatchlistCard } from "./ui/watchlist-card/watchlist-card";
+export { WatchlistLink } from "./ui/watchlist-link/watchlist-link";

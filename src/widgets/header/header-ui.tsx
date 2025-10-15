@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
-import { WatchlistLink } from "@/features/watchlist/ui/watchlist-link/watchlist-link";
 import logoSrc from "@/shared/assets/rankflix.svg";
 import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
 
+import { Navbar } from "../navbar";
 import { HEADER_VARIANTS_CLASSNAMES } from "./header-constants";
 import type { HeaderProps } from "./header-types";
 
@@ -40,13 +40,7 @@ export function Header({ variant = "default" }: HeaderProps) {
         <Link to={getRouteLink.HOME()} className="header__logo-link">
           <img src={logoSrc} alt="Rankflix" className="header__logo" />
         </Link>
-
-        <nav className="header__nav">
-          <Link to={getRouteLink.HOME()} className="header__nav-link">
-            Home
-          </Link>
-          <WatchlistLink />
-        </nav>
+        <Navbar />
       </div>
     </header>
   );

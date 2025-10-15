@@ -41,7 +41,7 @@ export const createListStore = <ItemData>(
 
         items: [],
 
-        patchItem: (itemId: string, newData: ListItem<ItemData>) =>
+        patchItem: (itemId: string, newData: Partial<ListItem<ItemData>>) =>
           set((state) => {
             const itemIndex = state.items.findIndex((item) => item.uid === itemId);
 
@@ -73,7 +73,7 @@ export const createListStore = <ItemData>(
 
         updatedAt: now,
 
-        updateItem: (itemId: string, newData: ListItem<ItemData>) =>
+        updateItem: (itemId: string, newItem: ListItem<ItemData>) =>
           set((state) => {
             const itemIndex = state.items.findIndex((item) => item.uid === itemId);
 
@@ -83,7 +83,7 @@ export const createListStore = <ItemData>(
             updatedItems[itemIndex] = {
               createdAt: updatedItems[itemIndex].createdAt,
               updatedAt: new Date(),
-              ...newData,
+              ...newItem,
             };
 
             return {

@@ -40,7 +40,7 @@ jobs:
         run: npm run lint:stylelint
 
       - name: Tests
-        run: npm run test:coverage
+        run: npm run test:ci
 
       - name: Build
         run: npm run build

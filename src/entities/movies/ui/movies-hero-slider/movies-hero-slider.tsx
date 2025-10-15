@@ -10,12 +10,13 @@ import type { Movie } from "../../model/movies-types";
 import "./movies-hero-slider.scss";
 
 interface MoviesHeroSliderProps {
+  className?: string;
   movies: Movie[];
 }
 
-export function MoviesHeroSlider({ movies }: MoviesHeroSliderProps) {
+export function MoviesHeroSlider({ className, movies }: MoviesHeroSliderProps) {
   return (
-    <HeroSlider>
+    <HeroSlider className={className}>
       {movies.map((movie) => (
         <div className="movies-hero-slider__slide" key={movie.id}>
           <img

@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TitlesSkeleton > matches the snapshot 1`] = `
+<div
+  class="titles-skeleton"
+>
+  <div
+    class="titles-skeleton__track"
+  >
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+    <div
+      class="titles-skeleton__card"
+    />
+  </div>
+</div>
+`;

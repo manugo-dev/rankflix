@@ -6,6 +6,8 @@ import { Spinner } from "@/shared/ui/spinner";
 
 import { discoverMoviesQueries } from "../api/queries";
 
+import "./trending-section.scss";
+
 interface TrendingSectionProps {
   source: MovieSourceIdType;
   timeWindow?: MovieTrendingTime;
@@ -19,8 +21,7 @@ export function TrendingSection({ source, timeWindow }: TrendingSectionProps) {
   } = useQuery(discoverMoviesQueries.trending(source, timeWindow));
 
   if (isLoading) return <Spinner />;
-  if (error) return <></>;
-  if (!movies?.results) return <></>;
+  if (error || !movies?.results) return <div className="trending-section"></div>;
 
-  return <MoviesHeroSlider movies={movies.results} />;
+  return <MoviesHeroSlider className="trending-section" movies={movies.results} />;
 }

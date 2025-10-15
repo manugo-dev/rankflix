@@ -80,8 +80,8 @@ export default defineConfig([
       "unicorn/prevent-abbreviations": [
         "error",
         {
-          allowList: { lib: true, param: false, params: false, props: true },
-          replacements: { param: false, params: false, props: false },
+          allowList: { fn: true, lib: true, param: false, params: false, props: true },
+          replacements: { fn: false, param: false, params: false, props: false },
         },
       ],
     },

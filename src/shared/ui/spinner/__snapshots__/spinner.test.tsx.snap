@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Spinner > matches the snapshot 1`] = `
+<div
+  class="spinner"
+  role="status"
+>
+  <div
+    class="eye"
+  />
+  <div
+    class="halo"
+  />
+</div>
+`;

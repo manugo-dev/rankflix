@@ -1,0 +1,97 @@
+import { TMDBGenreMap, type TMDBMovie, type TMDBMovieDetail } from "@/shared/api/tmdb";
+
+import type { Movies } from "../model/movies-types";
+
+export const MOCKED_TMDB_MOVIES: TMDBMovie[] = [
+  {
+    adult: false,
+    backdrop_path: "bpath1",
+    genre_ids: [TMDBGenreMap.action],
+    id: "321",
+    original_language: "en",
+    original_title: "Origin",
+    overview: "Overview",
+    popularity: 10,
+    poster_path: "ppath1",
+    release_date: "2024-01-01",
+    title: "Title1",
+    video: false,
+    vote_average: 7.1,
+    vote_count: 50,
+  },
+  {
+    adult: false,
+    backdrop_path: "bpath2",
+    genre_ids: [TMDBGenreMap.comedy, TMDBGenreMap.drama],
+    id: "322",
+    original_language: "es",
+    original_title: "Origin2",
+    overview: "Overview2",
+    popularity: 10,
+    poster_path: "ppath2",
+    release_date: "2024-10-05",
+    title: "Title2",
+    video: true,
+    vote_average: 7.1,
+    vote_count: 50,
+  },
+];
+
+export const MOCKED_MAPPED_MOVIES: Movies = [
+  {
+    backdropUrl: "bpath1",
+    id: "321",
+    overview: "Overview",
+    posterPath: "ppath1",
+    releaseDate: new Date("2024-01-01T00:00:00.000Z"),
+    source: "TMDB",
+    title: "Title1",
+    voteAverage: 7.1,
+    voteCount: 50,
+  },
+  {
+    id: "322",
+    overview: "Overview2",
+    posterPath: "ppath2",
+    releaseDate: new Date("2024-10-05T00:00:00.000Z"),
+    source: "TMDB",
+    title: "Title2",
+    voteAverage: 7.1,
+    voteCount: 50,
+  },
+];
+
+export const MOCKED_TMDB_MOVIE_DETAIL: TMDBMovieDetail = {
+  adult: true,
+  backdrop_path: "backdrop.png",
+  belongs_to_collection: null,
+  budget: 500_000,
+  genres: [
+    { id: TMDBGenreMap.action, name: "Action" },
+    { id: TMDBGenreMap.drama, name: "Drama" },
+  ],
+  homepage: "https://movie.test",
+  id: 42,
+  imdb_id: "tt1234567",
+  origin_country: ["US"],
+  original_language: "en",
+  original_title: "Origin Title",
+  overview: "Detail overview",
+  popularity: 88,
+  poster_path: "poster.png",
+  production_companies: [{ id: 1, logo_path: null, name: "Studio", origin_country: "" }],
+  production_countries: [{ iso_3166_1: "US", name: "United States" }],
+  release_date: "2024-02-01",
+  revenue: 1_000_000,
+  runtime: 123,
+  spoken_languages: [
+    { english_name: "English", iso_639_1: "en", name: "English" },
+    { english_name: "", iso_639_1: "es", name: "Español" },
+  ],
+  status: "Released",
+  tagline: "The tagline",
+  title: "Movie Detail",
+  video: false,
+  vote_average: 8.2,
+  vote_count: 200,
+};

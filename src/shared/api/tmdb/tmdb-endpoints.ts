@@ -5,7 +5,7 @@ import type {
   TMDBTrendingMoviesParams,
 } from "./tmdb-types";
 
-const TMDB_ENDPOINTS = {
+export const TMDB_ENDPOINTS = {
   DISCOVER_MOVIE: () => "/discover/movie",
   MOVIE_DETAILS: (id: string) => `/movie/${id}`,
   SIMILAR_MOVIES: (id: string) => `/movie/${id}/similar`,

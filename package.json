@@ -22,6 +22,7 @@
     "prepare": "husky",
     "prettier": "prettier --write .",
     "start": "cross-env NODE_ENV=production node dist/index.js",
+    "test:ci": "vitest --coverage --watch=false",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui --coverage",
     "test": "vitest"
@@ -78,6 +79,7 @@
     "husky": "9.1.7",
     "jsdom": "27.0.0",
     "lint-staged": "16.2.3",
+    "msw": "^2.11.5",
     "playwright": "1.56.0",
     "prettier": "3.6.2",
     "rimraf": "6.0.1",

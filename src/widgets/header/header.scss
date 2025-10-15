@@ -39,46 +39,6 @@
   filter: drop-shadow(0 0 1rem var(--color-primary));
 }
 
-.header__nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: 0.8rem;
-  gap: 0.5rem;
-
-  @include from-breakpoint(xs) {
-    font-size: 1rem;
-    gap: 1rem;
-  }
-}
-
-.header__nav a {
-  position: relative;
-  color: inherit;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.header__nav a::after {
-  position: absolute;
-  bottom: -0.2rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: currentcolor;
-  content: "";
-  opacity: 0;
-  transform: scaleX(0);
-  transition:
-    transform 0.2s,
-    opacity 0.2s;
-}
-
-.header:hover::after {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
 .header--default {
   position: sticky;
   height: 6rem;

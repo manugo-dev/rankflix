@@ -6,4 +6,4 @@ export type {
   HttpClientResponse,
   HttpPaginatedRequestParams,
   HttpPaginatedResponse,
-} from "./http-model";
+} from "./http-types";
