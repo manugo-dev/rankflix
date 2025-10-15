@@ -4,6 +4,7 @@ import type { MoviesAPIActions } from "../model/movies-types";
 import {
   getTMDBMovieDetail,
   getTMDBMovies,
+  getTMDBSimilarMovies,
   getTMDBTrendingMovies,
 } from "./providers/tmdb-movie-provider";
 
@@ -14,6 +15,7 @@ export const movieApi = {
     details: getTMDBMovieDetail,
     discover: getTMDBMovies,
     getMovieImage: getTMDBMovieImage,
+    similar: getTMDBSimilarMovies,
     trending: getTMDBTrendingMovies,
   },
 } satisfies Record<MovieSourceIdType, MoviesAPIActions>;

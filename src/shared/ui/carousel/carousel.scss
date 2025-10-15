@@ -12,7 +12,7 @@
   width: 100%;
   align-items: center;
   justify-content: left;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   cursor: grab;
   outline: none;
   touch-action: pan-y pinch-zoom;
@@ -35,12 +35,15 @@
 }
 
 .carousel__item {
-  min-height: 15rem;
   flex: 0 0 auto;
   outline: none;
   transition:
     opacity 0.25s ease,
     transform 0.25s ease;
+
+  @include from-breakpoint(md) {
+    min-height: 10rem;
+  }
 }
 
 .carousel__control {
@@ -59,9 +62,9 @@
 }
 
 .carousel__control--prev {
-  left: 0.5rem;
+  left: 0;
 }
 
 .carousel__control--next {
-  right: 0.5rem;
+  right: 0;
 }

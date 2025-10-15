@@ -12,8 +12,8 @@ export function AppRouter() {
     <Routes>
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route element={<MainLayout />}>
-        <Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
         <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetailPage />} />
+        <Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

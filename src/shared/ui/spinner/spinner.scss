@@ -9,22 +9,24 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  width: 78px;
-  height: 78px;
+  width: 5rem;
+  height: 5rem;
   box-sizing: border-box;
-  border: 8px solid #303030;
+  border: 0.5rem solid #222;
   border-radius: 50%;
   margin: 10rem auto;
   background: #fff;
+  box-shadow: 0 0 2rem rgb(0 0 0 / 80%);
+  outline: 0.1rem solid #333;
 }
 
 .eye::before {
   position: absolute;
   z-index: 2;
   bottom: 15px;
-  left: 20px;
-  width: 32px;
-  height: 32px;
+  left: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   animation: eye-move 3s infinite;
   background: #111;
@@ -39,22 +41,32 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  border-bottom: 8px solid #303030;
+  border-bottom: 0.5rem solid #222;
   animation: eye-shade 3s infinite;
-  background: #6b6b6b;
+  background: #444;
   content: "";
+}
+
+.halo {
+  position: absolute;
+  z-index: -1;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  animation: halo-pulse 3s infinite;
+  background: radial-gradient(circle, rgb(255 255 255 / 20%) 0%, transparent 70%);
 }
 
 @keyframes halo-pulse {
   0%,
   100% {
     opacity: 0.3;
-    transform: scale(0.2);
+    transform: scale(0.5);
   }
 
   50% {
     opacity: 0.5;
-    transform: scale(1);
+    transform: scale(2);
   }
 }
 

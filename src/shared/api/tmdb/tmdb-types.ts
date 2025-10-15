@@ -5,13 +5,18 @@ export type TMDBGenreId = (typeof TMDBGenreMap)[keyof typeof TMDBGenreMap];
 
 export interface TMDBProductionCompany {
   id: number;
-  logo_path: string;
+  logo_path: string | null;
   name: string;
   origin_country: string;
 }
 
 export interface TMDBProductionCountry {
   iso_3166_1: string;
+  name: string;
+}
+
+export interface TMDBMovieDetailGenre {
+  id: TMDBGenreId;
   name: string;
 }
 
@@ -43,7 +48,7 @@ export interface TMDBMovieDetail {
   backdrop_path: string;
   belongs_to_collection: string | null;
   budget: number;
-  genres: TMDBGenreId[];
+  genres: TMDBMovieDetailGenre[];
   homepage: string;
   id: number;
   imdb_id: string;

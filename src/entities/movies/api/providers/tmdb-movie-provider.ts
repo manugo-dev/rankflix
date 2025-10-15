@@ -42,3 +42,13 @@ export const getTMDBMovieDetail = async (id: string) => {
   const response = await tmdbApi.movieDetail(id);
   return mapTMDBMovieDetailToMovieDetail(response.data);
 };
+
+export const getTMDBSimilarMovies = async (id: string): Promise<PaginatedMovies> => {
+  const response = await tmdbApi.similarMovies(id);
+  return {
+    page: response.data.page,
+    results: response.data.results.map((movie) => mapTMDBMovieToMovie(movie)),
+    total_pages: response.data.total_pages,
+    total_results: response.data.total_results,
+  };
+};

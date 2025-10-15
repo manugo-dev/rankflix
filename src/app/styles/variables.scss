@@ -5,6 +5,7 @@
   /* Typography */
   --font-primary: "Poppins", system-ui, -apple-system, sans-serif;
   --font-mono: "Space Mono", monospace;
+  --font-secondary: "Reddit Sans Condensed Variable", sans-serif;
   --base-font-size: 16px;
   --font-size-base: 1rem;
   --line-height-base: 1.25rem;
@@ -37,6 +38,7 @@
   --color-primary: rgb(10 64 96 / 100%);
   --color-primary-hover: rgb(10 64 96 / 50%);
   --color-danger: rgb(120 28 29);
+  --color-danger-hover: rgb(120 28 29 / 50%);
   --color-text-white: rgb(255 255 255 / 100%);
   --color-text-danger: rgb(212 65 68);
   --color-text-gray: rgb(00 150 150);
@@ -46,6 +48,7 @@
   --color-shadow-black: rgb(0 0 0 / 25%);
   --shadow-sm: 0 0.25rem 0.7rem;
   --shadow-md: 0 0.375rem 0.9rem;
+  --shadow-lg: 0 0.5rem 1rem;
 
   /* Transitions */
   --transition-fast: 150ms ease;

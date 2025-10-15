@@ -15,12 +15,23 @@ export interface Movie {
   voteAverage?: number;
   voteCount?: number;
 }
-
 export type Movies = Movie[];
+
+export interface MovieProductionCompany {
+  id: number;
+  logoPath?: string;
+  name: string;
+  originCountry?: string;
+}
+
+export interface MovieProductionCountry {
+  isoCode: string;
+  name: string;
+}
 
 export interface MovieDetail {
   adult: boolean;
-  backdrop_path: string;
+  backdropPath: string;
   budget: number;
   genres: MovieGenreId[];
   homepage: string;
@@ -31,6 +42,8 @@ export interface MovieDetail {
   overview: string;
   popularity: number;
   posterPath: string;
+  productionCompanies: MovieProductionCompany[];
+  productionCountries: MovieProductionCountry[];
   releaseDate: Date;
   revenue: number;
   runtime: number;
@@ -69,5 +82,6 @@ export interface MoviesAPIActions {
   details: (_id: string) => Promise<MovieDetail>;
   discover: (_params: DiscoverMoviesParams) => Promise<PaginatedMovies>;
   getMovieImage: (_path: string, _size?: MovieImageSize) => string;
+  similar: (_id: string) => Promise<PaginatedMovies>;
   trending: (_params: TrendingMoviesParams) => Promise<PaginatedMovies>;
 }

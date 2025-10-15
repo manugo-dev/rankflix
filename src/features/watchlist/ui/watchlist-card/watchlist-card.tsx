@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { cn } from "@/shared/lib/styles";
@@ -14,6 +15,7 @@ interface WatchlistCardProps {
 }
 
 export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
+  const [hasImageError, setHasImageError] = useState(false);
   const movieYear = item.releaseDate ? new Date(item.releaseDate).getFullYear() : "—";
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
 
   return (
     <motion.article
-      className={cn("movie-card", { "movie-card--active": active })}
+      className={cn("watchlist-card", { "watchlist-card--active": active })}
       initial={false}
       animate={active ? "hover" : "rest"}
       whileHover="hover"
@@ -34,29 +36,28 @@ export function WatchlistCard({ active = false, item }: WatchlistCardProps) {
       onClick={handleCardClick}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
-      <motion.div className="movie-card__image-container">
-        <motion.img
-          src={item.posterUrl}
-          alt={item.title}
-          className="movie-card__image"
-          variants={{
-            hover: { height: "75%" },
-            rest: { height: "100%" },
-          }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          draggable={false}
-        />
+      <motion.div className="watchlist-card__image-container">
+        {hasImageError ? (
+          <div className="watchlist-card__placeholder">{item.title}</div>
+        ) : (
+          <motion.img
+            src={item.posterUrl}
+            alt={item.title}
+            className="watchlist-card__image"
+            onError={() => setHasImageError(true)}
+          />
+        )}
       </motion.div>
       <motion.div
-        className="movie-card__info"
+        className="watchlist-card__info"
         variants={{
           hover: { opacity: 1, y: 0 },
           rest: { opacity: 0, y: 10 },
         }}
         transition={{ delay: 0.05, duration: 0.3 }}
       >
-        <h3 className="movie-card__title">{item.title}</h3>
-        <p className="movie-card__year">{movieYear}</p>
+        <h3 className="watchlist-card__title">{item.title}</h3>
+        <p className="watchlist-card__year">{movieYear}</p>
       </motion.div>
     </motion.article>
   );

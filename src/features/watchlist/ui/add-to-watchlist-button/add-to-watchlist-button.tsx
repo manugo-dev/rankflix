@@ -7,8 +7,6 @@ import {
 } from "../../model/watchlist-selectors";
 import type { WatchlistItem } from "../../model/watchlist-types";
 
-import "./add-to-watchlist-button.scss";
-
 interface AddToWatchlistButtonProps {
   item: WatchlistItem;
 }

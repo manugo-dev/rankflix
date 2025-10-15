@@ -30,12 +30,12 @@ export const getTMDBMovieImage = (path?: string, size?: keyof typeof tmdbImageSi
 
 export const tmdbGenreMap = createBidirectionalMap<MovieGenreId, TMDBGenreId>({
   [MovieGenreMap.ACTION]: TMDBGenreMap.action,
+  [MovieGenreMap.DRAMA]: TMDBGenreMap.drama,
   [MovieGenreMap.ADVENTURE]: TMDBGenreMap.adventure,
   [MovieGenreMap.ANIMATION]: TMDBGenreMap.animation,
   [MovieGenreMap.COMEDY]: TMDBGenreMap.comedy,
   [MovieGenreMap.CRIME]: TMDBGenreMap.crime,
   [MovieGenreMap.DOCUMENTARY]: TMDBGenreMap.documentary,
-  [MovieGenreMap.DRAMA]: TMDBGenreMap.drama,
   [MovieGenreMap.FAMILY]: TMDBGenreMap.family,
   [MovieGenreMap.FANTASY]: TMDBGenreMap.fantasy,
   [MovieGenreMap.HISTORY]: TMDBGenreMap.history,
@@ -59,7 +59,7 @@ From TMDB provider model to Movie model
 export const mapTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
   return {
     backdropUrl: tmdbMovie.backdrop_path ?? undefined,
-    id: tmdbMovie.id,
+    id: tmdbMovie.id.toString(),
     overview: tmdbMovie.overview,
     posterPath: tmdbMovie.poster_path ?? undefined,
     releaseDate: parseDate(tmdbMovie.release_date),
@@ -73,11 +73,11 @@ export const mapTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
 export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): MovieDetail => {
   return {
     adult: tmdbMovie.adult,
-    backdrop_path: tmdbMovie.backdrop_path,
+    backdropPath: tmdbMovie.backdrop_path,
     budget: tmdbMovie.budget,
     genres: tmdbMovie.genres
-      .map((genreId) => mapTMDBGenreIdToMovieGenreId(genreId))
-      .filter((genreId) => !!genreId),
+      .map((genre) => mapTMDBGenreIdToMovieGenreId(genre.id))
+      .filter((genre) => !!genre),
     homepage: tmdbMovie.homepage,
     id: tmdbMovie.id.toString(),
     imdbId: tmdbMovie.imdb_id,
@@ -86,11 +86,23 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
     overview: tmdbMovie.overview,
     popularity: tmdbMovie.popularity,
     posterPath: tmdbMovie.poster_path,
+    productionCompanies: tmdbMovie.production_companies.map((company) => ({
+      id: company.id,
+      logoPath: company.logo_path ?? undefined,
+      name: company.name,
+      originCountry: company.origin_country || undefined,
+    })),
+    productionCountries: tmdbMovie.production_countries.map((country) => ({
+      isoCode: country.iso_3166_1,
+      name: country.name,
+    })),
     releaseDate: parseDate(tmdbMovie.release_date),
     revenue: tmdbMovie.revenue,
     runtime: tmdbMovie.runtime,
     source: MovieSourceId.TMDB,
-    spokenLanguages: tmdbMovie.spoken_languages.map((language) => language.name),
+    spokenLanguages: tmdbMovie.spoken_languages.map(
+      (language) => language.english_name || language.name,
+    ),
     status: tmdbMovie.status,
     tagline: tmdbMovie.tagline,
     title: tmdbMovie.title,
