@@ -14,9 +14,6 @@ jobs:
     name: CI Pipeline
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -53,6 +50,7 @@ jobs:
           gist-token: ${{ secrets.GIST_TOKEN }}
           gist-url: ${{ vars.BADGES_GIST_URL }}
           upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
+          vitest-config-path: vite.config.ts
 
       - name: Build
         run: npm run build
