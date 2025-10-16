@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,6 +48,7 @@ jobs:
           branches: "*"
           badges-icon: vitest
           target-branch: badges
+          vitest-config-path: vite.config.ts
 
       - name: Build
         run: npm run build
