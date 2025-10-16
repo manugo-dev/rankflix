@@ -7,6 +7,16 @@
   color: var(--color-text-white);
 }
 
+.movie-detail.movie-detail--genre-action {
+  background: radial-gradient(120% 120% at 50% 0%, rgb(43 2 2) 0%, rgb(9 5 5) 50%, rgb(4 2 2) 100%);
+  font-family: var(--font-secondary);
+}
+
+.movie-detail.movie-detail--genre-comedy {
+  background: radial-gradient(120% 120% at 50% 0%, #152115 0%, #050905 60%, #020402 100%);
+  font-family: var(--font-mono);
+}
+
 .movie-detail__hero {
   position: relative;
   display: flex;
@@ -175,7 +185,7 @@
   padding: 2rem;
   border: 1px solid rgb(255 255 255 / 5%);
   border-radius: 1.25rem;
-  background: linear-gradient(135deg, rgb(18 22 40 / 70%), rgb(12 14 26 / 90%));
+  background: linear-gradient(135deg, rgb(0 0 0 / 30%), rgb(0 0 0 / 60%));
   box-shadow: 0 20px 40px rgb(0 0 0 / 25%);
 }
 

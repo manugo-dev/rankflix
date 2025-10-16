@@ -48,7 +48,6 @@ jobs:
           branches: "*"
           badges-icon: vitest
           target-branch: badges
-          vitest-config-path: vite.config.ts
 
       - name: Build
         run: npm run build

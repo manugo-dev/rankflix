@@ -8,8 +8,11 @@ import { movieDetailQueries } from "@/features/movie-detail";
 import { AddToWatchlistButton, createWatchlistItemFromMovie } from "@/features/watchlist";
 import { formatDate, getYear } from "@/shared/lib/date";
 import { humanizer } from "@/shared/lib/humanizer";
+import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
 import { Spinner } from "@/shared/ui/spinner";
+
+import { movieDetailGenreStyles } from "./movie-detail-constants";
 
 import "./movie-detail.scss";
 
@@ -38,8 +41,12 @@ export function MovieDetailPage() {
   const heroBackgroundImage = movieApi[movie.source].getMovieImage(movie.backdropPath, "backdrop");
   const posterImage = movieApi[movie.source].getMovieImage(movie.posterPath, "poster");
 
+  const genreWithStyle = movie.genres?.find((genre) => {
+    return genre in movieDetailGenreStyles;
+  });
+
   return (
-    <div className="movie-detail">
+    <div className={cn("movie-detail", genreWithStyle && movieDetailGenreStyles[genreWithStyle])}>
       <motion.section
         className="movie-detail__hero"
         style={heroBackgroundImage ? { backgroundImage: `url(${heroBackgroundImage})` } : undefined}
