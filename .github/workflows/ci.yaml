@@ -46,6 +46,8 @@ jobs:
         run: npm run test:ci
 
       - name: Generating coverage badges
+        env:
+          HUSKY: 0
         uses: jpb06/coverage-badges-action@latest
         with:
           branches: "*"
