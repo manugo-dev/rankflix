@@ -77,3 +77,12 @@ Object.defineProperty(globalThis, "matchMedia", {
   })),
   writable: true,
 });
+
+Object.defineProperty(globalThis, "IntersectionObserver", {
+  configurable: true,
+  value: vi.fn(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+  })),
+  writable: true,
+});

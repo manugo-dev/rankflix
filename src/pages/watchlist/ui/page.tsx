@@ -9,7 +9,7 @@ export function WatchlistPage() {
     <main className="page boxed-container watchlist-page">
       <h1>My Watchlist</h1>
       {watchlistItems.length === 0 ? (
-        <p>Your watchlist is empty.</p>
+        <p data-testid="empty-watchlist-message">Your watchlist is empty.</p>
       ) : (
         <div className="watchlist-grid">
           {watchlistItems.map((watchlistItem) => (

@@ -10,8 +10,7 @@ vi.mock("@tanstack/react-query", async (importActual) => ({
   ...(await importActual()),
   useQuery: vi.fn(() => ({
     data: { results: MOCKED_MAPPED_MOVIES },
-    error: null,
-    isLoading: false,
+    isPending: false,
   })),
 }));
 

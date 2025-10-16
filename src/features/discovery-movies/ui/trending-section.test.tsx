@@ -30,8 +30,7 @@ describe("TrendingSection", () => {
   it("renders Spinner while loading", () => {
     mockedUseQuery.mockReturnValue({
       data: undefined,
-      error: null,
-      isLoading: true,
+      isPending: true,
     });
 
     render(<TrendingSection source={"TMDB"} />);
@@ -42,8 +41,8 @@ describe("TrendingSection", () => {
   it("renders empty container on error", () => {
     mockedUseQuery.mockReturnValue({
       data: undefined,
-      error: new Error("fetch failed"),
-      isLoading: false,
+      isError: true,
+      isPending: false,
     });
     const { container } = render(<TrendingSection source={"TMDB"} />);
     expect(container.querySelector(".trending-section")).toBeInTheDocument();
@@ -53,8 +52,8 @@ describe("TrendingSection", () => {
   it("renders empty container when no results are present", () => {
     mockedUseQuery.mockReturnValue({
       data: { some: "payload" }, // no results key
-      error: null,
-      isLoading: false,
+      error: true,
+      isPending: false,
     });
     const { container } = render(<TrendingSection source={"TMDB"} />);
     expect(container.querySelector(".trending-section")).toBeInTheDocument();
@@ -65,8 +64,7 @@ describe("TrendingSection", () => {
     const movies = [{ id: 1, title: "Movie A" }];
     mockedUseQuery.mockReturnValue({
       data: { results: movies },
-      error: null,
-      isLoading: false,
+      isPending: false,
     });
     render(<TrendingSection source={"TMDB"} />);
     const slider = screen.getByTestId("movies-hero-slider");

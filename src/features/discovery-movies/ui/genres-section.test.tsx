@@ -26,8 +26,7 @@ describe("GenresSection", () => {
   it("renders TitlesSkeleton while loading", () => {
     mockedUseQuery.mockReturnValue({
       data: undefined,
-      error: null,
-      isLoading: true,
+      isPending: true,
     });
     render(<GenresSection genres={["genres.ACTION"]} source={"TMDB"} title="Popular" />);
     expect(screen.getByRole("heading", { name: "Popular" })).toBeInTheDocument();
@@ -37,8 +36,8 @@ describe("GenresSection", () => {
   it("shows error message when query errors", () => {
     mockedUseQuery.mockReturnValue({
       data: undefined,
-      error: new Error("boom"),
-      isLoading: false,
+      isError: true,
+      isPending: false,
     });
     render(<GenresSection genres={["genres.COMEDY"]} source={"TMDB"} title="Comedy" />);
     expect(screen.getByRole("heading", { name: "Comedy" })).toBeInTheDocument();
@@ -48,8 +47,7 @@ describe("GenresSection", () => {
   it("shows 'No movies found' when there are no results", () => {
     mockedUseQuery.mockReturnValue({
       data: undefined,
-      error: null,
-      isLoading: false,
+      isPending: false,
     });
     render(<GenresSection genres={["genres.ANIMATION"]} source={"TMDB"} title="Animation" />);
     expect(screen.getByRole("heading", { name: "Animation" })).toBeInTheDocument();
@@ -60,8 +58,7 @@ describe("GenresSection", () => {
     const sampleResults = [{ id: 1 }, { id: 2 }];
     mockedUseQuery.mockReturnValue({
       data: { results: sampleResults },
-      error: null,
-      isLoading: false,
+      isPending: false,
     });
     render(<GenresSection genres={["genres.ADVENTURE"]} source={"TMDB"} title="Adventure" />);
     expect(screen.getByRole("heading", { name: "Adventure" })).toBeInTheDocument();

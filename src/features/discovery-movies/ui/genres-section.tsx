@@ -16,11 +16,11 @@ interface GenreSectionProps {
 export function GenresSection({ genres, source, title }: GenreSectionProps) {
   const {
     data: movies,
-    error,
-    isLoading,
+    isError,
+    isPending,
   } = useQuery(discoverMoviesQueries.byGenres(source, genres));
 
-  if (isLoading)
+  if (isPending)
     return (
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>
@@ -28,7 +28,7 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
       </section>
     );
 
-  if (error)
+  if (isError)
     return (
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>

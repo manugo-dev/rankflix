@@ -17,10 +17,10 @@ export function TrendingSection({ source, timeWindow }: TrendingSectionProps) {
   const {
     data: movies,
     error,
-    isLoading,
+    isPending,
   } = useQuery(discoverMoviesQueries.trending(source, timeWindow));
 
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
   if (error || !movies?.results)
     return <div className="trending-section" data-testid="trending-section"></div>;
 
