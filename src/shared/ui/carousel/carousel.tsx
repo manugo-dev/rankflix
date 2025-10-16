@@ -14,6 +14,7 @@ export function Carousel({
   gap = 16,
   itemsPerPage = DEFAULT_CAROUSEL_ITEMS_PER_PAGE,
   onSelectItem,
+  ...props
 }: CarouselProps) {
   const childrenArray = useMemo(
     () => (Array.isArray(children) ? children : [children]),
@@ -46,6 +47,7 @@ export function Carousel({
 
   return (
     <div
+      {...props}
       ref={containerReference}
       className="carousel"
       tabIndex={0}

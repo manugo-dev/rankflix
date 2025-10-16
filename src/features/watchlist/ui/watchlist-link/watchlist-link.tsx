@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router";
 
-import { useWatchlistCount } from "@/features/watchlist";
 import { getRouteLink } from "@/shared/routes";
+
+import { useWatchlistCount } from "../../model/watchlist-selectors";
 
 import "./watchlist-link.scss";
 

@@ -40,7 +40,7 @@ export const MOCKED_TMDB_MOVIES: TMDBMovie[] = [
 
 export const MOCKED_MAPPED_MOVIES: Movies = [
   {
-    backdropUrl: "bpath1",
+    backdropPath: "bpath1",
     id: "321",
     overview: "Overview",
     posterPath: "ppath1",
@@ -110,11 +110,11 @@ export const MOCKED_MAPPED_MOVIE_DETAIL: MovieDetail = {
   overview: "Detail overview",
   popularity: 88,
   posterPath: "poster.png",
-  productionCompanies: [{ id: 1, logoPath: undefined, name: "Studio", originCountry: "" }],
+  productionCompanies: [{ id: 1, logoImage: undefined, name: "Studio", originCountry: "" }],
   productionCountries: [{ isoCode: "US", name: "United States" }],
   releaseDate: new Date("2024-02-01T00:00:00.000Z"),
   revenue: 1_000_000,
-  runtime: 123,
+  runtimeMilliseconds: 6000,
   source: MovieSourceId.TMDB,
   spokenLanguages: ["English", "Español"],
   status: "Released",

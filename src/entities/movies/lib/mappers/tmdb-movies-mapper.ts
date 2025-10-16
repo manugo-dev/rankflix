@@ -58,7 +58,7 @@ From TMDB provider model to Movie model
 
 export const mapTMDBMovieToMovie = (tmdbMovie: TMDBMovie): Movie => {
   return {
-    backdropUrl: tmdbMovie.backdrop_path ?? undefined,
+    backdropPath: tmdbMovie.backdrop_path ?? undefined,
     id: tmdbMovie.id.toString(),
     overview: tmdbMovie.overview,
     posterPath: tmdbMovie.poster_path ?? undefined,
@@ -98,7 +98,7 @@ export const mapTMDBMovieDetailToMovieDetail = (tmdbMovie: TMDBMovieDetail): Mov
     })),
     releaseDate: parseDate(tmdbMovie.release_date),
     revenue: tmdbMovie.revenue,
-    runtime: tmdbMovie.runtime,
+    runtimeMilliseconds: tmdbMovie.runtime ? tmdbMovie.runtime * 60 * 1000 : undefined,
     source: MovieSourceId.TMDB,
     spokenLanguages: tmdbMovie.spoken_languages.map(
       (language) => language.english_name || language.name,

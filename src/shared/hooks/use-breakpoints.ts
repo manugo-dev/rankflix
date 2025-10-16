@@ -13,7 +13,7 @@ function getCurrentBreakpoint(width: number): Breakpoint {
   return "xs";
 }
 
-export function useBreakpoint(): Breakpoint {
+export function useBreakpoints(): Breakpoint {
   const [breakpoint, setBreakpoint] = useState<Breakpoint>("xs");
 
   useEffect(() => {

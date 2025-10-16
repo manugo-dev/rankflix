@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { HTMLProps, ReactNode } from "react";
 
 import type { BreakpointValueObject } from "@/shared/config";
 
@@ -13,7 +13,7 @@ export interface CarouselItemRenderProps extends React.HTMLAttributes<HTMLLIElem
 
 export type CarouselItemRenderer = (_props: CarouselItemRenderProps) => ReactNode;
 
-export interface CarouselProps {
+export interface CarouselProps extends Omit<HTMLProps<HTMLDivElement>, "children"> {
   children: CarouselItemRenderer[];
   className?: string;
   gap?: number;

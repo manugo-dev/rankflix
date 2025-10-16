@@ -1,5 +1,5 @@
 import { MovieGenreMap, MovieSourceId } from "@/entities/movies";
-import { GenresSection, TrendingSection } from "@/features/movie/discovery-movies";
+import { GenresSection, TrendingSection } from "@/features/discovery-movies";
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 

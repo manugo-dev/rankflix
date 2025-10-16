@@ -3,8 +3,8 @@ import { motion } from "motion/react";
 import { Navigate, useParams } from "react-router";
 
 import { movieApi, MovieSourceId } from "@/entities/movies";
-import { SimilarMovies } from "@/features/movie/discovery-movies/ui/similar-movies";
-import { movieDetailQueries } from "@/features/movie/movie-detail";
+import { SimilarMovies } from "@/features/discovery-movies";
+import { movieDetailQueries } from "@/features/movie-detail";
 import { AddToWatchlistButton, createWatchlistItemFromMovie } from "@/features/watchlist";
 import { formatDate, getYear } from "@/shared/lib/date";
 import { humanizer } from "@/shared/lib/humanizer";
@@ -35,25 +35,14 @@ export function MovieDetailPage() {
     return <Navigate to={getRouteLink.ERROR()} />;
   }
 
-  const heroBackground = movie.backdropPath
-    ? movieApi[movie.source].getMovieImage(movie.backdropPath, "banner")
-    : undefined;
-
-  const posterImage = movie.posterPath
-    ? movieApi[movie.source].getMovieImage(movie.posterPath, "poster")
-    : undefined;
-
-  const releaseDateLabel = formatDate(movie.releaseDate);
-  const runtimeMs = movie.runtime ? movie.runtime * 60 * 1000 : 0;
-  const languagesLabel = movie.spokenLanguages.join(" • ");
-  const countriesLabel = movie.productionCountries.map((country) => country.name).join(", ");
-  const productionLabel = movie.productionCompanies.map((company) => company.name).join(", ");
+  const heroBackgroundImage = movieApi[movie.source].getMovieImage(movie.backdropPath, "backdrop");
+  const posterImage = movieApi[movie.source].getMovieImage(movie.posterPath, "poster");
 
   return (
     <div className="movie-detail">
       <motion.section
         className="movie-detail__hero"
-        style={heroBackground ? { backgroundImage: `url(${heroBackground})` } : undefined}
+        style={heroBackgroundImage ? { backgroundImage: `url(${heroBackgroundImage})` } : undefined}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -80,7 +69,7 @@ export function MovieDetailPage() {
             transition={{ delay: 0.35, duration: 0.6 }}
           >
             <div className="movie-detail__chips">
-              {movie.genres.map((genre) => (
+              {movie.genres?.map((genre) => (
                 <span key={genre} className="movie-detail__chip">
                   {genre}
                 </span>
@@ -93,8 +82,16 @@ export function MovieDetailPage() {
 
             <div className="movie-detail__meta">
               <span className="movie-detail__meta-item">{getYear(movie.releaseDate)}</span>
-              {runtimeMs && <span className="movie-detail__meta-item">{humanizer(runtimeMs)}</span>}
-              {languagesLabel && <span className="movie-detail__meta-item">{languagesLabel}</span>}
+              {movie.runtimeMilliseconds && (
+                <span className="movie-detail__meta-item">
+                  {humanizer(movie.runtimeMilliseconds)}
+                </span>
+              )}
+              {movie.spokenLanguages && (
+                <span className="movie-detail__meta-item">
+                  {movie.spokenLanguages?.join(", ") || "—"}
+                </span>
+              )}
             </div>
 
             <div className="movie-detail__rating">
@@ -137,25 +134,29 @@ export function MovieDetailPage() {
               </div>
               <div>
                 <span className="movie-detail__label">Release Date</span>
-                <p className="movie-detail__value">{releaseDateLabel}</p>
+                <p className="movie-detail__value">{formatDate(movie.releaseDate)}</p>
               </div>
               <div>
                 <span className="movie-detail__label">Genres</span>
                 <p className="movie-detail__value">
-                  {movie.genres?.length > 0 ? movie.genres.join(" • ") : "—"}
+                  {movie.genres && movie.genres?.length > 0 ? movie.genres.join(" • ") : "—"}
                 </p>
               </div>
               <div>
                 <span className="movie-detail__label">Languages</span>
-                <p className="movie-detail__value">{languagesLabel || "—"}</p>
+                <p className="movie-detail__value">{movie.spokenLanguages?.join(", ") || "—"}</p>
               </div>
               <div>
                 <span className="movie-detail__label">Production</span>
-                <p className="movie-detail__value">{productionLabel || "—"}</p>
+                <p className="movie-detail__value">
+                  {movie?.productionCompanies?.map((company) => company.name).join(", ") || "—"}
+                </p>
               </div>
               <div>
                 <span className="movie-detail__label">Countries</span>
-                <p className="movie-detail__value">{countriesLabel || "—"}</p>
+                <p className="movie-detail__value">
+                  {movie.productionCountries?.map((country) => country.name).join(", ") || "—"}
+                </p>
               </div>
               <div>
                 <span className="movie-detail__label">IMDB</span>
@@ -172,7 +173,7 @@ export function MovieDetailPage() {
             </div>
           </div>
 
-          {movie.productionCompanies.length > 0 && (
+          {movie.productionCompanies && movie.productionCompanies?.length > 0 && (
             <div className="movie-detail__section movie-detail__section--production">
               <h2 className="movie-detail__section-title">Production Studios</h2>
               <div className="movie-detail__companies">
@@ -183,11 +184,11 @@ export function MovieDetailPage() {
                     whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {company.logoPath ? (
+                    {company.logoImage ? (
                       <img
                         alt={`${company.name} logo`}
                         className="movie-detail__company-logo"
-                        src={movieApi[movie.source].getMovieImage(company.logoPath, "poster")}
+                        src={company.logoImage}
                         loading="lazy"
                       />
                     ) : (
@@ -202,6 +203,7 @@ export function MovieDetailPage() {
             </div>
           )}
         </div>
+
         {movieId && (
           <motion.section
             className="boxed-container movie-detail__similar"

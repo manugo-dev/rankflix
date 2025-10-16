@@ -2,22 +2,23 @@ import { useNavigate } from "react-router";
 
 import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
-import { Carousel } from "@/shared/ui/carousel";
+import { Carousel, type CarouselProps } from "@/shared/ui/carousel";
 
 import type { Movie } from "../../model/movies-types";
 import { MovieCard } from "../movie-card/movie-card";
 
 import "./movies-carousel.scss";
 
-interface MoviesCarouselProps {
+interface MoviesCarouselProps extends Omit<CarouselProps, "children"> {
   movies: Movie[];
 }
 
-export function MoviesCarousel({ movies }: MoviesCarouselProps) {
+export function MoviesCarousel({ movies, ...props }: MoviesCarouselProps) {
   const navigate = useNavigate();
 
   return (
     <Carousel
+      {...props}
       gap={10}
       className="movies-carousel"
       onSelectItem={(index) => navigate(getRouteLink.MOVIE_DETAIL(movies[index].id))}

@@ -1,5 +1,5 @@
 import { MovieGenreMap, MovieSourceId } from "@/entities/movies";
-import { discoverMoviesQueries } from "@/features/movie/discovery-movies";
+import { discoverMoviesQueries } from "@/features/discovery-movies";
 import type { PrefetchContext } from "@/shared/lib/prefetch";
 import { registerRoute } from "@/shared/lib/prefetch";
 import { ROUTES } from "@/shared/routes";

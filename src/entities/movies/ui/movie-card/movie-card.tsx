@@ -20,6 +20,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
 
   return (
     <motion.article
+      data-testid={`movie-card-${movie.id}`}
       className={cn("movie-card", { "movie-card--active": active })}
       initial={false}
       animate={active ? "hover" : "rest"}

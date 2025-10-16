@@ -1,5 +1,5 @@
 import { MovieSourceId } from "@/entities/movies";
-import { movieDetailQueries } from "@/features/movie/movie-detail";
+import { movieDetailQueries } from "@/features/movie-detail";
 import { type PrefetchContext, registerRoute } from "@/shared/lib/prefetch";
 import { ROUTES } from "@/shared/routes";
 

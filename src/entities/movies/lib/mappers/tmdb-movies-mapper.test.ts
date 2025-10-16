@@ -54,13 +54,13 @@ describe("tmdb-movies-mapper", () => {
     expect(detail.id).toBe("42");
     expect(detail.source).toBe(MovieSourceId.TMDB);
     expect(detail.genres).toEqual([MovieGenreMap.ACTION, MovieGenreMap.DRAMA]);
-    expect(detail.productionCompanies[0]).toEqual({
+    expect(detail.productionCompanies?.[0]).toEqual({
       id: 1,
       logoPath: undefined,
       name: "Studio",
       originCountry: undefined,
     });
-    expect(detail.productionCountries[0]).toEqual({ isoCode: "US", name: "United States" });
+    expect(detail.productionCountries?.[0]).toEqual({ isoCode: "US", name: "United States" });
     expect(detail.spokenLanguages).toEqual(["English", "Español"]);
     expect(detail.releaseDate.toISOString()).toBe("2024-02-01T00:00:00.000Z");
   });

@@ -21,7 +21,7 @@ export function MoviesHeroSlider({ className, movies }: MoviesHeroSliderProps) {
         <div className="movies-hero-slider__slide" key={movie.id}>
           <img
             src={
-              movieApi[movie.source].getMovieImage(movie.backdropUrl, "banner") ??
+              movieApi[movie.source].getMovieImage(movie.backdropPath, "banner") ??
               DEFAULT_BANNER_PATH
             }
             alt={movie.title}

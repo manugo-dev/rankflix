@@ -4,7 +4,7 @@ import type { ParamsObject } from "@/shared/lib/utility-types";
 import type { MovieGenreId, MovieSourceIdType } from "./movies-constants";
 
 export interface Movie {
-  backdropUrl?: string;
+  backdropPath?: string;
   genres?: MovieGenreId[];
   id: string;
   overview?: string;
@@ -19,7 +19,7 @@ export type Movies = Movie[];
 
 export interface MovieProductionCompany {
   id: number;
-  logoPath?: string;
+  logoImage?: string;
   name: string;
   originCountry?: string;
 }
@@ -33,7 +33,7 @@ export interface MovieDetail {
   adult: boolean;
   backdropPath: string;
   budget: number;
-  genres: MovieGenreId[];
+  genres?: MovieGenreId[];
   homepage: string;
   id: string;
   imdbId: string;
@@ -42,13 +42,13 @@ export interface MovieDetail {
   overview: string;
   popularity: number;
   posterPath: string;
-  productionCompanies: MovieProductionCompany[];
-  productionCountries: MovieProductionCountry[];
+  productionCompanies?: MovieProductionCompany[];
+  productionCountries?: MovieProductionCountry[];
   releaseDate: Date;
   revenue: number;
-  runtime: number;
+  runtimeMilliseconds?: number;
   source: MovieSourceIdType;
-  spokenLanguages: string[];
+  spokenLanguages?: string[];
   status: string;
   tagline: string;
   title: string;

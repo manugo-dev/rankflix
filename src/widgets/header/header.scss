@@ -53,12 +53,15 @@
   top: 0;
   left: 0;
   height: 8rem;
+  border-bottom: 0.1rem solid transparent;
   backdrop-filter: none;
   background: linear-gradient(to bottom, rgb(0 0 0 / 100%) 0%, rgb(0 0 0 / 0%) 100%);
+  background-clip: content-box;
 }
 
 .header--floating.header--scrolled {
   height: 4rem;
+  border-bottom: 0.1rem solid rgb(255 255 255 / 20%);
   backdrop-filter: blur(0.7rem);
   background: rgb(0 0 0 / 60%);
   box-shadow: var(--shadow-md) var(--color-shadow-primary);
