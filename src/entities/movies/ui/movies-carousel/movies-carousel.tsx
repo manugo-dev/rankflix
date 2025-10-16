@@ -9,7 +9,7 @@ import { MovieCard } from "../movie-card/movie-card";
 
 import "./movies-carousel.scss";
 
-interface MoviesCarouselProps extends Omit<CarouselProps, "children"> {
+export interface MoviesCarouselProps extends Omit<CarouselProps, "children"> {
   movies: Movie[];
 }
 

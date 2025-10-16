@@ -14,9 +14,6 @@ jobs:
     name: CI Pipeline
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,13 +46,10 @@ jobs:
         uses: wjervis7/vitest-badge-action@v1.0.0
         if: success() || failure()
         with:
-          result-type: statements
-          upload-badge: false
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          file_pattern: "./badge.svg"
+          result-type: lines
+          gist-token: ${{ secrets.GIST_TOKEN }}
+          gist-url: https://gist.github.com/{org/user}/{gist_id}
+          upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
 
       - name: Build
         run: npm run build

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { type MovieSourceIdType, type MovieTrendingTime } from "@/entities/movies";
-import { MoviesHeroSlider } from "@/entities/movies/ui/movies-hero-slider/movies-hero-slider";
+import { MoviesHeroSlider } from "@/entities/movies";
 import { Spinner } from "@/shared/ui/spinner";
 
 import { discoverMoviesQueries } from "../api/queries";

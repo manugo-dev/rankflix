@@ -10,3 +10,4 @@ export {
 export type * from "./model/movies-types";
 export { MovieCard } from "./ui/movie-card/movie-card";
 export { MoviesCarousel } from "./ui/movies-carousel/movies-carousel";
+export { MoviesHeroSlider } from "./ui/movies-hero-slider/movies-hero-slider";

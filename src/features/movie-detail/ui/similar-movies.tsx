@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MoviesCarousel, MovieSourceId } from "@/entities/movies";
 import { Spinner } from "@/shared/ui/spinner/spinner";
 
-import { movieDetailQueries } from "../../movie-detail/api/queries";
+import { movieDetailQueries } from "../api/queries";
 
 export interface SimilarMoviesProps {
   movieId: string;
