@@ -1,73 +1,367 @@
-# React + TypeScript + Vite
+# 🎬 Rankflix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![CI](https://github.com/manugo-dev/rankflix/actions/workflows/ci.yaml/badge.svg)](https://github.com/manugo-dev/rankflix/actions/workflows/ci.yaml)
+[![DeployProduction](https://github.com/manugo-dev/rankflix/actions/workflows/production.yaml/badge.svg)](https://github.com/manugo-dev/rankflix/actions/workflows/production.yaml)
+[![Coverage](https://gist.githubusercontent.com/manugo-dev/8acf73cd84f3bec4668b07f073ad11a6/raw/84e09764edcdba377008ad3c8c1f797e501fcf61/badge.svg)](https://github.com/manugo-dev/rankflix)
 
-Currently, two official plugins are available:
+A modern, server-side rendered movie catalog application built with React, Vite SSR, and Feature-Sliced Design architecture. Explore trending movies, discover new titles, and manage your personal watchlist.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- **Server-Side Rendering (SSR)** with Vite
+- **Modern UI** with smooth animations powered by Motion (Framer Motion)
+- **Movie Discovery** - Browse trending movies and discover by genre
+- **Watchlist Management** - Save and organize your favorite movies
+- **Fully Responsive** - Optimized for mobile, tablet, and desktop
+- **Type-Safe** - Built with TypeScript for reliability
+- **Comprehensive Testing** - 80%+ test coverage with Vitest
+- **Accessible** - Following WCAG guidelines
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+### Core
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **[React 19](https://react.dev/)** - UI library
+- **[Vite](https://vite.dev/)** - Build tool with SSR support
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+### State & Data
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **[TanStack Query](https://tanstack.com/query)** - Server state management
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - Client state management
+- **[Axios](https://axios-http.com/)** - HTTP client
+- **[React Router 7](https://reactrouter.com/)** - Routing
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+### Styling & Animation
+
+- **[Sass](https://sass-lang.com/)** - CSS preprocessor
+- **[Motion](https://motion.dev/)** - Animation library
+
+### Testing & Quality
+
+- **[Vitest](https://vitest.dev/)** - Unit & integration testing
+- **[Testing Library](https://testing-library.com/)** - Component testing
+- **[ESLint](https://eslint.org/)** - Code linting
+- **[Prettier](https://prettier.io/)** - Code formatting
+- **[Stylelint](https://stylelint.io/)** - CSS linting
+- **[Husky](https://typicode.github.io/husky/)** - Git hooks
+
+### Architecture
+
+- **[Feature-Sliced Design (FSD)](https://feature-sliced.design/)** - Architectural methodology
+
+## 📁 Project Structure
+
+Following Feature-Sliced Design principles:
+
+```
+rankflix/
+├── src/
+│   ├── app/                      # Application layer
+│   │   ├── layouts/              # Layout components
+│   │   ├── providers/            # Global providers (Router, Query, Store)
+│   │   └── styles/               # Global styles & variables
+│   │
+│   ├── pages/                    # Pages layer
+│   │   ├── home/                 # Home page
+│   │   ├── movie-detail/         # Movie detail page
+│   │   ├── watchlist/            # Watchlist page
+│   │   └── not-found/            # 404 page
+│   │
+│   ├── widgets/                  # Widgets layer
+│   │   ├── header/               # Header component
+│   │   ├── navbar/               # Navigation bar
+│   │   └── footer/               # Footer component
+│   │
+│   ├── features/                 # Features layer
+│   │   ├── discovery-movies/     # Movie discovery features
+│   │   ├── movie-detail/         # Movie detail features
+│   │   └── watchlist/            # Watchlist management
+│   │
+│   ├── entities/                 # Entities layer
+│   │   ├── movies/               # Movie entity (types, api, ui)
+│   │   └── list/                 # List entity
+│   │
+│   ├── shared/                   # Shared layer
+│   │   ├── api/                  # API clients & types
+│   │   ├── config/               # App configuration
+│   │   ├── hooks/                # Reusable hooks
+│   │   ├── lib/                  # Utility functions
+│   │   ├── routes/               # Route definitions
+│   │   └── ui/                   # Shared UI components
+│   │
+│   ├── tests/                    # Test utilities
+│   ├── entry-client.tsx          # Client entry point
+│   └── entry-server.tsx          # SSR entry point
+│
+├── server/                       # Express SSR server
+│   ├── index.js                  # Development server
+│   └── build.js                  # Production server builder
+│
+└── dist/                         # Build output
+    ├── client/                   # Client-side bundle
+    ├── server/                   # SSR bundle
+    └── index.js                  # Production server
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### FSD Layers (Bottom-up)
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+1. **`shared/`** - Reusable utilities, UI kit, and third-party lib configs
+2. **`entities/`** - Business entities (e.g., Movie, User)
+3. **`features/`** - User interactions and business features
+4. **`widgets/`** - Composite blocks and templates
+5. **`pages/`** - Application pages
+6. **`app/`** - App-wide settings, providers, and global styles
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## 🚦 Getting Started
+
+### Prerequisites
+
+- **Node.js** >= 22.x
+- **npm** >= 10.x
+- **TMDB API Key** - Get one from [The Movie Database](https://www.themoviedb.org/settings/api)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/manugo-dev/rankflix.git
+   cd rankflix
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root directory:
+
+   ```env
+   VITE_TMDB_API_KEY=your_tmdb_api_key_here
+   VITE_TMDB_API_BASE_URL=https://api.themoviedb.org/3
+   VITE_TMDB_IMAGE_BASE_URL=https://media.themoviedb.org/t/p/
+   ```
+
+### Development
+
+Start the development server with hot module replacement (HMR):
+
+```bash
+npm run dev
 ```
+
+The application will be available at `http://localhost:5174`
+
+#### Development Scripts
+
+```bash
+npm run dev:client    # Start Vite dev server only (client-side)
+npm run typecheck     # Run TypeScript type checking
+npm run lint          # Run all linters (ESLint, Prettier, Stylelint)
+npm run lint:fix      # Auto-fix linting issues
+npm run test          # Run tests in watch mode
+npm run test:ui       # Run tests with Vitest UI
+npm run test:coverage # Run tests with coverage report
+```
+
+### Building for Production
+
+Build the application for production:
+
+```bash
+npm run build
+```
+
+This will:
+
+1. Build the client bundle (`dist/client/`)
+2. Build the SSR bundle (`dist/server/`)
+3. Build the production server (`dist/index.js`)
+
+#### Build Scripts
+
+```bash
+npm run build:client      # Build client-side only
+npm run build:ssr         # Build SSR bundle only
+npm run build:ssr-server  # Build production server only
+```
+
+### Running Production Build Locally
+
+```bash
+npm start
+```
+
+The production server will run on `http://localhost:3000`
+
+## 🧪 Testing
+
+The project uses **Vitest** and **Testing Library** for comprehensive testing.
+
+### Test Coverage Requirements
+
+- **Lines**: 80%
+- **Functions**: 80%
+- **Branches**: 80%
+- **Statements**: 80%
+
+### Running Tests
+
+```bash
+# Run tests in watch mode
+npm test
+
+# Run tests once (CI mode)
+npm run test:ci
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests with UI
+npm run test:ui
+```
+
+### Test Organization
+
+Tests are co-located with their source files:
+
+```
+src/
+├── entities/
+│   └── movies/
+│       ├── ui/
+│       │   ├── movie-card/
+│       │   │   ├── movie-card.tsx
+│       │   │   └── movie-card.test.tsx
+```
+
+## 🎨 Code Quality
+
+### Linting & Formatting
+
+```bash
+# Check code quality
+npm run lint
+
+# Auto-fix issues
+npm run lint:fix:eslint
+npm run lint:fix:prettier
+npm run lint:fix:stylelint
+```
+
+### Git Hooks
+
+Pre-commit hooks (via Husky and lint-staged):
+
+- Type checking
+- Linting
+- Formatting
+- Running tests for changed files
+
+### Commit Conventions
+
+Following [Conventional Commits](https://www.conventionalcommits.org/):
+
+```bash
+feat: add new feature
+fix: bug fix
+docs: documentation changes
+style: code style changes
+refactor: code refactoring
+test: test changes
+chore: build process or auxiliary tool changes
+```
+
+## 🚀 Deployment
+
+### Vercel (Production)
+
+The application is deployed to **Vercel** using GitHub Actions.
+
+#### CI Pipeline (`.github/workflows/ci.yaml`)
+
+Runs on every push to `main` and on pull requests:
+
+1. **TypeCheck** - Validate TypeScript types
+2. **Prettier** - Check code formatting
+3. **ESLint** - Lint JavaScript/TypeScript
+4. **Stylelint** - Lint CSS/SCSS
+5. **Tests** - Run test suite with coverage
+6. **Build** - Ensure production build succeeds
+7. **Badge** - Update coverage badge
+
+#### Production Deployment (`.github/workflows/production.yaml`)
+
+Triggered on push to `main` after CI passes:
+
+1. **CI Job** - Runs full CI pipeline
+2. **Deploy Job** - Deploys to Vercel
+   - Installs Vercel CLI
+   - Pulls Vercel environment
+   - Builds project artifacts
+   - Deploys to production
+
+#### Required Secrets
+
+Configure in GitHub repository settings:
+
+- `VERCEL_TOKEN` - Vercel deployment token
+- `GIST_TOKEN` - GitHub token for badges (optional)
+
+#### Required Variables
+
+- `BADGES_GIST_URL` - URL for coverage badges (optional)
+
+### Manual Deployment
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy to preview
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+## 🌍 Environment Variables
+
+### Required
+
+| Variable            | Description                | Example        |
+| ------------------- | -------------------------- | -------------- |
+| `VITE_TMDB_API_KEY` | The Movie Database API key | `your_api_key` |
+
+### Optional
+
+| Variable                   | Description         | Default                             |
+| -------------------------- | ------------------- | ----------------------------------- |
+| `VITE_TMDB_API_BASE_URL`   | TMDB API base URL   | `https://api.themoviedb.org/3`      |
+| `VITE_TMDB_IMAGE_BASE_URL` | TMDB image base URL | `https://media.themoviedb.org/t/p/` |
+
+### Development Guidelines
+
+- Follow Feature-Sliced Design principles
+- Write tests for new features
+- Maintain 80%+ coverage
+- Use conventional commits
+- Update documentation
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 🙏 Acknowledgments
+
+- [The Movie Database (TMDB)](https://www.themoviedb.org/) - Movie data API
+- [Feature-Sliced Design](https://feature-sliced.design/) - Architecture methodology
+- [Vite](https://vite.dev/) - Build tool
+
+---
+
+Built with ❤️ using React, Vite, and Feature-Sliced Design

@@ -44,7 +44,7 @@ jobs:
 
       - name: Publish Results Badge
         uses: wjervis7/vitest-badge-action@v1.0.0
-        if: (success() || failure()) && (github.ref == 'refs/heads/main' || github.base_ref == 'main')
+        if: (success() || failure()) && (github.ref == 'refs/heads/main')
         with:
           result-type: lines
           gist-token: ${{ secrets.GIST_TOKEN }}
