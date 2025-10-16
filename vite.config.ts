@@ -35,7 +35,7 @@ export default defineConfig({
         "**/*.config.js",
         ...coverageConfigDefaults.exclude,
       ],
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "json", "html", "json-summary"],
       thresholds: {
         branches: 80,
         functions: 80,
