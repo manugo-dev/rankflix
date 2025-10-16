@@ -1,13 +1,12 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { type PropsWithChildren, useCallback, useEffect, useState } from "react";
+import { type HTMLProps, useCallback, useEffect, useState } from "react";
 
 import { cn } from "@/shared/lib/styles";
 
 import "./hero-slider.scss";
 
-interface HeroSliderProps extends PropsWithChildren {
+export interface HeroSliderProps extends HTMLProps<HTMLDivElement> {
   autoPlay?: boolean;
-  className?: string;
   interval?: number;
 }
 
@@ -16,6 +15,7 @@ export function HeroSlider({
   children,
   className,
   interval = 6000,
+  ...props
 }: HeroSliderProps) {
   const slides = Array.isArray(children) ? children : [children];
   const [index, setIndex] = useState(0);
@@ -35,7 +35,7 @@ export function HeroSlider({
   }, [index, autoPlay, interval, next]);
 
   return (
-    <div className={cn("hero-slider", className)}>
+    <div {...props} className={cn("hero-slider", className)}>
       <div className="hero-slider__track">
         <AnimatePresence mode="wait">
           <motion.div

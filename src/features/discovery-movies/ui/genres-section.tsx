@@ -47,9 +47,13 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     );
 
   return (
-    <section aria-label={title} className="genres-section">
+    <section aria-label={title} className="genres-section" data-testid="genres-section">
       <h2 className="genres-section__title">{title}</h2>
-      <MoviesCarousel movies={movies.results} />
+      <MoviesCarousel
+        movies={movies.results}
+        data-testid="genres-carousel"
+        data-genres={[...genres]}
+      />
     </section>
   );
 }

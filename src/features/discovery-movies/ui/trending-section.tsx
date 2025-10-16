@@ -21,7 +21,15 @@ export function TrendingSection({ source, timeWindow }: TrendingSectionProps) {
   } = useQuery(discoverMoviesQueries.trending(source, timeWindow));
 
   if (isLoading) return <Spinner />;
-  if (error || !movies?.results) return <div className="trending-section"></div>;
+  if (error || !movies?.results)
+    return <div className="trending-section" data-testid="trending-section"></div>;
 
-  return <MoviesHeroSlider className="trending-section" movies={movies.results} />;
+  return (
+    <MoviesHeroSlider
+      data-testid="trending-section"
+      data-source={source}
+      className="trending-section"
+      movies={movies.results}
+    />
+  );
 }

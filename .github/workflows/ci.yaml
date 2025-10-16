@@ -42,14 +42,12 @@ jobs:
       - name: Tests
         run: npm run test:ci
 
-      - name: Publish Results Badge
-        uses: wjervis7/vitest-badge-action@v1.0.0
-        if: success() || failure()
+      - name: ⚙️ Generating coverage badges
+        uses: jpb06/coverage-badges-action@latest
         with:
-          result-type: lines
-          gist-token: ${{ secrets.GIST_TOKEN }}
-          gist-url: https://gist.github.com/{org/user}/{gist_id}
-          upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
+          branches: "*"
+          badges-icon: vitest
+          target-branch: badges
 
       - name: Build
         run: npm run build

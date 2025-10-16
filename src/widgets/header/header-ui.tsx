@@ -35,6 +35,8 @@ export function Header({ variant = "default" }: HeaderProps) {
         HEADER_VARIANTS_CLASSNAMES[variant] ?? HEADER_VARIANTS_CLASSNAMES.default,
         { "header--scrolled": scrolled },
       )}
+      data-testid="header"
+      data-variant={variant}
     >
       <div className="header__inner">
         <Link to={getRouteLink.HOME()} className="header__logo-link">

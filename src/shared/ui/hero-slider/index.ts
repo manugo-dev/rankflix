@@ -1,1 +1,1 @@
-export { HeroSlider } from "./hero-slider";
+export { HeroSlider, type HeroSliderProps } from "./hero-slider";

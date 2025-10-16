@@ -1,5 +1,9 @@
 import "./footer.scss";
 
 export function Footer() {
-  return <footer className="footer">crafted with ❤️ by @manugo.dev</footer>;
+  return (
+    <footer data-testid="footer" className="footer">
+      crafted with ❤️ by @manugo.dev
+    </footer>
+  );
 }

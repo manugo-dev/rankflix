@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 import { getRouteLink } from "@/shared/routes";
-import { HeroSlider } from "@/shared/ui/hero-slider/hero-slider";
+import { HeroSlider, type HeroSliderProps } from "@/shared/ui/hero-slider";
 
 import { movieApi } from "../../api";
 import { DEFAULT_BANNER_PATH } from "../../model/movies-constants";
@@ -9,14 +9,14 @@ import type { Movie } from "../../model/movies-types";
 
 import "./movies-hero-slider.scss";
 
-interface MoviesHeroSliderProps {
+interface MoviesHeroSliderProps extends HeroSliderProps {
   className?: string;
   movies: Movie[];
 }
 
-export function MoviesHeroSlider({ className, movies }: MoviesHeroSliderProps) {
+export function MoviesHeroSlider({ className, movies, ...props }: MoviesHeroSliderProps) {
   return (
-    <HeroSlider className={className}>
+    <HeroSlider className={className} {...props}>
       {movies.map((movie) => (
         <div className="movies-hero-slider__slide" key={movie.id}>
           <img
