@@ -1,10 +1,12 @@
-# 🎬 Rankflix
+# 🔥 Rankflix
 
 [![CI](https://github.com/manugo-dev/rankflix/actions/workflows/ci.yaml/badge.svg)](https://github.com/manugo-dev/rankflix/actions/workflows/ci.yaml)
 [![DeployProduction](https://github.com/manugo-dev/rankflix/actions/workflows/production.yaml/badge.svg)](https://github.com/manugo-dev/rankflix/actions/workflows/production.yaml)
 [![Coverage](https://gist.githubusercontent.com/manugo-dev/8acf73cd84f3bec4668b07f073ad11a6/raw/84e09764edcdba377008ad3c8c1f797e501fcf61/badge.svg)](https://github.com/manugo-dev/rankflix)
 
 A modern, server-side rendered movie catalog application built with React, Vite SSR, and Feature-Sliced Design architecture. Explore trending movies, discover new titles, and manage your personal watchlist.
+
+### Live DEMO: [Ranflix Official DEMO Page](https://rankflix.manugo.dev)
 
 ## 🚀 Features
 
