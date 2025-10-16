@@ -45,14 +45,14 @@ jobs:
       - name: Tests
         run: npm run test:ci
 
-      - name: Generating coverage badges
-        env:
-          HUSKY: 0
-        uses: jpb06/coverage-badges-action@latest
+      - name: Publish Results Badge
+        uses: wjervis7/vitest-badge-action@v1.0.0
+        if: success() || failure()
         with:
-          branches: "*"
-          badges-icon: vitest
-          target-branch: badges
+          result-type: lines
+          gist-token: ${{ secrets.GIST_TOKEN }}
+          gist-url: ${{ vars.BADGES_GIST_URL }}
+          upload-badge: ${{ github.base_ref == 'refs/heads/main' }}
 
       - name: Build
         run: npm run build
