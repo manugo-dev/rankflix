@@ -52,6 +52,7 @@ jobs:
         with:
           branches: "*"
           badges-icon: vitest
+          target-branch: badges
 
       - name: Build
         run: npm run build
