@@ -6,8 +6,6 @@ import { Spinner } from "@/shared/ui/spinner";
 
 import { discoverMoviesQueries } from "../api/queries";
 
-import "./trending-section.scss";
-
 interface TrendingSectionProps {
   source: MovieSourceIdType;
   timeWindow?: MovieTrendingTime;
