@@ -370,4 +370,4 @@ This project is licensed under the MIT License.
 
 Built with ❤️ using React, Vite, and Feature-Sliced Design
 
-![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=jwenjian.visitor-badge&left_text=MyPageVisitors)
+![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=manugo-dev.rankflix&left_text=Visitors)
