@@ -15,7 +15,7 @@ interface MovieCardProps {
 }
 
 export function MovieCard({ active = false, movie }: MovieCardProps) {
-  const movieYear = movie.releaseDate ? getYear(movie.releaseDate) : "—";
+  const movieYear = movie.releaseDate && getYear(movie.releaseDate);
   const [hasErrorLoadingPoster, setHasErrorLoadingPoster] = useState(false);
 
   return (
@@ -70,7 +70,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
         transition={{ delay: 0.05, duration: 0.3 }}
       >
         <h3 className="movie-card__title">{movie.title}</h3>
-        {movieYear && <p className="movie-card__year">{movieYear}</p>}
+        <p className="movie-card__year">{movieYear ?? "—"}</p>
       </motion.div>
     </motion.article>
   );

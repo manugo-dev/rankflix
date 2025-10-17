@@ -200,7 +200,7 @@ export function MovieDetailPage() {
                       <img
                         alt={`${company.name} logo`}
                         className="movie-detail__company-logo"
-                        src={company.logoPath}
+                        src={movieApi[movie.source].getMovieImage(company.logoPath, "poster")}
                         loading="lazy"
                       />
                     ) : (
