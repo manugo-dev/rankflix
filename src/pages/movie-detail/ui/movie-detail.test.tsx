@@ -58,8 +58,8 @@ describe("MovieDetailPage", () => {
     expect(
       screen.getByText(`★ ${MOCKED_MAPPED_MOVIE_DETAIL.voteAverage.toFixed(1)}`),
     ).toBeDefined();
-    expect(screen.getByText(`${MOCKED_MAPPED_MOVIE_DETAIL.voteCount} votes`)).toBeDefined();
-    expect(screen.getByText("genres.ACTION")).toBeDefined();
+    expect(screen.getByText(`${MOCKED_MAPPED_MOVIE_DETAIL.voteCount} #vote#`)).toBeDefined();
+    expect(screen.getByText("#movie.genre.action#")).toBeDefined();
     expect(screen.getAllByText(MOCKED_MAPPED_MOVIE_DETAIL.overview).length).toBeGreaterThan(0);
     const posterImg = screen.getByAltText(
       `${MOCKED_MAPPED_MOVIE_DETAIL.title} poster`,

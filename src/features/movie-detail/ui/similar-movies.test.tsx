@@ -42,6 +42,6 @@ describe("SimilarMovies", () => {
   it("renders fallback message when no results", () => {
     mockedUseQuery.mockReturnValue({ data: { results: [] }, isPending: false });
     render(<SimilarMovies movieId="1" />);
-    expect(screen.getByText("We could not find similar titles right now.")).toBeDefined();
+    expect(screen.getByText("#movie.similar-titles.not-found#")).toBeDefined();
   });
 });

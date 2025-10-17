@@ -130,6 +130,7 @@ export const mapDiscoverParamsToTMDBParams = (
   params?: DiscoverMoviesParams,
 ): TMDBDiscoverMoviesParams => {
   return {
+    language: params?.language,
     with_genres: sortedValuesToString(
       params?.withGenres?.map((genre) => mapMovieGenreIdToTMDBGenreId(genre)),
     ),

@@ -8,7 +8,7 @@
 .movies-carousel__item--is-active,
 .movies-carousel__item--is-active:hover {
   .movie-card {
-    border: 0.3rem solid rgb(255 255 255 / 20%);
+    border: 0.3rem solid var(--color-secondary);
   }
 
   .movie-card__image {

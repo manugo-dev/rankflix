@@ -6,8 +6,8 @@ import { movieApi, MovieSourceId } from "@/entities/movies";
 import { SimilarMovies } from "@/features/discovery-movies";
 import { movieDetailQueries } from "@/features/movie-detail";
 import { AddToWatchlistButton, createWatchlistItemFromMovie } from "@/features/watchlist";
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { formatDate, getYear } from "@/shared/lib/date";
-import { humanizer } from "@/shared/lib/humanizer";
 import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
 import { Spinner } from "@/shared/ui/spinner";
@@ -18,6 +18,7 @@ import "./movie-detail.scss";
 
 export function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
+  const { i18n, t } = useTranslate();
 
   const movieQuery = useQuery({
     ...movieDetailQueries.getMovie(MovieSourceId.TMDB, movieId!),
@@ -78,7 +79,7 @@ export function MovieDetailPage() {
             <div className="movie-detail__chips">
               {movie.genres?.map((genre) => (
                 <span key={genre} className="movie-detail__chip">
-                  {genre}
+                  {t(genre)}
                 </span>
               ))}
             </div>
@@ -91,7 +92,7 @@ export function MovieDetailPage() {
               <span className="movie-detail__meta-item">{getYear(movie.releaseDate)}</span>
               {movie.runtimeMilliseconds && (
                 <span className="movie-detail__meta-item">
-                  {humanizer(movie.runtimeMilliseconds)}
+                  {i18n.format(movie.runtimeMilliseconds, "humanize-duration", i18n.language)}
                 </span>
               )}
               {movie.spokenLanguages && (
@@ -103,7 +104,9 @@ export function MovieDetailPage() {
 
             <div className="movie-detail__rating">
               <span className="movie-detail__rating-score">★ {movie.voteAverage.toFixed(1)}</span>
-              <span className="movie-detail__rating-count">{movie.voteCount} votes</span>
+              <span className="movie-detail__rating-count">
+                {movie.voteCount} {t("vote", { count: movie.voteCount })}
+              </span>
             </div>
 
             <p className="movie-detail__overview">{movie.overview}</p>
@@ -111,7 +114,7 @@ export function MovieDetailPage() {
             <div className="movie-detail__actions">
               {movie.homepage && (
                 <a className="button-link" href={movie.homepage} rel="noreferrer" target="_blank">
-                  Visit Official Site
+                  {t("go-official-site")}
                 </a>
               )}
               <AddToWatchlistButton item={createWatchlistItemFromMovie(movie)} />
@@ -128,45 +131,47 @@ export function MovieDetailPage() {
       >
         <div className="movie-detail__sections">
           <div className="movie-detail__section">
-            <h2 className="movie-detail__section-title">Overview</h2>
+            <h2 className="movie-detail__section-title">{t("movie.overview")}</h2>
             <p className="movie-detail__section-text">{movie.overview}</p>
           </div>
 
           <div className="movie-detail__section">
-            <h2 className="movie-detail__section-title">Details</h2>
+            <h2 className="movie-detail__section-title">{t("movie.details")}</h2>
             <div className="movie-detail__info-grid">
               <div>
-                <span className="movie-detail__label">Original Title</span>
+                <span className="movie-detail__label">{t("movie.original-title")}</span>
                 <p className="movie-detail__value">{movie.originalTitle}</p>
               </div>
               <div>
-                <span className="movie-detail__label">Release Date</span>
+                <span className="movie-detail__label">{t("movie.release-date")}</span>
                 <p className="movie-detail__value">{formatDate(movie.releaseDate)}</p>
               </div>
               <div>
-                <span className="movie-detail__label">Genres</span>
+                <span className="movie-detail__label">{t("movie.genres")}</span>
                 <p className="movie-detail__value">
-                  {movie.genres && movie.genres?.length > 0 ? movie.genres.join(" • ") : "—"}
+                  {movie.genres && movie.genres?.length > 0
+                    ? movie.genres.map((genre) => t(genre)).join(" • ")
+                    : "—"}
                 </p>
               </div>
               <div>
-                <span className="movie-detail__label">Languages</span>
+                <span className="movie-detail__label">{t("movie.languages")}</span>
                 <p className="movie-detail__value">{movie.spokenLanguages?.join(", ") || "—"}</p>
               </div>
               <div>
-                <span className="movie-detail__label">Production</span>
+                <span className="movie-detail__label">{t("movie.production-companies")}</span>
                 <p className="movie-detail__value">
                   {movie?.productionCompanies?.map((company) => company.name).join(", ") || "—"}
                 </p>
               </div>
               <div>
-                <span className="movie-detail__label">Countries</span>
+                <span className="movie-detail__label">{t("movie.production-countries")}</span>
                 <p className="movie-detail__value">
                   {movie.productionCountries?.map((country) => country.name).join(", ") || "—"}
                 </p>
               </div>
               <div>
-                <span className="movie-detail__label">IMDB</span>
+                <span className="movie-detail__label">{t("imdb")}</span>
                 <p className="movie-detail__value">
                   <a
                     href={`https://www.imdb.com/title/${movie.imdbId}`}
@@ -182,7 +187,7 @@ export function MovieDetailPage() {
 
           {movie.productionCompanies && movie.productionCompanies?.length > 0 && (
             <div className="movie-detail__section movie-detail__section--production">
-              <h2 className="movie-detail__section-title">Production Studios</h2>
+              <h2 className="movie-detail__section-title">{t("movie.production-companies")}</h2>
               <div className="movie-detail__companies">
                 {movie.productionCompanies.map((company) => (
                   <motion.div
@@ -219,7 +224,7 @@ export function MovieDetailPage() {
             viewport={{ amount: 0.2, once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="movie-detail__section-title">Similar Titles</h2>
+            <h2 className="movie-detail__section-title">{t("movie.similar-titles.title")}</h2>
             <SimilarMovies movieId={movieId} />
           </motion.section>
         )}

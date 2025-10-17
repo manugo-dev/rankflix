@@ -18,6 +18,7 @@
   justify-content: space-between;
   padding: 0 var(--space-md);
   margin: 0 auto;
+  gap: 1rem;
 
   @include from-breakpoint(md) {
     padding: 0 var(--space-xl);

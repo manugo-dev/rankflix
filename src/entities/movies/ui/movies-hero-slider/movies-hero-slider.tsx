@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { getRouteLink } from "@/shared/routes";
 import { HeroSlider, type HeroSliderProps } from "@/shared/ui/hero-slider";
 
@@ -15,9 +16,11 @@ interface MoviesHeroSliderProps extends HeroSliderProps {
 }
 
 export function MoviesHeroSlider({ className, movies, ...props }: MoviesHeroSliderProps) {
+  const { t } = useTranslate();
+
   return (
     <HeroSlider className={className} {...props}>
-      {movies.map((movie) => (
+      {movies.map((movie, index) => (
         <div className="movies-hero-slider__slide" key={movie.id}>
           <img
             src={
@@ -25,6 +28,7 @@ export function MoviesHeroSlider({ className, movies, ...props }: MoviesHeroSlid
               DEFAULT_BANNER_PATH
             }
             alt={movie.title}
+            fetchPriority={index === 0 ? "high" : "low"}
             className="movies-hero-slider__image"
           />
           <div className="movies-hero-slider__overlay" />
@@ -32,7 +36,7 @@ export function MoviesHeroSlider({ className, movies, ...props }: MoviesHeroSlid
             <h3 className="movies-hero-slider__title">{movie.title}</h3>
             {movie.overview && <p className="movies-hero-slider__description">{movie.overview}</p>}
             <Link to={getRouteLink.MOVIE_DETAIL(movie.id)} className="movies-hero-slider__button">
-              See more
+              {t("movie.see-details")}
             </Link>
           </div>
         </div>

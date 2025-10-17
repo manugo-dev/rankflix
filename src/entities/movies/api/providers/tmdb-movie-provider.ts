@@ -38,13 +38,16 @@ export const getTMDBMovies = async (params?: DiscoverMoviesParams): Promise<Pagi
   };
 };
 
-export const getTMDBMovieDetail = async (id: string) => {
-  const response = await tmdbApi.movieDetail(id);
+export const getTMDBMovieDetail = async (id: string, language?: string) => {
+  const response = await tmdbApi.movieDetail(id, language);
   return mapTMDBMovieDetailToMovieDetail(response.data);
 };
 
-export const getTMDBSimilarMovies = async (id: string): Promise<PaginatedMovies> => {
-  const response = await tmdbApi.similarMovies(id);
+export const getTMDBSimilarMovies = async (
+  id: string,
+  language?: string,
+): Promise<PaginatedMovies> => {
+  const response = await tmdbApi.similarMovies(id, language);
   return {
     page: response.data.page,
     results: response.data.results.map((movie) => mapTMDBMovieToMovie(movie)),

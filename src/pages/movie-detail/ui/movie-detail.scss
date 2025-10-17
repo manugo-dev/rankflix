@@ -109,7 +109,7 @@
   margin: 0;
   font-size: 3rem;
   font-weight: 700;
-  line-height: 3rem;
+  line-height: 3.5rem;
 }
 
 .movie-detail__tagline {
@@ -122,6 +122,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+  line-height: 2rem;
   opacity: 0.85;
 }
 

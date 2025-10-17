@@ -1,0 +1,59 @@
+{
+  "vote_one": "vote",
+  "vote_other": "votes",
+  "go-official-site": "Go to official site",
+  "go-back-home": "Go back home",
+  "page-not-found": "Page not found",
+  "imdb": "IMDB",
+  "navbar": {
+    "home": "Home",
+    "watchlist": "My List"
+  },
+  "movie": {
+    "details": "Movie details",
+    "see-details": "See details",
+    "something-went-wrong": "Something went wrong while loading the catalog",
+    "no-movies-found": "No movies found",
+    "overview": "Overview",
+    "release-date": "Release date",
+    "original-title": "Original title",
+    "genres": "Genres",
+    "languages": "Languages",
+    "production-companies": "Production companies",
+    "production-countries": "Production countries",
+    "similar-titles": {
+      "title": "Similar titles",
+      "not-found": "No similar titles found"
+    },
+    "genre": {
+      "action": "Action",
+      "adventure": "Adventure",
+      "animation": "Animation",
+      "comedy": "Comedy",
+      "crime": "Crime",
+      "documentary": "Documentary",
+      "drama": "Drama",
+      "family": "Family",
+      "fantasy": "Fantasy",
+      "history": "History",
+      "horror": "Horror",
+      "music": "Music",
+      "mystery": "Mystery",
+      "romance": "Romance",
+      "science_fiction": "Science Fiction",
+      "thriller": "Thriller",
+      "tv_movie": "TV Movie",
+      "war": "War",
+      "western": "Western"
+    }
+  },
+  "watchlist": {
+    "title": "My List",
+    "empty": "Your list is empty",
+    "add-to-list": "Add to my list",
+    "remove-from-list": "Remove from my list"
+  },
+  "footer": {
+    "crafted": "crafted with ❤️ by "
+  }
+}

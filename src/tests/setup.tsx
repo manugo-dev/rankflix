@@ -25,6 +25,29 @@ vi.mock("framer-motion", async (importOriginal) => {
   };
 });
 
+vi.mock("react-i18next", () => ({
+  I18nextProvider: ({ children }: { children?: ReactNode }) => <>{children}</>,
+  initReactI18next: {
+    init: vi.fn(),
+    type: "3rdParty",
+  },
+  useTranslation: vi.fn((namespace: string) => ({
+    i18n: {
+      changeLanguage: vi.fn(),
+      language: "en",
+    },
+    t: vi.fn((key: string) => (namespace ? `#${namespace}:${key}#` : `#${key}#`)),
+  })),
+}));
+
+vi.mock("i18next", () => ({
+  default: {
+    init: vi.fn().mockResolvedValue(undefined),
+    language: "en",
+    use: vi.fn().mockReturnThis(),
+  },
+}));
+
 class MockResizeObserver {
   private callback: ResizeObserverCallback;
   private static lastInstance: MockResizeObserver | null = null;

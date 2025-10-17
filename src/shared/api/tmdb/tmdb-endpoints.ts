@@ -18,10 +18,15 @@ export const tmdbApi = {
       params: params,
     }),
 
-  movieDetail: (id: string) => tmdbClient.get(TMDB_ENDPOINTS.MOVIE_DETAILS(id)),
+  movieDetail: (id: string, language?: string) =>
+    tmdbClient.get(TMDB_ENDPOINTS.MOVIE_DETAILS(id), {
+      params: { language },
+    }),
 
-  similarMovies: (id: string) =>
-    tmdbClient.get<TMDBDiscoverMoviesResponse>(TMDB_ENDPOINTS.SIMILAR_MOVIES(id)),
+  similarMovies: (id: string, language?: string) =>
+    tmdbClient.get<TMDBDiscoverMoviesResponse>(TMDB_ENDPOINTS.SIMILAR_MOVIES(id), {
+      params: { language },
+    }),
 
   trendingMovies: (time: "day" | "week", params?: TMDBTrendingMoviesParams) =>
     tmdbClient.get<TMDBDiscoverMoviesResponse>(TMDB_ENDPOINTS.TRENDING_MOVIES(time), {

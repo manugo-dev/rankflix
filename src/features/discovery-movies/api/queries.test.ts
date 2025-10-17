@@ -41,7 +41,7 @@ describe("discover-movies queries", () => {
       "movies",
       "discover",
       "TMDB",
-      "genres.ACTION,genres.ADVENTURE",
+      "movie.genre.action,movie.genre.adventure",
       "page:1",
     );
     const options = discoverMoviesQueries.byGenres("TMDB", withGenres, params);

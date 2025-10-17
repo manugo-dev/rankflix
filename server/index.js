@@ -67,16 +67,17 @@ async function loadRenderModule(vite) {
  * @param {string} template
  * @param {RenderResult} result
  */
-function injectAppContent(template, result) {
+function injectAppContent(template, result, language) {
   let html = template
     .replace("<!--ssr-app-head-->", result.head || "")
-    .replace("<!--ssr-app-html-->", result.html || "");
+    .replace("<!--ssr-app-html-->", result.html || "")
+    .replace("%lang%", language || "");
 
   if (result.dehydrated) {
     const serialized = JSON.stringify(result.dehydrated).replaceAll("<", String.raw`\u003c`);
     html = html.replace(
       "</body>",
-      `<script>window.__INITIAL_STATE__=${serialized};</script></body>`,
+      `<script>window.__INITIAL_STATE__=${serialized};window.__LANGUAGE__='${language}'</script></body>`,
     );
   }
 
@@ -113,6 +114,48 @@ async function registerProductionMiddleware(app) {
   app.use(BASE_URL, sirv(path.join(ROOT_DIR, "dist/client"), { extensions: [] }));
 }
 
+function parseCookies(header = "") {
+  return (
+    header
+      .split(";")
+      .map((pair) => pair.trim().split("="))
+      // eslint-disable-next-line unicorn/no-array-reduce
+      .reduce((accumulator, [key, value]) => {
+        if (key && value) accumulator[key] = decodeURIComponent(value);
+        return accumulator;
+      }, {})
+  );
+}
+
+/**
+ * Detect language from request headers or cookies
+ * @param {import('express').Request} request
+ * @returns {string}
+ */
+function detectLanguage(request) {
+  if (request.query.lang) {
+    return request.query.lang;
+  }
+  const cookies = parseCookies(request.headers.cookie);
+  if (cookies.language) {
+    return cookies.language;
+  }
+  const acceptLanguage = request.headers["accept-language"];
+  if (acceptLanguage) {
+    // Parse the header (format: "en-US,en;q=0.9,es;q=0.8")
+    const languages = acceptLanguage.split(",").map((lang) => {
+      const [code] = lang.split(";");
+      return code.trim().split("-")[0]; // Extract base language code
+    });
+    const supportedLanguages = new Set(["es", "en", "de"]);
+    const detected = languages.find((lang) => supportedLanguages.has(lang));
+    if (detected) {
+      return detected;
+    }
+  }
+  return "en";
+}
+
 /**
  * Main SSR handler
  * @param {ViteDevServer} [vite]
@@ -121,10 +164,12 @@ function createRequestHandler(vite) {
   return async (request, response, next) => {
     try {
       const url = request.originalUrl.replace(BASE_URL, "/");
+      const language = detectLanguage(request);
       const template = await loadTemplate(vite, url);
       const renderModule = await loadRenderModule(vite);
-      const rendered = await renderModule.render(url);
-      const html = injectAppContent(template, rendered);
+      const rendered = await renderModule.render(url, { language });
+      const html = injectAppContent(template, rendered, language);
+      response.append("Set-Cookie", `language=${language}; Path=/; SameSite=Lax`);
       return response.status(200).type("text/html").send(html);
     } catch (error) {
       if (vite && IS_LOCAL && vite.ssrFixStacktrace) {

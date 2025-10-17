@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { type MovieGenreId, MoviesCarousel, type MovieSourceIdType } from "@/entities/movies";
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { TitlesSkeleton } from "@/shared/ui/skeleton";
 
 import { discoverMoviesQueries } from "../api/queries";
@@ -19,6 +20,7 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     isError,
     isPending,
   } = useQuery(discoverMoviesQueries.byGenres(source, genres));
+  const { t } = useTranslate();
 
   if (isPending)
     return (
@@ -33,7 +35,7 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>
         <p className="genres-section__description genres-section__description--danger">
-          Something happened downloading the catalog
+          {t("movie.something-went-wrong")}
         </p>
       </section>
     );
@@ -42,7 +44,7 @@ export function GenresSection({ genres, source, title }: GenreSectionProps) {
     return (
       <section aria-label={title} className="genres-section">
         <h2 className="genres-section__title">{title}</h2>
-        <p className="genres-section__description">No movies found</p>
+        <p className="genres-section__description">{t("movie.no-movies-found")}</p>
       </section>
     );
 
