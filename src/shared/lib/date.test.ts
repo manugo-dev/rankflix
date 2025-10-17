@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import { describe, expect, it } from "vitest";
 
-import { DEFAULT_DATE_TIME_FORMAT, formatDate, getYear, parseDate } from "./date";
+import { DEFAULT_DATE_FORMAT, formatDate, getYear, parseDate } from "./date";
 
 describe("parseDate", () => {
   it("returns a Date matching the provided string", () => {
     const input = "2023-05-15 10:20:30";
     const result = parseDate(input);
     expect(result).toBeInstanceOf(Date);
-    expect(dayjs(result).format(DEFAULT_DATE_TIME_FORMAT)).toBe("2023-05-15 10:20:30");
+    expect(dayjs(result).format(DEFAULT_DATE_FORMAT)).toBe("15/05/2023");
   });
 
   it("preserves numeric timestamps", () => {
@@ -20,8 +20,8 @@ describe("parseDate", () => {
 
 describe("formatDate", () => {
   it("uses the default format when none is provided", () => {
-    const input = "2023-05-15 10:20:30";
-    expect(formatDate(input)).toBe("2023-05-15 10:20:30");
+    const input = "2023-05-20 10:20:30";
+    expect(formatDate(input)).toBe("20/05/2023");
   });
 
   it("applies a custom format", () => {

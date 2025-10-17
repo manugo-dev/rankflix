@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { Button } from "@/shared/ui/button";
 
 import {
@@ -12,6 +14,7 @@ interface AddToWatchlistButtonProps {
 }
 
 export function AddToWatchlistButton({ item }: AddToWatchlistButtonProps) {
+  const { t } = useTranslation();
   const addItem = useWatchlistAddItem();
   const removeItem = useWatchlistRemoveItem();
   const exists = useWatchlistExists(item.uid);
@@ -30,7 +33,7 @@ export function AddToWatchlistButton({ item }: AddToWatchlistButtonProps) {
       onClick={handleAction}
       variant={exists ? "danger" : "primary"}
     >
-      {exists ? "Remove from Watchlist" : "Add to Watchlist"}
+      {exists ? t("watchlist.remove-from-list") : t("watchlist.add-to-list")}
     </Button>
   );
 }

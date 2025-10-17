@@ -49,7 +49,7 @@ describe("MoviesHeroSlider", () => {
       </MemoryRouter>,
     );
 
-    const links = screen.getAllByRole("link", { name: /See more/i });
+    const links = screen.getAllByRole("link", { name: "#movie.see-details#" });
     expect(links[0]).toBeInTheDocument();
     expect(links[0]).toHaveAttribute("href", getRouteLink.MOVIE_DETAIL("321"));
     expect(links[1]).toBeInTheDocument();

@@ -21,6 +21,8 @@ A modern, server-side rendered movie catalog application built with React, Vite 
 
 ## 🛠️ Tech Stack
 
+[![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://typescriptlang.org)
+
 ### Core
 
 - **[React 19](https://react.dev/)** - UI library
@@ -367,3 +369,5 @@ This project is licensed under the MIT License.
 ---
 
 Built with ❤️ using React, Vite, and Feature-Sliced Design
+
+![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=jwenjian.visitor-badge&left_text=MyPageVisitors)

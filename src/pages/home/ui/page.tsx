@@ -1,9 +1,12 @@
 import { MovieGenreMap, MovieSourceId } from "@/entities/movies";
 import { GenresSection, TrendingSection } from "@/features/discovery-movies";
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 
 export function HomePage() {
+  const { t } = useTranslate();
+
   return (
     <>
       <Header variant="floating" />
@@ -13,17 +16,17 @@ export function HomePage() {
           <GenresSection
             source={MovieSourceId.TMDB}
             genres={[MovieGenreMap.DRAMA]}
-            title="Drama Movies"
+            title={t("movie.genre.drama")}
           />
           <GenresSection
             source={MovieSourceId.TMDB}
             genres={[MovieGenreMap.COMEDY]}
-            title="Comedy Movies"
+            title={t("movie.genre.comedy")}
           />
           <GenresSection
             source={MovieSourceId.TMDB}
             genres={[MovieGenreMap.ACTION]}
-            title="Action Movies"
+            title={t("movie.genre.action")}
           />
         </div>
       </main>

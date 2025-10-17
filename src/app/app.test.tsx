@@ -7,6 +7,9 @@ vi.mock("./providers", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./providers")>();
   return {
     ...actual,
+    LanguageProvider: ({ children }: { children?: React.ReactNode }) => (
+      <div data-testid="language-provider">{children}</div>
+    ),
     QueryProvider: ({ children }: { children?: React.ReactNode }) => (
       <div data-testid="query-provider">{children}</div>
     ),
@@ -17,13 +20,14 @@ vi.mock("./providers", async (importOriginal) => {
 });
 
 describe("App", () => {
-  it("renders AppRouter inside providers and forwards dehydratedState to QueryProvider", async () => {
+  it("renders AppRouter inside providers", async () => {
     const { App } = await import("./app");
 
     render(<App dehydratedState={{ mutations: [], queries: [] }} />);
 
     expect(screen.getByTestId("store-provider")).toBeInTheDocument();
     expect(screen.getByTestId("query-provider")).toBeInTheDocument();
+    expect(screen.getByTestId("language-provider")).toBeInTheDocument();
     expect(screen.getByTestId("app-router")).toBeInTheDocument();
   });
 });

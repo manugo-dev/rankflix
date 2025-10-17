@@ -27,7 +27,7 @@ vi.mock("@/entities/movies", async (importActual) => {
 describe("discover-movies queries", () => {
   it("builds an 'all' query key and queryFn calls movieApi.discover with params", async () => {
     const params = { page: 2 };
-    const expectedKey = createEntityKey("movies", "discover", "TMDB", "page:2");
+    const expectedKey = createEntityKey("movies", "discover", "TMDB", "page:2", "en");
     const options = discoverMoviesQueries.all("TMDB", params);
     expect(options.queryKey).toEqual(expectedKey);
     const result = await (options.queryFn as Mock)?.();
@@ -41,8 +41,9 @@ describe("discover-movies queries", () => {
       "movies",
       "discover",
       "TMDB",
-      "genres.ACTION,genres.ADVENTURE",
+      "movie.genre.action,movie.genre.adventure",
       "page:1",
+      "en",
     );
     const options = discoverMoviesQueries.byGenres("TMDB", withGenres, params);
     expect(options.queryKey).toEqual(expectedKey);
@@ -52,7 +53,15 @@ describe("discover-movies queries", () => {
 
   it("builds a 'trending' key and uses STALE_TIMES.DAY as staleTime", () => {
     const options = discoverMoviesQueries.trending("TMDB", "week", { page: 1 });
-    const expectedKey = createEntityKey("movies", "discover", "trending", "TMDB", "week", "page:1");
+    const expectedKey = createEntityKey(
+      "movies",
+      "discover",
+      "trending",
+      "TMDB",
+      "week",
+      "page:1",
+      "en",
+    );
     expect(options.queryKey).toEqual(expectedKey);
     expect(options.staleTime).toBe(STALE_TIMES.DAY);
   });

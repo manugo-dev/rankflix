@@ -9,7 +9,11 @@ export const tmdbClient = createHttpClient({
   },
 });
 
+// Add API key to all requests
 tmdbClient.interceptors.request.use((config) => {
   config.params = { ...config.params, api_key: ENVIRONMENT.TMDB_API_KEY };
   return config;
 });
+
+// Add language to all requests (works in both client and SSR)
+// registerLanguageInterceptor(tmdbClient);

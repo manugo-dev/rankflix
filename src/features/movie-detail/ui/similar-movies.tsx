@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { MoviesCarousel, MovieSourceId } from "@/entities/movies";
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { Spinner } from "@/shared/ui/spinner/spinner";
 
 import { movieDetailQueries } from "../api/queries";
@@ -10,6 +11,7 @@ export interface SimilarMoviesProps {
 }
 
 export function SimilarMovies({ movieId }: SimilarMoviesProps) {
+  const { t } = useTranslate();
   const similarMoviesQuery = useQuery({
     ...movieDetailQueries.getSimilar(MovieSourceId.TMDB, movieId),
   });
@@ -22,5 +24,5 @@ export function SimilarMovies({ movieId }: SimilarMoviesProps) {
     return <MoviesCarousel movies={similarMoviesQuery.data.results} />;
   }
 
-  return <p>We could not find similar titles right now.</p>;
+  return <p>{t("movie.similar-titles.not-found")}</p>;
 }

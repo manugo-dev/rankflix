@@ -16,41 +16,38 @@ const DEFAULT_DEHYDRATED_STATE: DehydratedState = {
 };
 const DEFAULT_HTML = "<div>SSR</div>";
 
-const prefetchRouteDataFn = vi.fn<PrefetchRouteDataFunction>(async () => {});
-const dehydrateFn = vi.fn<DehydrateFunction>(() => DEFAULT_DEHYDRATED_STATE);
-const renderToStringFn = vi.fn<RenderToStringFunction>(() => DEFAULT_HTML);
 const APP_COMPONENT_MOCK = vi.fn<AppComponent>(() => {
   return createElement("div");
 });
-const QUERY_CLIENT_FACTORY_FN = vi.fn<CreateQueryClientFunction>(() => {
+
+const prefetchRouteDataFn = vi.fn<PrefetchRouteDataFunction>(async () => {});
+const dehydrateFn = vi.fn<DehydrateFunction>(() => DEFAULT_DEHYDRATED_STATE);
+const renderToStringFn = vi.fn<RenderToStringFunction>(() => DEFAULT_HTML);
+const queryClientFactoryFn = vi.fn<CreateQueryClientFunction>(() => {
   return { id: Symbol("query-client") } as unknown as QueryClient;
 });
-
-vi.mock("@/shared/lib/prefetch", () => ({
-  prefetchRouteData: prefetchRouteDataFn,
-}));
-
-vi.mock("@tanstack/react-query", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@tanstack/react-query")>();
-
-  return {
-    ...actual,
-    dehydrate: dehydrateFn,
-  };
-});
-
-vi.mock("react-dom/server", () => ({
-  renderToString: renderToStringFn,
-}));
 
 vi.mock("./app/app", () => ({
   App: APP_COMPONENT_MOCK,
 }));
 
-vi.mock("./pages/ssr", () => ({}));
+vi.mock("@/shared/lib/prefetch", async (importActual) => ({
+  ...(await importActual<typeof import("@/shared/lib/prefetch")>()),
+  prefetchRouteData: prefetchRouteDataFn,
+}));
 
-vi.mock("@/shared/config", () => ({
-  createQueryClient: QUERY_CLIENT_FACTORY_FN,
+vi.mock("@tanstack/react-query", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@tanstack/react-query")>()),
+  dehydrate: dehydrateFn,
+}));
+
+vi.mock("@/shared/config", async (importActual) => ({
+  ...(await importActual<typeof import("@/shared/config")>()),
+  createQueryClient: queryClientFactoryFn,
+}));
+
+vi.mock("react-dom/server", () => ({
+  renderToString: renderToStringFn,
 }));
 
 describe("entry-server render", () => {
@@ -60,7 +57,7 @@ describe("entry-server render", () => {
     prefetchRouteDataFn.mockImplementation(async () => {});
     dehydrateFn.mockImplementation(() => DEFAULT_DEHYDRATED_STATE);
     renderToStringFn.mockImplementation(() => DEFAULT_HTML);
-    QUERY_CLIENT_FACTORY_FN.mockImplementation(() => {
+    queryClientFactoryFn.mockImplementation(() => {
       return { id: Symbol("query-client") } as unknown as QueryClient;
     });
   });
@@ -73,15 +70,13 @@ describe("entry-server render", () => {
       queries: [],
     };
     const htmlMarkup = "<section>SSR</section>";
-
-    QUERY_CLIENT_FACTORY_FN.mockReturnValueOnce(queryClient);
+    queryClientFactoryFn.mockReturnValueOnce(queryClient);
     dehydrateFn.mockReturnValueOnce(dehydratedState);
     renderToStringFn.mockReturnValueOnce(htmlMarkup);
 
     const { render } = await import("./entry-server");
     const result = await render(currentUrl);
-
-    expect(QUERY_CLIENT_FACTORY_FN).toHaveBeenCalledTimes(1);
+    expect(queryClientFactoryFn).toHaveBeenCalledTimes(1);
     expect(prefetchRouteDataFn).toHaveBeenCalledWith(queryClient, currentUrl);
     expect(dehydrateFn).toHaveBeenCalledWith(queryClient);
     expect(renderToStringFn).toHaveBeenCalledTimes(1);
@@ -99,18 +94,14 @@ describe("entry-server render", () => {
       queries: [],
     };
 
-    QUERY_CLIENT_FACTORY_FN.mockReturnValueOnce(queryClient);
+    queryClientFactoryFn.mockReturnValueOnce(queryClient);
     dehydrateFn.mockReturnValueOnce(dehydratedState);
-
     const { render } = await import("./entry-server");
     await render(currentUrl);
-
     const renderArguments = renderToStringFn.mock.calls[0];
-
     if (!renderArguments) {
       throw new Error("renderToString was not called");
     }
-
     const [reactElement] = renderArguments;
     const strictModeElement = reactElement as JSX.Element;
     const staticRouterElement = strictModeElement.props.children as JSX.Element;
