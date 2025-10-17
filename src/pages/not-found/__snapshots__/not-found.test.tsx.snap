@@ -42,14 +42,14 @@ exports[`NotFoundPage page > matches snapshot 1`] = `
       class="not-found__text"
       style="opacity: 0; transform: translateY(20px);"
     >
-      Page not found
+      #page-not-found#
     </p>
     <button
       class="not-found__button"
       data-testid="go-to-home-link"
       tabindex="0"
     >
-      Go back to home
+      #go-back-home#
     </button>
     <div
       class="not-found__glow"

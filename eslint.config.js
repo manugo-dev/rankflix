@@ -75,6 +75,7 @@ export default defineConfig([
 
       // eslint-plugin-unicorn rules
       "unicorn/filename-case": ["error", { case: "kebabCase" }],
+      "unicorn/no-array-reduce": "off",
       "unicorn/no-null": "off",
       "unicorn/no-useless-undefined": ["error", { checkArguments: false }],
       "unicorn/prevent-abbreviations": [

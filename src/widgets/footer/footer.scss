@@ -5,4 +5,15 @@
   justify-content: center;
   padding: var(--space-md);
   background: var(--footer-background);
+  gap: 0.5rem;
+}
+
+.footer__link {
+  color: var(--color-text-white);
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-secondary);
+  }
 }

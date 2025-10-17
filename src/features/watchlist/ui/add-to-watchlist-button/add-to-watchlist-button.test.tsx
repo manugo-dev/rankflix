@@ -28,21 +28,21 @@ describe("AddToWatchlistButton", () => {
   it("renders add to watchlist button when item already exists", () => {
     (useWatchlistExists as Mock).mockReturnValue(true);
     render(<AddToWatchlistButton item={DEFAULT_ITEM} />);
-    const button = screen.getByRole("button", { name: /Remove from watchlist/i });
+    const button = screen.getByRole("button", { name: /#watchlist.remove-from-list#/i });
     expect(button).toBeInTheDocument();
   });
 
   it("renders add to watchlist button when item does not exists", () => {
     (useWatchlistExists as Mock).mockReturnValue(false);
     render(<AddToWatchlistButton item={DEFAULT_ITEM} />);
-    const button = screen.getByRole("button", { name: /Add to watchlist/i });
+    const button = screen.getByRole("button", { name: /#watchlist.add-to-list#/i });
     expect(button).toBeInTheDocument();
   });
 
   it("should call add item to store when user clicks add button", async () => {
     const user = userEvent.setup();
     render(<AddToWatchlistButton item={DEFAULT_ITEM} />);
-    const button = screen.getByRole("button", { name: /add to watchlist/i });
+    const button = screen.getByRole("button", { name: /#watchlist.add-to-list#/i });
     expect(button).toBeInTheDocument();
     await user.click(button);
     expect(addItemFn).toHaveBeenCalledWith(DEFAULT_ITEM);

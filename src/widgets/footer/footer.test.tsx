@@ -6,7 +6,7 @@ import { Footer } from "./footer-ui";
 describe("Footer", () => {
   it("renders footer element with expected text", () => {
     render(<Footer />);
-    const element = screen.getByText(/crafted with ❤️ by @manugo.dev/i);
+    const element = screen.getByText(/#footer.crafted#/i);
     expect(element.tagName.toLowerCase()).toBe("footer");
   });
 });

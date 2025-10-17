@@ -26,7 +26,7 @@ describe("movie-detail queries", () => {
 
   it("creates movie detail query key and queryFn calls movieApi.details", async () => {
     const id = "123";
-    const expectedKey = createEntityKey("movies", "detail", id);
+    const expectedKey = createEntityKey("movies", "detail", id, "en");
     const options = movieDetailQueries.getMovie("TMDB", id);
     expect(options.queryKey).toEqual(expectedKey);
     expect(typeof options.queryFn).toBe("function");
@@ -36,7 +36,7 @@ describe("movie-detail queries", () => {
 
   it("creates similar movies query key and queryFn calls movieApi.similar", async () => {
     const id = "456";
-    const expectedKey = createEntityKey("movies", "detail", id, "similar");
+    const expectedKey = createEntityKey("movies", "detail", id, "similar", "en");
     const options = movieDetailQueries.getSimilar("TMDB", id);
     expect(options.queryKey).toEqual(expectedKey);
     expect(typeof options.queryFn).toBe("function");

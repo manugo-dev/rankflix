@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router";
 
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { getRouteLink } from "@/shared/routes";
 
 import { useWatchlistCount } from "../../model/watchlist-selectors";
@@ -9,10 +10,11 @@ import "./watchlist-link.scss";
 
 export function WatchlistLink() {
   const watchlistCount = useWatchlistCount();
+  const { t } = useTranslate();
 
   return (
     <Link to={getRouteLink.WATCHLIST()} className="watchlist-link">
-      Watchlist
+      {t("watchlist.title")}
       <AnimatePresence mode="popLayout">
         {watchlistCount > 0 && (
           <motion.span

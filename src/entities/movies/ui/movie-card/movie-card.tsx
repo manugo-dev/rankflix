@@ -46,6 +46,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
             onError={() => setHasErrorLoadingPoster(true)}
             transition={{ duration: 0.35, ease: "easeOut" }}
             draggable={false}
+            loading="lazy"
             style={{ viewTransitionName: `movie-${movie.id}` }}
           />
         )}
@@ -69,7 +70,7 @@ export function MovieCard({ active = false, movie }: MovieCardProps) {
         transition={{ delay: 0.05, duration: 0.3 }}
       >
         <h3 className="movie-card__title">{movie.title}</h3>
-        <p className="movie-card__year">{movieYear}</p>
+        {movieYear && <p className="movie-card__year">{movieYear}</p>}
       </motion.div>
     </motion.article>
   );

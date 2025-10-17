@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
+import { LanguageSelector } from "@/features/language-selector";
 import logoSrc from "@/shared/assets/rankflix.svg";
 import { cn } from "@/shared/lib/styles";
 import { getRouteLink } from "@/shared/routes";
@@ -43,6 +44,7 @@ export function Header({ variant = "default" }: HeaderProps) {
           <img src={logoSrc} alt="Rankflix" className="header__logo" />
         </Link>
         <Navbar />
+        <LanguageSelector />
       </div>
     </header>
   );

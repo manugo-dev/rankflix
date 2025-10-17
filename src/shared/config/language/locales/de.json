@@ -1,0 +1,59 @@
+{
+  "vote_one": "Stimme",
+  "vote_other": "Stimmen",
+  "go-official-site": "Zur offiziellen Website",
+  "go-back-home": "Zurück zur Startseite",
+  "page-not-found": "Seite nicht gefunden",
+  "imdb": "IMDB",
+  "navbar": {
+    "home": "Startseite",
+    "watchlist": "Meine Liste"
+  },
+  "movie": {
+    "details": "Filmdetails",
+    "see-details": "Details anzeigen",
+    "something-went-wrong": "Beim Laden des Katalogs ist ein Fehler aufgetreten",
+    "no-movies-found": "Keine Filme gefunden",
+    "overview": "Übersicht",
+    "release-date": "Veröffentlichungsdatum",
+    "original-title": "Originaltitel",
+    "genres": "Genres",
+    "languages": "Sprachen",
+    "production-companies": "Produktionsfirmen",
+    "production-countries": "Produktionsländer",
+    "similar-titles": {
+      "title": "Ähnliche Titel",
+      "not-found": "Keine ähnlichen Titel gefunden"
+    },
+    "genre": {
+      "action": "Action",
+      "adventure": "Abenteuer",
+      "animation": "Animation",
+      "comedy": "Komödie",
+      "crime": "Krimi",
+      "documentary": "Dokumentation",
+      "drama": "Drama",
+      "family": "Familie",
+      "fantasy": "Fantasie",
+      "history": "Geschichte",
+      "horror": "Horror",
+      "music": "Musik",
+      "mystery": "Mystery",
+      "romance": "Romanze",
+      "science_fiction": "Science-Fiction",
+      "thriller": "Thriller",
+      "tv_movie": "Fernsehfilm",
+      "war": "Krieg",
+      "western": "Western"
+    }
+  },
+  "watchlist": {
+    "title": "Meine Liste",
+    "empty": "Deine Liste ist leer",
+    "add-to-list": "Zu meiner Liste hinzufügen",
+    "remove-from-list": "Aus meiner Liste entfernen"
+  },
+  "footer": {
+    "crafted": "erstellt mit ❤️ von "
+  }
+}

@@ -1,4 +1,11 @@
 export { ENVIRONMENT } from "./environment";
+export {
+  default as i18n,
+  DEFAULT_LANGUAGE,
+  type LanguageOption,
+  SUPPORTED_LANGUAGES,
+  type SupportedLanguage,
+} from "./language/language";
 export { createQueryClient, STALE_TIMES } from "./query-client";
 export {
   type Breakpoint,

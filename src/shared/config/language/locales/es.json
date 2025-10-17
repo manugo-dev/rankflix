@@ -1,0 +1,59 @@
+{
+  "vote_one": "voto",
+  "vote_other": "votos",
+  "go-official-site": "Ir al sitio oficial",
+  "go-back-home": "Volver a inicio",
+  "page-not-found": "Página no encontrada",
+  "imdb": "IMDB",
+  "navbar": {
+    "home": "Inicio",
+    "watchlist": "Mi lista"
+  },
+  "movie": {
+    "details": "Detalles de la película",
+    "see-details": "Ver detalles",
+    "something-went-wrong": "Algo salió mal al descargar el catálogo",
+    "no-movies-found": "No se encontraron películas",
+    "overview": "Sinopsis",
+    "release-date": "Fecha de lanzamiento",
+    "original-title": "Título original",
+    "genres": "Géneros",
+    "languages": "Idiomas",
+    "production-companies": "Compañías de producción",
+    "production-countries": "Países de producción",
+    "similar-titles": {
+      "title": "Titulos similares",
+      "not-found": "No se encontraron titulos similares"
+    },
+    "genre": {
+      "action": "Acción",
+      "adventure": "Aventura",
+      "animation": "Animación",
+      "comedy": "Comedia",
+      "crime": "Crimen",
+      "documentary": "Documental",
+      "drama": "Drama",
+      "family": "Familiar",
+      "fantasy": "Fantasía",
+      "history": "Historia",
+      "horror": "Terror",
+      "music": "Música",
+      "mystery": "Misterio",
+      "romance": "Romance",
+      "science_fiction": "Ciencia ficción",
+      "thriller": "Suspenso",
+      "tv_movie": "Película de TV",
+      "war": "Guerra",
+      "western": "Occidental"
+    }
+  },
+  "watchlist": {
+    "title": "Mi lista",
+    "empty": "Tu lista está vacía",
+    "add-to-list": "Añadir a mi lista",
+    "remove-from-list": "Eliminar de mi lista"
+  },
+  "footer": {
+    "crafted": "hecho con amor ❤️ por "
+  }
+}

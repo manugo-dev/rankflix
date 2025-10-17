@@ -8,15 +8,28 @@ import {
   type MovieTrendingTime,
   type TrendingMoviesParams,
 } from "@/entities/movies";
-import { STALE_TIMES } from "@/shared/config";
+import { i18n, STALE_TIMES } from "@/shared/config";
 import { sortedValuesToString } from "@/shared/lib/array";
 import { createEntityKey, serializeObjectEntries } from "@/shared/lib/query";
 
 export const discoverMoviesQueryKeys = {
   all: (source: string, params?: DiscoverMoviesParams) =>
-    createEntityKey(MOVIE_QUERY_KEY, "discover", source, serializeObjectEntries(params)),
+    createEntityKey(
+      MOVIE_QUERY_KEY,
+      "discover",
+      source,
+      serializeObjectEntries(params),
+      i18n.language,
+    ),
   byGenres: (source: string, genres?: string, params?: DiscoverMoviesParams) =>
-    createEntityKey(MOVIE_QUERY_KEY, "discover", source, genres, serializeObjectEntries(params)),
+    createEntityKey(
+      MOVIE_QUERY_KEY,
+      "discover",
+      source,
+      genres,
+      serializeObjectEntries(params),
+      i18n.language,
+    ),
   trending: (source: string, time?: MovieTrendingTime, params?: TrendingMoviesParams) =>
     createEntityKey(
       MOVIE_QUERY_KEY,
@@ -25,13 +38,14 @@ export const discoverMoviesQueryKeys = {
       source,
       time,
       serializeObjectEntries(params),
+      i18n.language,
     ),
 };
 
 export const discoverMoviesQueries = {
   all: (source: keyof typeof movieApi, params?: DiscoverMoviesParams) => {
     return queryOptions({
-      queryFn: () => movieApi[source].discover(params),
+      queryFn: () => movieApi[source].discover({ ...params, language: i18n.language }),
       queryKey: discoverMoviesQueryKeys.all(source, params),
       staleTime: STALE_TIMES.DEFAULT,
     });
@@ -42,7 +56,7 @@ export const discoverMoviesQueries = {
     params?: Omit<DiscoverMoviesParams, "withGenres">,
   ) => {
     return queryOptions({
-      queryFn: () => movieApi[source].discover({ ...params, withGenres }),
+      queryFn: () => movieApi[source].discover({ ...params, language: i18n.language, withGenres }),
       queryKey: discoverMoviesQueryKeys.byGenres(source, sortedValuesToString(withGenres), params),
       staleTime: STALE_TIMES.DEFAULT,
     });
@@ -53,7 +67,8 @@ export const discoverMoviesQueries = {
     params?: TrendingMoviesParams,
   ) => {
     return queryOptions({
-      queryFn: () => movieApi[source].trending({ ...params, timeWindow: time }),
+      queryFn: () =>
+        movieApi[source].trending({ ...params, language: i18n.language, timeWindow: time }),
       queryKey: discoverMoviesQueryKeys.trending(source, time, params),
       staleTime: STALE_TIMES.DAY,
     });

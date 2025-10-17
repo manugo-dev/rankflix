@@ -1,4 +1,4 @@
-import type { LanguageParam, Paginated, PaginatedParams } from "@/shared/api/types";
+import type { Paginated, PaginatedParams } from "@/shared/api/types";
 import type { ParamsObject } from "@/shared/lib/utility-types";
 
 import type { MovieGenreId, MovieSourceIdType } from "./movies-constants";
@@ -19,7 +19,7 @@ export type Movies = Movie[];
 
 export interface MovieProductionCompany {
   id: number;
-  logoImage?: string;
+  logoPath?: string;
   name: string;
   originCountry?: string;
 }
@@ -67,21 +67,21 @@ export type MovieTrendingTime = "day" | "week";
 export type PaginatedMovies = Paginated<Movie>;
 
 export interface TrendingMoviesParams extends ParamsObject, Partial<PaginatedParams> {
-  language?: LanguageParam;
+  language?: string;
   timeWindow?: MovieTrendingTime;
 }
 
 export interface DiscoverMoviesParams extends ParamsObject, Partial<PaginatedParams> {
-  language?: LanguageParam;
+  language?: string;
   withGenres?: MovieGenreId[];
 }
 
 export type MovieImageSize = "backdrop" | "banner" | "poster";
 
 export interface MoviesAPIActions {
-  details: (_id: string) => Promise<MovieDetail>;
+  details: (_id: string, _language: string) => Promise<MovieDetail>;
   discover: (_params: DiscoverMoviesParams) => Promise<PaginatedMovies>;
   getMovieImage: (_path: string, _size?: MovieImageSize) => string;
-  similar: (_id: string) => Promise<PaginatedMovies>;
-  trending: (_params: TrendingMoviesParams) => Promise<PaginatedMovies>;
+  similar: (_id: string, _language: string) => Promise<PaginatedMovies>;
+  trending: (_params: TrendingMoviesParams, _language: string) => Promise<PaginatedMovies>;
 }

@@ -28,7 +28,7 @@ describe("GenresSection", () => {
       data: undefined,
       isPending: true,
     });
-    render(<GenresSection genres={["genres.ACTION"]} source={"TMDB"} title="Popular" />);
+    render(<GenresSection genres={["movie.genre.action"]} source={"TMDB"} title="Popular" />);
     expect(screen.getByRole("heading", { name: "Popular" })).toBeInTheDocument();
     expect(screen.getByTestId("titles-skeleton")).toBeInTheDocument();
   });
@@ -39,9 +39,9 @@ describe("GenresSection", () => {
       isError: true,
       isPending: false,
     });
-    render(<GenresSection genres={["genres.COMEDY"]} source={"TMDB"} title="Comedy" />);
+    render(<GenresSection genres={["movie.genre.comedy"]} source={"TMDB"} title="Comedy" />);
     expect(screen.getByRole("heading", { name: "Comedy" })).toBeInTheDocument();
-    expect(screen.getByText("Something happened downloading the catalog")).toBeInTheDocument();
+    expect(screen.getByText("#movie.something-went-wrong#")).toBeInTheDocument();
   });
 
   it("shows 'No movies found' when there are no results", () => {
@@ -49,9 +49,9 @@ describe("GenresSection", () => {
       data: undefined,
       isPending: false,
     });
-    render(<GenresSection genres={["genres.ANIMATION"]} source={"TMDB"} title="Animation" />);
+    render(<GenresSection genres={["movie.genre.animation"]} source={"TMDB"} title="Animation" />);
     expect(screen.getByRole("heading", { name: "Animation" })).toBeInTheDocument();
-    expect(screen.getByText("No movies found")).toBeInTheDocument();
+    expect(screen.getByText("#movie.no-movies-found#")).toBeInTheDocument();
   });
 
   it("renders MoviesCarousel when movies are returned", () => {
@@ -60,7 +60,7 @@ describe("GenresSection", () => {
       data: { results: sampleResults },
       isPending: false,
     });
-    render(<GenresSection genres={["genres.ADVENTURE"]} source={"TMDB"} title="Adventure" />);
+    render(<GenresSection genres={["movie.genre.adventure"]} source={"TMDB"} title="Adventure" />);
     expect(screen.getByRole("heading", { name: "Adventure" })).toBeInTheDocument();
     const carousel = screen.getByTestId("movies-carousel");
     expect(carousel).toBeInTheDocument();

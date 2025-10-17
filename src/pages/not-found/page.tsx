@@ -1,12 +1,14 @@
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 
+import { useTranslate } from "@/shared/hooks/use-translation";
 import { BadgeAlertIcon } from "@/shared/ui/icons";
 
 import "./not-found.scss";
 
 export function NotFoundPage() {
   const navigate = useNavigate();
+  const { t } = useTranslate();
 
   return (
     <main className="page boxed-container not-found">
@@ -25,7 +27,7 @@ export function NotFoundPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        Page not found
+        {t("page-not-found")}
       </motion.p>
       <motion.button
         className="not-found__button"
@@ -34,7 +36,7 @@ export function NotFoundPage() {
         onClick={() => navigate("/")}
         data-testid="go-to-home-link"
       >
-        Go back to home
+        {t("go-back-home")}
       </motion.button>
       <motion.div
         className="not-found__glow"
