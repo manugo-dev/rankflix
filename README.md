@@ -31,6 +31,7 @@ A modern, server-side rendered movie catalog application built with React, Vite 
 - [ ] Implement dynamic metadata (SSR + client) via generateMeta() in routes to enhance SEO and link previews.
 - [ ] Add accessibility improvements — focus trapping in modals, ARIA labels for buttons, and keyboard navigation for sliders.
 - [ ] Optimize image loading in movie cards and hero banners with lazy loading and responsive srcset.
+- [ ] Review and optimize bundle size by applying code splitting and efficient dependency management.
 
 ## 🛠️ Tech Stack
 

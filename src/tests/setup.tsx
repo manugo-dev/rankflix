@@ -116,3 +116,9 @@ Object.defineProperty(globalThis, "IntersectionObserver", {
   })),
   writable: true,
 });
+
+Object.defineProperty(globalThis, "scrollTo", {
+  configurable: true,
+  value: vi.fn(),
+  writable: true,
+});
