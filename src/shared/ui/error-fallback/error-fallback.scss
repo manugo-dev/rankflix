@@ -1,0 +1,10 @@
+.error-fallback {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0a0a 0%, #151515 100%);
+  color: var(--color-text-white);
+  text-align: center;
+}

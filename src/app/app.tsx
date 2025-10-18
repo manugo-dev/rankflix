@@ -2,7 +2,7 @@ import type { DehydratedState } from "@tanstack/react-query";
 import { MotionConfig } from "motion/react";
 
 import { AppRouter } from "./app-router";
-import { LanguageProvider, QueryProvider, StoreProvider } from "./providers";
+import { ErrorBoundary, LanguageProvider, QueryProvider } from "./providers";
 
 import "./styles/main.scss";
 
@@ -12,7 +12,7 @@ interface AppProps {
 
 export function App({ dehydratedState }: AppProps) {
   return (
-    <StoreProvider>
+    <ErrorBoundary>
       <LanguageProvider>
         <QueryProvider dehydratedState={dehydratedState}>
           <MotionConfig reducedMotion="user">
@@ -20,6 +20,6 @@ export function App({ dehydratedState }: AppProps) {
           </MotionConfig>
         </QueryProvider>
       </LanguageProvider>
-    </StoreProvider>
+    </ErrorBoundary>
   );
 }

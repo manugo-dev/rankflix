@@ -62,7 +62,7 @@ describe("tmdb-movies-mapper", () => {
     });
     expect(detail.productionCountries?.[0]).toEqual({ isoCode: "US", name: "United States" });
     expect(detail.spokenLanguages).toEqual(["English", "Español"]);
-    expect(detail.releaseDate.toISOString()).toBe("2024-02-01T00:00:00.000Z");
+    expect(detail.releaseDate?.toISOString()).toBe("2024-02-01T00:00:00.000Z");
   });
 
   it("maps TMDB genre id to Movie genre id when known", () => {

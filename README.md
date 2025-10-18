@@ -19,6 +19,19 @@ A modern, server-side rendered movie catalog application built with React, Vite 
 - **Comprehensive Testing** - 80%+ test coverage with Vitest
 - **Accessible** - Following WCAG guidelines
 
+## 🚀 Next steps
+
+- [ ] Add a useOutsideClick hook to handle closing dropdowns, selectors, and upcoming modals consistently.
+- [ ] Refactor the Movie Detail view by componentizing its sections (overview, metadata, similar titles, etc.) to enable reuse across other parts of the app.
+- [ ] Implement a global ErrorBoundary to gracefully catch runtime errors and render a fallback UI.
+- [ ] Add logging within the ErrorBoundary to capture and persist error details (message, stack trace, component state) for debugging and diagnostics.
+- [x] Fix scroll restoration when navigating between pages (preserve or reset position as needed).
+- [ ] Automatically close the mobile navigation menu after navigating from detail views (e.g., Movie Detail → Watchlist).
+- [ ] Persist the Watchlist state using APIs such as TMDB guest sessions.
+- [ ] Implement dynamic metadata (SSR + client) via generateMeta() in routes to enhance SEO and link previews.
+- [ ] Add accessibility improvements — focus trapping in modals, ARIA labels for buttons, and keyboard navigation for sliders.
+- [ ] Optimize image loading in movie cards and hero banners with lazy loading and responsive srcset.
+
 ## 🛠️ Tech Stack
 
 [![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://typescriptlang.org)

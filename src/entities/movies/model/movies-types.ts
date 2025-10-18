@@ -44,7 +44,7 @@ export interface MovieDetail {
   posterPath: string;
   productionCompanies?: MovieProductionCompany[];
   productionCountries?: MovieProductionCountry[];
-  releaseDate: Date;
+  releaseDate?: Date;
   revenue: number;
   runtimeMilliseconds?: number;
   source: MovieSourceIdType;

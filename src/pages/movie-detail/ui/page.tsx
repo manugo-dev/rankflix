@@ -89,7 +89,9 @@ export function MovieDetailPage() {
             {movie.tagline && <p className="movie-detail__tagline">{movie.tagline}</p>}
 
             <div className="movie-detail__meta">
-              <span className="movie-detail__meta-item">{getYear(movie.releaseDate)}</span>
+              <span className="movie-detail__meta-item">
+                {movie.releaseDate ? getYear(movie.releaseDate) : "—"}
+              </span>
               {movie.runtimeMilliseconds && (
                 <span className="movie-detail__meta-item">
                   {i18n.format(movie.runtimeMilliseconds, "humanize-duration", i18n.language)}
@@ -142,10 +144,12 @@ export function MovieDetailPage() {
                 <span className="movie-detail__label">{t("movie.original-title")}</span>
                 <p className="movie-detail__value">{movie.originalTitle}</p>
               </div>
-              <div>
-                <span className="movie-detail__label">{t("movie.release-date")}</span>
-                <p className="movie-detail__value">{formatDate(movie.releaseDate)}</p>
-              </div>
+              {movie.releaseDate && (
+                <div>
+                  <span className="movie-detail__label">{t("movie.release-date")}</span>
+                  <p className="movie-detail__value">{formatDate(movie.releaseDate)}</p>
+                </div>
+              )}
               <div>
                 <span className="movie-detail__label">{t("movie.genres")}</span>
                 <p className="movie-detail__value">

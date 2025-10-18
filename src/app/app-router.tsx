@@ -6,16 +6,20 @@ import { MovieDetailPage } from "@/pages/movie-detail";
 import { NotFoundPage } from "@/pages/not-found";
 import { WatchlistPage } from "@/pages/watchlist";
 import { ROUTES } from "@/shared/routes";
+import { ScrollToTop } from "@/shared/ui/scroll-to-top";
 
 export function AppRouter() {
   return (
-    <Routes>
-      <Route path={ROUTES.HOME} element={<HomePage />} />
-      <Route element={<MainLayout />}>
-        <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetailPage />} />
-        <Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route element={<MainLayout />}>
+          <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetailPage />} />
+          <Route path={ROUTES.WATCHLIST} element={<WatchlistPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+      <ScrollToTop />
+    </>
   );
 }

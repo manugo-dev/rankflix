@@ -55,5 +55,10 @@
   },
   "footer": {
     "crafted": "crafted with ❤️ by "
+  },
+  "error": {
+    "title": "Something went wrong",
+    "reload": "Reload page",
+    "reported": "The error has been logged. Please try again later."
   }
 }

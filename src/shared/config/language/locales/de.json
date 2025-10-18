@@ -55,5 +55,10 @@
   },
   "footer": {
     "crafted": "erstellt mit ❤️ von "
+  },
+  "error": {
+    "title": "Fehler",
+    "reload": "Seite neu laden",
+    "reported": "Der Fehler wurde protokolliert. Bitte versuche es später erneut."
   }
 }

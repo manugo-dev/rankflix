@@ -55,5 +55,10 @@
   },
   "footer": {
     "crafted": "hecho con amor ❤️ por "
+  },
+  "error": {
+    "title": "Algo salió mal",
+    "reload": "Recargar página",
+    "reported": "El error ha sido registrado. Por favor, inténtalo de nuevo más tarde."
   }
 }
