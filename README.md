@@ -45,14 +45,14 @@ A modern, server-side rendered movie catalog application built with React, Vite 
 
 ### State & Data
 
-- **[TanStack Query](https://tanstack.com/query)** - Server state management
+- **[TanStack Query](https://tanstack.com/query)** - Data fetching management
 - **[Zustand](https://zustand-demo.pmnd.rs/)** - Client state management
 - **[Axios](https://axios-http.com/)** - HTTP client
 - **[React Router 7](https://reactrouter.com/)** - Routing
 
 ### Styling & Animation
 
-- **[Sass](https://sass-lang.com/)** - CSS preprocessor
+- **[Sass](https://sass-lang.com/)** - SCSS preprocessor
 - **[Motion](https://motion.dev/)** - Animation library
 
 ### Testing & Quality
@@ -369,10 +369,6 @@ vercel --prod
 - Maintain 80%+ coverage
 - Use conventional commits
 - Update documentation
-
-## 📝 License
-
-This project is licensed under the MIT License.
 
 ## 🙏 Acknowledgments
 
